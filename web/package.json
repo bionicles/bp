@@ -11,10 +11,14 @@
     "react-scripts": "3.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start:css": "postcss src/css/global.css -o src/css/tailwind.css --watch",
+    "build:css": "postcss src/css/global.css -o src/css/tailwind.css --env production",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "start": "npm-run-all -p start:css start:js",
+    "build": "npm-run-all build:css build:js",
+    "start:js": "react-scripts start",
+    "build:js": "react-scripts build && npx precompress build",
+    "test": "CI=true react-scripts test"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,5 +34,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^1.3.0",
+    "autoprefixer": "^9.7.3",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^6.1.3",
+    "purgecss": "^1.4.2",
+    "source-map-explorer": "^2.2.1",
+    "tailwindcss": "^1.1.4"
   }
 }

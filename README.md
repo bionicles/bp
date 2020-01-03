@@ -36,6 +36,7 @@ Add additional notes about how to deploy this on a live system
 ## Built With
 
 - React + npx create-react-app
+- tailwind css and tufte css
 - make
 - aws-cdk
 - AWS Neptune + gremlin
@@ -60,7 +61,3 @@ See also the list of [contributors](https://github.com/your/project/contributors
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Works Cited
-
-1.  Expression Atlas update — an integrated database of gene and protein expression in humans, animals and plants (Nucleic Acids Research, 2016).
