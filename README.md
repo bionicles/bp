@@ -25,12 +25,9 @@ make test
 1. It passes a lighthouse test > 90% score
 2. It allows users to Sign In w/ Google
 3. It allows users to give feedback
-4. It allows users to produce plasmids
-5. It allows users to order plasmids
-
-```
-
-```
+4. It helps producers sign up with stripe and add offerings
+5. It matches consumers and producers with search + recommendations
+6. It helps consumers order plasmids
 
 ## Deployment
 
@@ -38,12 +35,12 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-- React
-- GNU Make
-- Neo4j
-- AWS
-- Docker Compose
--
+- React + npx create-react-app
+- make
+- aws-cdk
+- AWS Neptune + gremlin
+- AWS Lambda + jeremydaly/lambda-api + jquense/yup
+- AWS SNS +
 
 ## Contributing
 
