@@ -11,7 +11,7 @@ Bitpharma.com is a robot army for medical researchers to cure diseases
 3. docker
 
 ```
-git clone https://github.com/bitpharma/platform
+git clone https://github.com/bionicles/bp
 ```
 
 ## Test
@@ -23,15 +23,15 @@ make test
 ### Tests
 
 1. It passes a lighthouse test > 90% score
-2. It allows users to Sign In w/ Google
+2. It allows users to Sign In
 3. It allows users to give feedback
-4. It helps producers sign up with stripe and add offerings
+4. It helps signed-up users connect stripe and add items
 5. It matches consumers and producers with search + recommendations
-6. It helps consumers order plasmids
+6. It helps consumers purchase items
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+We deploy with AWS codepipeline in aws/pipe
 
 ## Built With
 
@@ -41,11 +41,15 @@ Add additional notes about how to deploy this on a live system
 - aws-cdk
 - AWS Neptune + gremlin
 - AWS Lambda + jeremydaly/lambda-api + jquense/yup
-- AWS SNS +
+- AWS SNS
+- Auth0
+- Stripe Connect
 
 ## Contributing
 
 Pull requests and issues are welcome.
+
+For security issues or support with sensitive matters, please email bion@bitpharma.com
 
 ## Versioning
 
