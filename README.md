@@ -31,7 +31,7 @@ make test
 
 ## Deployment
 
-We deploy with AWS codepipeline in aws/pipe
+We deploy with AWS codepipeline in pipe
 
 ## Built With
 
