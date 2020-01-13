@@ -2,19 +2,18 @@ SHELL := /bin/bash
 
 dc := $(shell which docker-compose)
 home := ${CURDIR}
-server = $(home)/trust
-react = $(home)/react
 
 # DEV
 .PHONY: test
 
-test: local
+test:
+	cd test && yarn test
+
+pipe:
+	cd pipe/docker && docker build -t bionicle/pipe && docker push 
 
 cloud:
-	cd trust && cdk synth
-
-e2e: cloud
-	cd e2e && yarn test
+	cd pipe && cdk synth
 
 local:
 	@echo home: $(home)
