@@ -1,6 +1,6 @@
-# bitpharma.com
+# Bit Pharma
 
-Bitpharma.com is a robot army for medical researchers to cure diseases
+Bit Pharma is an international biosecurity and medical research risk management firm
 
 ## Install
 
