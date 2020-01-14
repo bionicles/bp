@@ -39,6 +39,7 @@ We deploy with AWS codepipeline in pipe
 - tailwind css and tufte css
 - make
 - aws-cdk
+- tests with Codecept JS docker
 - AWS Neptune + gremlin
 - AWS Lambda + jeremydaly/lambda-api + jquense/yup
 - AWS SNS
