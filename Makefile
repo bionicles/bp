@@ -6,14 +6,14 @@ home := ${CURDIR}
 # DEV
 .PHONY: test
 
-test: 
+test:
 	cd pipe/e2e && yarn test
 
-pipe:
-	cd pipe/docker && docker build -t bionicle/pipe && docker push 
+api:
+	cd api && docker build -t api
 
-cloud:
-	cd pipe && cdk synth
+www:
+	cd www && docker build -t www
 
 local:
 	cd $(home) && $(dc) up  -d --force-recreate && $(dc) logs --tail=1000 -f -t

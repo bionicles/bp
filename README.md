@@ -16,21 +16,10 @@ View the dev branch:
 [http://www.gitpharma.com](http://www.gitpharma.com)
 [https://www.gitpharma.com](https://www.gitpharma.com)
 
-## Install
-
-### Prepare
-
-1. git
-2. make
-3. docker
+## Quick Start
 
 ```
 git clone https://github.com/bionicles/bp
-```
-
-## Test
-
-```
 make test
 ```
 
@@ -45,26 +34,30 @@ make test
 
 ## Deployment
 
-We deploy with Github Actions and AWS
+We deploy with Github Actions and AWS ECS
 
 ## Built With
 
-- tests with Codecept JS docker
-- React + npx create-react-app
-- tailwind css and tufte css
+- git and GitHub
+- GitHub Actions
+- VS Code
 - make
+- markdown
+- tests with Codecept JS docker
+- Docker Compose
+- Amazon ECS CLI
+- React + NextJS npx create-next-app
+- tailwind css and tufte css
 - aws-cdk
 - OrientDB + gremlin
-- AWS Lambda + jeremydaly/lambda-api + jquense/yup
-- AWS SNS
 - Auth0
 - Stripe Connect
 
 ## Contributing
 
-Pull requests and issues are welcome.
-
 For security issues or support with sensitive matters, please email bion@bitpharma.com
+
+Pull requests and issues are welcome.
 
 ## Versioning
 
