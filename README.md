@@ -6,21 +6,17 @@ Bit Pharma is an international biosecurity and medical research risk management 
 
 View the master branch at:
 
-```
-visit [bitpharma.com](bitpharma.com)
-visit [https://bitpharma.com](https://bitpharma.com)
-visit [www.bitpharma.com](www.bitpharma.com)
-visit [https://www.bitpharma.com](https://www.bitpharma.com)
-```
+[bitpharma.com](bitpharma.com)
+[https://bitpharma.com](https://bitpharma.com)
+[www.bitpharma.com](www.bitpharma.com)
+[https://www.bitpharma.com](https://www.bitpharma.com)
 
 View the dev branch at:
 
-```
-visit [gitpharma.com](gitpharma.com)
-visit [https://gitpharma.com](https://gitpharma.com)
-visit [www.gitpharma.com](www.gitpharma.com)
-visit [https://www.gitpharma.com](https://www.gitpharma.com)
-```
+[gitpharma.com](gitpharma.com)
+[https://gitpharma.com](https://gitpharma.com)
+[www.gitpharma.com](www.gitpharma.com)
+[https://www.gitpharma.com](https://www.gitpharma.com)
 
 ## Install
 
