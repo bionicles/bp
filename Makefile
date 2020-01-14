@@ -6,8 +6,8 @@ home := ${CURDIR}
 # DEV
 .PHONY: test
 
-test:
-	cd test && yarn test
+test: 
+	cd pipe/e2e && yarn test
 
 pipe:
 	cd pipe/docker && docker build -t bionicle/pipe && docker push 
