@@ -2,6 +2,26 @@
 
 Bit Pharma is an international biosecurity and medical research risk management firm
 
+## Usage
+
+View the master branch at:
+
+```
+visit [bitpharma.com](bitpharma.com)
+visit [https://bitpharma.com](https://bitpharma.com)
+visit [www.bitpharma.com](www.bitpharma.com)
+visit [https://www.bitpharma.com](https://www.bitpharma.com)
+```
+
+View the dev branch at:
+
+```
+visit [gitpharma.com](gitpharma.com)
+visit [https://gitpharma.com](https://gitpharma.com)
+visit [www.gitpharma.com](www.gitpharma.com)
+visit [https://www.gitpharma.com](https://www.gitpharma.com)
+```
+
 ## Install
 
 ### Prepare
@@ -31,16 +51,16 @@ make test
 
 ## Deployment
 
-We deploy with AWS codepipeline in pipe
+We deploy with Github Actions and AWS
 
 ## Built With
 
+- tests with Codecept JS docker
 - React + npx create-react-app
 - tailwind css and tufte css
 - make
 - aws-cdk
-- tests with Codecept JS docker
-- AWS Neptune + gremlin
+- OrientDB + gremlin
 - AWS Lambda + jeremydaly/lambda-api + jquense/yup
 - AWS SNS
 - Auth0
