@@ -36,7 +36,7 @@ make test
 
 We deploy with Github Actions and AWS ECS
 
-## Built With
+## Dependencies
 
 - [MacOS](https://www.apple.com/macos/catalina/) + [Ubuntu](https://ubuntu.com/)
 - [git](https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf) and [GitHub](http://github.com/)
