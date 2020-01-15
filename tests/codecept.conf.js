@@ -5,8 +5,8 @@ exports.config = {
     Puppeteer: {
       url: "http://",
       show: true,
-      "chrome":{
-        "args": ["--no-sandbox"]
+      chrome: {
+        args: ["--no-sandbox"]
       }
     }
   },
