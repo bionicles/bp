@@ -1,20 +1,20 @@
 version: "3.7"
 
 services:
-  db:
-    image: orientdb:3.0.27
-    command: dserver.sh
-    volumes:
-      - ./var/odb/config:/orientdb/config
-      - ./var/odb/databases:/orientdb/databases
-    environment:
-      ORIENTDB_ROOT_PASSWORD: root
-      ORIENTDB_NODE_NAME: odb
-    ports:
-      - "127.0.0.1:2480:2480"
-      - "127.0.0.1:2424:2424"
+  # db:
+  #   image: orientdb:3.0.27
+  #   command: dserver.sh
+  #   volumes:
+  #     - ./var/odb/config:/orientdb/config
+  #     - ./var/odb/databases:/orientdb/databases
+  #   environment:
+  #     ORIENTDB_ROOT_PASSWORD: root
+  #     ORIENTDB_NODE_NAME: odb
+  #   ports:
+  #     - "127.0.0.1:2480:2480"
+  #     - "127.0.0.1:2424:2424"
   www:
-    depends_on: [db]
+    # depends_on: [db]
     build:
       context: ./www
     environment:
@@ -23,15 +23,16 @@ services:
       - API=127.0.0.1:4000
     ports:
       - "127.0.0.1:3000:3000"
-  chrome:
-    image: selenium/standalone-chrome-debug:3.141.59
-    ports:
-      - "4444"
-      - "5900"
-  e2e:
-    depends_on: [chrome]
+  # chrome:
+  #   image: selenium/standalone-chrome-debug:3.141.59
+  #   ports:
+  #     - "4444"
+  #     - "5900"
+  tests:
+    # depends_on: [chrome]
     image: codeception/codeceptjs
     environment:
       - CODECEPT_ARGS=--debug
+      - NO_OF_WORKERS=1
     volumes:
-      - .:/test
+      - ./tests:/tests

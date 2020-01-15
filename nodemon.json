@@ -4,6 +4,7 @@
     "www/components",
     "www/pages",
     "www/tools",
+    "e2e",
     "Makefile",
     ".env"
   ]

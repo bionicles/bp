@@ -7,6 +7,6 @@ home := ${CURDIR}
 .PHONY: test
 
 test:
-	cd $(home) && $(dc) up  -d --force-recreate && $(dc) logs --tail=1000 -f -t
+	cd $(home) && $(dc) up  --build -d --force-recreate && $(dc) logs --tail=1000 -f -t
 
 
