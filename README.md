@@ -42,7 +42,7 @@ We deploy with Github Actions and AWS ECS
 ## Dependencies
 
 - [MacOS](https://www.apple.com/macos/catalina/) + [Ubuntu](https://ubuntu.com/)
-- [git](https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf) [hub](https://github.com/github/hub) and [GitHub](http://github.com/)
+- [git](https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf) and [hub](https://github.com/github/hub) and [GitHub](http://github.com/)
 - [GitHub Actions](https://github.com/marketplace)
 - [VS Code](https://code.visualstudio.com/download)
 - [make](https://news.ycombinator.com/item?id=21566530)
