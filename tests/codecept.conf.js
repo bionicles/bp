@@ -4,7 +4,10 @@ exports.config = {
   helpers: {
     Puppeteer: {
       url: "http://",
-      show: true
+      show: true,
+      "chrome":{
+        "args": ["--no-sandbox"]
+      }
     }
   },
   include: {
