@@ -32,4 +32,5 @@ services:
     ports:
       - "127.0.0.1:3000:3000"
   e2e:
+    depends_on: [chrome, firefox]
     image: codeception/codeceptjs
