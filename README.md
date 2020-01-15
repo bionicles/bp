@@ -38,20 +38,20 @@ We deploy with Github Actions and AWS ECS
 
 ## Built With
 
-- git and GitHub
-- GitHub Actions
-- VS Code
-- make
-- markdown
-- tests with Codecept JS docker
-- Docker Compose
-- Amazon ECS CLI
-- React + NextJS npx create-next-app
-- tailwind css and tufte css
-- aws-cdk
-- OrientDB + gremlin
-- Auth0
-- Stripe Connect
+- [MacOS](https://www.apple.com/macos/catalina/) + [Ubuntu](https://ubuntu.com/)
+- [git](https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf) and [GitHub](http://github.com/)
+- [GitHub Actions](https://github.com/marketplace)
+- [VS Code](https://code.visualstudio.com/download)
+- [make](https://news.ycombinator.com/item?id=21566530)
+- [markdown](https://www.markdownguide.org/cheat-sheet/)
+- [CodeceptJS](https://codecept.io/)
+- [Docker](https://docs.docker.com/develop/dev-best-practices/) and [Docker Compose](https://gist.github.com/jonlabelle/bd667a97666ecda7bbc4f1cc9446d43a)
+- [AWS](https://docs.aws.amazon.com/) and [AWS CDK](https://github.com/aws/aws-cdk)
+- [React](https://reactjs.org/docs/hooks-intro.html) + [NextJS](https://nextjs.org/docs) + [npx create-next-app](https://github.com/zeit/next.js)
+- [tailwind css](https://tailwindcss.com/) and [tufte css](https://edwardtufte.github.io/tufte-css/)
+- [OrientDB](http://orientdb.com/docs/3.0.x/gremlin/Gremlin.html) + [gremlin](https://kelvinlawrence.net/book/Gremlin-Graph-Guide.html)
+- [Auth0](https://auth0.com/docs/)
+- [Stripe Connect](https://stripe.com/docs/connect)
 
 ## Contributing
 
