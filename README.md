@@ -60,9 +60,11 @@ Ensure there is an issue for your feature in the issues list and move it to the 
 Make a feature branch:
 ```
 git checkout -b FEATURE_NAME dev
+
 # document the feature in README.md
-# test the feature with docker-compose + CodeceptJS
+make test
 # develop the feature inside the subdirectories like api, www
+
 git add .
 git commit -m "feat(FEATURE_NAME): do something"
 git push --set-upstream origin FEATURE_NAME
