@@ -9,6 +9,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Codecov
+      uses: codecov/codecov-action@v1.0.5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }} #required
+
     - name: Run a one-line script
       run: echo Hello, world!
     - name: Run a multi-line script

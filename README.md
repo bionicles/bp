@@ -2,6 +2,8 @@
 
 Bit Pharma is an international biosecurity and medical research risk management firm
 
+[![codecov](https://codecov.io/gh/bionicles/bp/branch/master/graph/badge.svg)](https://codecov.io/gh/bionicles/bp)
+
 ## Usage
 
 View the master branch :
@@ -25,6 +27,7 @@ make test
 
 ### Tests
 
+1. The site renders when you visit
 1. It passes a lighthouse test > 90% score
 2. It allows users to Sign In
 3. It allows users to give feedback
