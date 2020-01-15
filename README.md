@@ -39,7 +39,7 @@ We deploy with Github Actions and AWS ECS
 ## Dependencies
 
 - [MacOS](https://www.apple.com/macos/catalina/) + [Ubuntu](https://ubuntu.com/)
-- [git](https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf) and [GitHub](http://github.com/)
+- [git](https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf) [hub](https://github.com/github/hub) and [GitHub](http://github.com/)
 - [GitHub Actions](https://github.com/marketplace)
 - [VS Code](https://code.visualstudio.com/download)
 - [make](https://news.ycombinator.com/item?id=21566530)
@@ -53,11 +53,26 @@ We deploy with Github Actions and AWS ECS
 - [Auth0](https://auth0.com/docs/)
 - [Stripe Connect](https://stripe.com/docs/connect)
 
-## Contributing
+## Contribute
 
-For security issues or support with sensitive matters, please email bion@bitpharma.com
+Ensure there is an issue for your feature in the issues list and move it to the "doing" list on the issues triage project
 
-Pull requests and issues are welcome.
+Make a feature branch:
+```
+git checkout -b FEATURE_NAME dev
+# document the feature in README.md
+# test the feature with docker-compose + CodeceptJS
+# develop the feature inside the subdirectories like api, www
+git add .
+git commit -m "feat(FEATURE_NAME): do something"
+git push --set-upstream origin FEATURE_NAME
+# make sure your git command can make pull requests .bash_profile or .bashrc has: eval "$(hub alias -s)"
+git pull-request -m "feat(FEATURE_NAME): do thing1; do thing2"
+```
+
+*For security issues or support with sensitive matters, please email bion@bitpharma.com*
+
+We welcome pull requests and issues, but please [give constructive criticism](https://hbr.org/2019/03/the-feedback-fallacy)!
 
 ## Versioning
 
