@@ -23,18 +23,13 @@ services:
       - API=127.0.0.1:4000
     ports:
       - "127.0.0.1:3000:3000"
-  firefox:
-    image: selenium/standalone-firefox-debug:3.141.59
-    ports:
-      - "4444"
-      - "5900"
   chrome:
     image: selenium/standalone-chrome-debug:3.141.59
     ports:
       - "4444"
       - "5900"
   e2e:
-    depends_on: [chrome, firefox]
+    depends_on: [chrome]
     image: codeception/codeceptjs
     environment:
       - CODECEPT_ARGS=--debug

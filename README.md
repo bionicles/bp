@@ -29,11 +29,11 @@ make test
 
 1. The site renders when you visit
 1. It passes a lighthouse test > 90% score
-2. It allows users to Sign In
-3. It allows users to give feedback
-4. It helps signed-up users connect stripe and add items
-5. It matches consumers and producers with search + recommendations
-6. It helps consumers purchase items
+1. It allows users to Sign In
+1. It allows users to give feedback
+1. It helps signed-up users connect stripe and add items
+1. It matches consumers and producers with search + recommendations
+1. It helps consumers purchase items
 
 ## Deployment
 
@@ -46,6 +46,8 @@ We deploy with Github Actions and AWS ECS
 - [GitHub Actions](https://github.com/marketplace)
 - [VS Code](https://code.visualstudio.com/download)
 - [make](https://news.ycombinator.com/item?id=21566530)
+- [nodemon](https://github.com/remy/nodemon#nodemon)
+- [npm](https://npmjs.com) and [yarn](https://yarnpkg.com/lang/en/)
 - [markdown](https://www.markdownguide.org/cheat-sheet/)
 - [CodeceptJS](https://codecept.io/)
 - [Docker](https://docs.docker.com/develop/dev-best-practices/) and [Docker Compose](https://gist.github.com/jonlabelle/bd667a97666ecda7bbc4f1cc9446d43a)
@@ -61,6 +63,7 @@ We deploy with Github Actions and AWS ECS
 Ensure there is an issue for your feature in the issues list and move it to the "doing" list on the issues triage project
 
 Make a feature branch:
+
 ```
 git checkout -b FEATURE_NAME dev
 
@@ -75,7 +78,7 @@ git push --set-upstream origin FEATURE_NAME
 git pull-request -m "feat(FEATURE_NAME): do thing1; do thing2"
 ```
 
-*For security issues or support with sensitive matters, please email bion@bitpharma.com*
+_For security issues or support with sensitive matters, please email bion@bitpharma.com_
 
 We welcome pull requests and issues, but please [give constructive criticism](https://hbr.org/2019/03/the-feedback-fallacy)!
 
