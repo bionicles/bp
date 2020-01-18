@@ -1,11 +1,11 @@
-FROM mhart/alpine-node:12 AS builder
+FROM node:12-alpine AS builder
 WORKDIR /www
 COPY package.json .
 RUN yarn
 COPY . .
 RUN yarn build && yarn --production
 
-FROM mhart/alpine-node:12
+FROM node:12-alpine
 WORKDIR /www
 COPY --from=builder /www .
 EXPOSE 3000
