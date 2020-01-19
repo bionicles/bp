@@ -8,14 +8,14 @@ var
 .pnp.js
 
 # testing
-/coverage
+/www/coverage
 
 # next.js
-/.next/
-/out/
+/www/.next/
+/www/out/
 
 # production
-/build
+/www/build
 
 # misc
 .DS_Store
