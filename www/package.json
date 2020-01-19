@@ -13,7 +13,7 @@
     "lint": "./node_modules/.bin/eslint ."
   },
   "dependencies": {
-    "@mdx-js/loader": "^1.5.4",
+    "@mdx-js/loader": "^1.5.5",
     "@next/mdx": "^9.2.0",
     "cssnano": "^4.1.10",
     "next": "9.2.0",
