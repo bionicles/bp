@@ -9,12 +9,11 @@ var
 
 # testing
 /www/coverage
+/tests/output
 
 # next.js
 /www/.next/
 /www/out/
-
-# production
 /www/build
 
 # misc
