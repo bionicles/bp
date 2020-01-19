@@ -5,7 +5,7 @@ export
 dc := $(shell which docker-compose)
 home := ${CURDIR}
 
-up: down
+up:
 	cd $(home) && $(dc) up --build -d && $(dc) logs --tail=1000 -f -t
 
 demon:

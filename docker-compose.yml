@@ -4,6 +4,7 @@ services:
   www:
     build:
       context: ./www
+      dockerfile: Dockerfile.${STAGE}
     environment:
       - API=http://localhost:8080
       - NODE_ENV=production

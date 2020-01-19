@@ -23,10 +23,10 @@ View the dev branch:
 ```
 git clone https://github.com/bionicles/bp
 
-// open two terminals. In one, run the app:
+// in a terminal, run the app and tail logs:
 make up
 
-// In the second, re-test on save:
+// in another terminal, auto-restart tests:
 make demon
 ```
 
