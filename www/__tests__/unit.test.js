@@ -8,7 +8,7 @@ describe("With Enzyme", () => {
   it('App shows "Bion is Cool"', () => {
     const app = shallow(<App />);
 
-    expect(app.find("p").text()).toEqual("Bion is Cool");
+    expect(app.find("#hero-title").text()).toContain("Bion is Cool");
   });
 });
 

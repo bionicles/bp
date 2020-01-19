@@ -1,5 +1,5 @@
 {
-  "name": "Bit Pharma",
+  "name": "www",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage -u",
-    "upload:coverage": "source .env && ./node_modules/.bin/codecov --token=$CODECOV_TOKEN",
+    "upload:coverage": "source ../.env && ./node_modules/.bin/codecov --token=$CODECOV_TOKEN",
     "lint": "./node_modules/.bin/eslint ."
   },
   "dependencies": {

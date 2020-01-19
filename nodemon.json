@@ -6,6 +6,7 @@
     "www/tools",
     "e2e",
     "Makefile",
-    ".env"
+    ".env",
+    ".next"
   ]
 }

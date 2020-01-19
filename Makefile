@@ -3,40 +3,45 @@ SHELL := /bin/bash
 dc := $(shell which docker-compose)
 home := ${CURDIR}
 
-# DEV
-.PHONY: test
-test:
-	cd $(home) && $(dc) up  --build -d --force-recreate && $(dc) logs --tail=1000 -f -t
+.PHONY:
+test: prebuild dev local.e2e
 
-cicd: build lint audit unit-test test-e2e-locally deploy-staging test-e2e-staging
+prebuild: prebuild.lint prebuild.audit prebuild.coverage prebuild.unit
 
-build:
-	docker build www
+prebuild.lint: 
+	cd www && yarn lint
 
-local:
-	docker run www
+prebuild.audit: 
+	cd www && yarn audit
 
-lint:
-	docker exec yarn lint
+prebuild.coverage: 
+	cd www && yarn test:coverage -u && yarn upload:coverage
 
-audit:
-	docker exec yarn audit
+prebuild.unit: 
+	cd www && yarn test
 
-unit-test:
-	docker exec yarn test
+dev: 
+	cd $(home) && $(dc) up  --build -d && $(dc) logs --tail=1000 -f -t
 
-test-e2e-locally:
+local.e2e: local.lighthouse local.e2e
+
+local.lighthouse: dev
+	docker run lighthouse target=localhost:3000
+
+local.e2e: dev
 	docker run e2e target=localhost:3000
 
-deploy-staging:
-	cdk synthesize && cdk deploy
+# stage.deploy:
+# 	cdk synthesize && cdk deploy
 
-test-e2e-staging:
-	docker run
+# stage.test.e2e:
+# 	docker run
 
-# production stuffs
-deploy-prod:
-	cdk synthesize && cdk deploy
+# stage.test.lighthouse:
+
+# # production stuffs
+# deploy-prod:
+# 	cdk synthesize && cdk deploy
 
 
 

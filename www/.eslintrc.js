@@ -6,6 +6,11 @@ module.exports = {
     jest: true
   },
   extends: ["eslint:recommended", "plugin:react/recommended"],
+  settings: {
+    react: {
+      version: "detect"
+    }
+  },
   globals: {
     Atomics: "readonly",
     SharedArrayBuffer: "readonly"

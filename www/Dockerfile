@@ -1,12 +1,9 @@
-FROM node:12-alpine AS builder
-WORKDIR /www
-COPY package.json .
-RUN yarn
-COPY . .
-RUN yarn build && yarn --production
-
 FROM node:12-alpine
-WORKDIR /www
-COPY --from=builder /www .
-EXPOSE 3000
-CMD ["node_modules/.bin/next", "start"]
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN yarn
+
+CMD [ "yarn", "dev" ]

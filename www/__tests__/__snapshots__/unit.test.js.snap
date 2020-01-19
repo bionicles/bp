@@ -49,6 +49,7 @@ exports[`With Snapshot Testing App shows "Bion is Cool" 1`] = `
   >
     <h1
       className="jsx-243749409 title"
+      id="hero-title"
     >
       Bion is Cool!
     </h1>

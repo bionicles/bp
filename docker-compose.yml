@@ -1,43 +1,46 @@
 version: "3.7"
 
 services:
-  # postgres:
-  #   image: postgres:11.4
-  #   restart: always
-  #   volumes:
-  #     - db_data:/var/lib/postgresql/data
-  # graphql-engine:
-  #   depends_on: [postgres]
-  #   image: hasura/graphql-engine:v1.0.0
-  #   ports:
-  #     - "127.0.0.1:8080:8080"
-  #   restart: always
-  #   environment:
-  #     HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:@postgres:5432/postgres
-  #     HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
-  #     HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
-  #     ## uncomment next line to set an admin secret
-  #     # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+  postgres:
+    image: postgres:11.4
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+  graphql-engine:
+    depends_on: [postgres]
+    image: hasura/graphql-engine:v1.0.0
+    ports:
+      - "8080:8080"
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:@postgres:5432/postgres
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      ## uncomment next line to set an admin secret
+      # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
   www:
-    # depends_on: [graphql-engine]
+    depends_on: [graphql-engine]
     build:
       context: ./www
     environment:
       - API=http://localhost:8080
       - NODE_ENV=production
       - PORT=3000
+    volumes:
+      - ./www:/usr/src/app
+      - /usr/src/app/node_modules
     ports:
       - "127.0.0.1:3000:3000"
     healthcheck:
       test: curl -s -o /dev/null -w "%{http_code}" localhost:3000 | grep -q 2
-  tests:
-    image: codeception/codeceptjs
-    depends_on: [www]
-    environment:
-      - TEST_URL=http://www:3000
-      - CODECEPT_ARGS=--debug
-      - NO_OF_WORKERS=1
-    volumes:
-      - ./tests:/tests
+  # tests:
+  #   image: codeception/codeceptjs
+  #   depends_on: [www]
+  #   environment:
+  #     - TEST_URL=http://www:3000
+  #     - CODECEPT_ARGS=--debug
+  #     - NO_OF_WORKERS=1
+  #   volumes:
+  #     - ./tests:/tests
 volumes:
   db_data:
