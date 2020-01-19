@@ -1,5 +1,8 @@
 SHELL := /bin/bash
 
+include .env
+export
+
 dc := $(shell which docker-compose)
 home := ${CURDIR}
 
@@ -20,16 +23,24 @@ prebuild.coverage:
 prebuild.unit: 
 	cd www && yarn test
 
-dev: 
-	cd $(home) && $(dc) up  --build -d && $(dc) logs --tail=1000 -f -t
+up: 
+	cd $(home) && $(dc) up --build -d --force-recreate && $(dc) logs --tail=1000 -f -t
+
+console:
+	source .env && echo ${HASURA_ADMIN_SECRET} && cd hasura && hasura console --admin-secret ${HASURA_ADMIN_SECRET}
 
 local.e2e: local.lighthouse local.e2e
 
-local.lighthouse: dev
-	docker run lighthouse target=localhost:3000
+local.lighthouse:
+	lighthouse http://localhost:3000
 
-local.e2e: dev
-	docker run e2e target=localhost:3000
+local.e2e:
+	docker run codeception/codeceptjs -e TEST_URL=http://localhost:3000
+
+down:
+	docker-compose down
+
+reset: down up
 
 # stage.deploy:
 # 	cdk synthesize && cdk deploy

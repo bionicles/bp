@@ -22,7 +22,11 @@ View the dev branch:
 
 ```
 git clone https://github.com/bionicles/bp
-make test
+
+// run the app
+make dev
+
+// watch the code and re-test automatically
 ```
 
 ### Tests
