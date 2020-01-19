@@ -1,15 +1,19 @@
 SHELL := /bin/bash
-
 include .env
 export
 
 dc := $(shell which docker-compose)
 home := ${CURDIR}
 
-.PHONY:
-test: prebuild dev local.e2e
+up: down
+	cd $(home) && $(dc) up --build -d && $(dc) logs --tail=1000 -f -t
 
-prebuild: prebuild.lint prebuild.audit prebuild.coverage prebuild.unit
+demon:
+	nodemon --ext '*' --exec 'make test || exit 1'
+
+test: e2e
+
+prebuild: prebuild.lint prebuild.audit prebuild.unit
 
 prebuild.lint: 
 	cd www && yarn lint
@@ -23,22 +27,14 @@ prebuild.coverage:
 prebuild.unit: 
 	cd www && yarn test
 
-up: 
-	cd $(home) && $(dc) up --build -d --force-recreate && $(dc) logs --tail=1000 -f -t
+lighthouse:
+	lighthouse http://localhost:3000 --view --output-path=tests/output/lighthouse.html
 
-console:
-	source .env && echo ${HASURA_ADMIN_SECRET} && cd hasura && hasura console --admin-secret ${HASURA_ADMIN_SECRET}
-
-local.e2e: local.lighthouse local.e2e
-
-local.lighthouse:
-	lighthouse http://localhost:3000
-
-local.e2e:
-	docker run codeception/codeceptjs -e TEST_URL=http://localhost:3000
+e2e:
+	docker run --net=host -v ${home}/tests:/tests -e TEST_URL=http://localhost:3000 codeception/codeceptjs codeceptjs run --steps --debug --verbose
 
 down:
-	docker-compose down
+	docker-compose down --remove-orphans
 
 reset: down up
 
