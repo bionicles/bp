@@ -42,7 +42,7 @@ To `save time` as a `user` I want `a site which passes Lighthouse` because `I do
 - [ ] tested
 - [ ] delivered
 
-To `hack faster` as a `dev` I want `clear docs` because `if it's not documented, then I don't know how to use it`
+To `hack faster` as a `dev` I want `clear docs` because `if it's not documented, I don't know how to use it`
 - [ ] documented
 - [ ] tested
 - [ ] delivered
