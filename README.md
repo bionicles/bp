@@ -30,19 +30,131 @@ make up
 make demon
 ```
 
-### Tests
+### User Stories
 
-1. The site renders when you visit
-1. It passes a lighthouse test > 90% score
-1. It allows users to Sign In
-1. It allows users to give feedback
-1. It helps signed-up users connect stripe and add items
-1. It matches consumers and producers with search + recommendations
-1. It helps consumers purchase items
+To `serve customers` as a `dev` I want `user stories` because `they help me put benefits before features`
+- [ ] documented
+- [ ] tested 
+- [ ] delivered
+
+To `learn about Bit Pharma` as a `user` I want `to view a pitch-deck style landing page` because `it helps me understand how this company can help me` 
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `save time` as a `user` I want `a site which passes Lighthouse` because `I don't like to use slow, inaccessible sites`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `use Bit Pharma` as a `dev` I want `clear docs` because `if it's not documented, then I don't know how to use it`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `code Bit Pharma` as a `dev` I want `a simple API` because `this lets me use the service programmatically`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `sign up easily` as a `user` I want `passwordless login` because `I'm sick of dealing with passwords`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `secure my account` as a `user` I want `multifactor auth` because `I don't want my account abused`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `give private feedback` as a `user` I want `an email for Bit Pharma leadership` because `some issues are private`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `give public feedback` as a `dev` I want `a link to Github Issues` because `this lets me report and track my concerns`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `give feedback` as a `user` I want `an email address for Bit Pharma leadership` because `some issues are private`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `find the reagents I need` as a `researcher` I want `to search inventory in my lab and nearby labs` because `it's hard to find reagents`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `save my inventory` as a `researcher` I want `a keyboard form to add inventory` because `it's faster to type`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `read inventory` as a `researcher` I want `to view an item's data` because `this lets me see where it is`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `know what I have` as a `researcher` I want `to view an item's data` because `this lets me see where it is`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `stay up to date` as a `researcher` I want `to click on and edit inventory data` because `things change`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `delete inventory` as a `researcher` I want `to archive items` because `stuff goes bad or gets used up`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `comply with regulations` as a `researcher` I want `an immutable audit trail of events` because `this helps me prove to others what happened`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `prevent theft and terrorism` as a `biologist` I want `to be notified when stuff goes missing` because `my reagents are expensive and potentially dangerous`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `get paid` as a `provider of goods and services` I want `a way to connect my inventory with stripe` because `this lets me charge money for my contributions to others`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `make a list of what I need` as a `researcher` I want `to add items to a cart` because `this lets me track what I want to buy`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `order what I need` as a `researcher` I want `to checkout easily` because `I need my stuff faster`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `get what I need for my work` as a `researcher` I want `to checkout easily` because `I want to focus on my work`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `know when my things arrive` as a `researcher` I want `shipment tracking` because `this helps me plan experiments`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `track stuff I like` as a `researcher` I want `a button to add something to a wish list` because `some things are interesting but I'm not ready to purchase them`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
 
 ## Deployment
 
-We deploy with Github Actions and AWS ECS
+Not happening yet.
 
 ## Dependencies
 
