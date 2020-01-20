@@ -18,7 +18,7 @@ View the dev branch:
 [http://www.gitpharma.com](http://www.gitpharma.com)
 [https://www.gitpharma.com](https://www.gitpharma.com)
 
-## Quick Start
+## Document, Test, Deliver
 
 just hacking on Master branch for now
 
