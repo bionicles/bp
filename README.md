@@ -23,11 +23,18 @@ View the dev branch:
 ```
 git clone https://github.com/bionicles/bp
 
-// in a terminal, run the app and tail logs:
+// in a terminal, run docker-compose and tail logs:
 make up
 
-// in another terminal, auto-restart tests:
+// in another terminal, auto-restart 'make test':
 make demon
+
+// to stop and restart the app (in Terminal 1)
+ctrl-c
+make reset
+
+// to stop the app
+make down
 ```
 
 ## Contribute
