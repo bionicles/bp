@@ -28,7 +28,7 @@ git clone https://github.com/bionicles/bp
 // in Terminal 1, run docker-compose and tail logs:
 make up
 
-// in Terminal 2, auto-restart 'make test':
+// when Terminal 1 is listening on localhost:3000, in Terminal 2, auto-restart 'make test':
 make demon
 
 // to stop and restart the app (in Terminal 1)
