@@ -31,6 +31,15 @@ make up
 // when Terminal 1 is listening on localhost:3000, in Terminal 2, auto-restart 'make test':
 make demon
 
+// to lint, audit, and unit-test the code
+make prebuild
+
+// to run a lighthouse test
+make lighthouse
+
+// to run an e2e test
+make test
+
 // to stop and restart the app (in Terminal 1)
 ctrl-c
 make reset
