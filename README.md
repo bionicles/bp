@@ -2,7 +2,7 @@
 
 Bit Pharma is an international biosecurity and medical research risk management firm
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/bionicles/bp/blob/master/LICENSE) [![codecov](https://codecov.io/gh/bionicles/bp/branch/master/graph/badge.svg)](https://codecov.io/gh/bionicles/bp)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/bionicles/bp/blob/master/LICENSE) 
 
 ## Usage
 
