@@ -52,7 +52,7 @@ make down
 
 _For security issues or other sensitive matters, please email bion@bitpharma.com_
 
-To contribute a feature request, docs question, bug report or comment, ensure it is in the issues list (please don't duplicate existing issues) and move it to "doing" on the issues triage project when you work actively to solve it. 
+To contribute feature requests, bug reports, questions, or comments, ensure the issue is on the [issues list](https://github.com/bionicles/bp/issues) (please don't duplicate existing issues) and move it to "doing" on the [issues triage project](https://github.com/bionicles/bp/projects/1) when you work actively to solve it. 
 
 Only 1-2 issues active at once, and please [give constructive criticism](https://hbr.org/2019/03/the-feedback-fallacy)!
 
@@ -78,130 +78,56 @@ Only 1-2 issues active at once, and please [give constructive criticism](https:/
 
 ## User Stories
 
-To `serve customers` as a `dev` I want `user stories` because `they help me put benefits before features`
-- [ ] documented
-- [ ] tested 
-- [ ] delivered
+- [ ] To `serve customers` as a `dev` I want `user stories` because `they help me put benefits before features`
 
-To `save time` as a `user` I want `a site which passes Lighthouse` because `I don't like to use slow, inaccessible sites`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `save time` as a `user` I want `a site which passes Lighthouse` because `I don't like to use slow, inaccessible sites`
 
-To `hack faster` as a `dev` I want `clear docs` because `if it's not documented, I don't know how to use it`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `hack faster` as a `dev` I want `clear docs` because `if it's not documented, I don't know how to use it`
 
-To `quickly install what I need to contribute` as a `dev` I want `dependencies tracked` because `then I don't need to install by trial and error`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `quickly install what I need to contribute` as a `dev` I want `dependencies tracked` because `then I don't need to install by trial and error`
 
-To `quickly test + deliver improvements` as a `dev` I want `a local setup with docker-compose` because `this works on all machines without a long deployment process`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `quickly test + deliver improvements` as a `dev` I want `a local setup with docker-compose` because `this works on all machines without a long deployment process`
 
-To `have 1 coherent interface` as a `dev` I want `commands managed in a Makefile` because `it simplifies my workflow`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `have 1 coherent interface` as a `dev` I want `dev commands in a Makefile` because `it simplifies my workflow`
 
-To `code Bit Pharma` as a `dev` I want `a simple API` because `this lets me use the service programmatically`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `code Bit Pharma` as a `dev` I want `a simple RPC API` because `this lets me use the service programmatically`
 
-To `sign up easily` as a `user` I want `passwordless login` because `I'm sick of dealing with passwords`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `sign up easily` as a `user` I want `passwordless login` because `I'm sick of dealing with passwords`
 
-To `secure my account` as a `user` I want `multifactor auth` because `I don't want my account abused`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `secure my account` as a `user` I want `multifactor auth` because `I don't want my account abused`
 
-To `give private feedback` as a `user` I want `an email for Bit Pharma leadership` because `some issues are private`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `give private feedback` as a `user` I want `an email for Bit Pharma leadership` because `some issues are private`
 
-To `give public feedback` as a `dev` I want `a link to Github Issues` because `this lets me report and track my concerns`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [] To `give public feedback` as a `dev` I want `a link to Github Issues` because `this lets me report and track my concerns`
 
-To `give feedback` as a `user` I want `an email address for Bit Pharma leadership` because `some issues are private`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [] To `give feedback` as a `user` I want `an email address for Bit Pharma leadership` because `some issues are private`
 
-To `find the reagents I need` as a `researcher` I want `to search inventory in my lab and nearby labs` because `it's hard to find reagents`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `find the reagents I need` as a `researcher` I want `to search inventory in my lab and nearby labs` because `it's hard to find reagents`
 
-To `save my inventory` as a `researcher` I want `a keyboard form to add inventory` because `it's faster to type`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `save my inventory` as a `researcher` I want `a keyboard form to add inventory` because `it's faster to type`
 
-To `read inventory` as a `researcher` I want `to view an item's data` because `this lets me see where it is`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `read inventory` as a `researcher` I want `to view an item's data` because `this lets me see where it is`
 
-To `know what I have` as a `researcher` I want `to view an item's data` because `this lets me see where it is`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `know what I have` as a `researcher` I want `to view an item's data` because `this lets me see where it is`
 
-To `stay up to date` as a `researcher` I want `to click on and edit inventory data` because `things change`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `stay up to date` as a `researcher` I want `to click on and edit inventory data` because `things change`
 
-To `delete inventory` as a `researcher` I want `to archive items` because `stuff goes bad or gets used up`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `delete inventory` as a `researcher` I want `to archive items` because `stuff goes bad or gets used up`
 
-To `comply with regulations` as a `researcher` I want `an immutable audit trail of events` because `this helps me prove to others what happened`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `comply with regulations` as a `researcher` I want `an immutable audit trail of events` because `this helps me prove to others what happened`
 
-To `prevent theft and terrorism` as a `biologist` I want `to be notified when stuff goes missing` because `my reagents are expensive and potentially dangerous`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `prevent theft and terrorism` as a `biologist` I want `to be notified when stuff goes missing` because `my reagents are expensive and potentially dangerous`
 
-To `get paid` as a `provider of goods and services` I want `a way to connect my inventory with stripe` because `this lets me charge money for my contributions to others`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `get paid` as a `provider of goods and services` I want `a way to connect my inventory with stripe` because `this lets me charge money for my contributions to others`
 
-To `make a list of what I need` as a `researcher` I want `to add items to a cart` because `this lets me track what I want to buy`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `make a list of what I need` as a `researcher` I want `to add items to a cart` because `this lets me track what I want to buy`
 
-To `order what I need` as a `researcher` I want `to checkout easily` because `I need my stuff faster`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `order what I need` as a `researcher` I want `to checkout easily` because `I need my stuff faster`
 
-To `know when my things arrive` as a `researcher` I want `shipment tracking` because `this helps me plan experiments`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `know when my things arrive` as a `researcher` I want `shipment tracking` because `this helps me plan experiments`
 
-To `track stuff I like` as a `researcher` I want `a button to add something to a wish list` because `some things are interesting but I'm not ready to purchase them`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
+- [ ] To `track stuff I like` as a `researcher` I want `a wish list` because `some things are interesting but I'm not ready to purchase them`
+
 
 ## Contributors
 
