@@ -98,9 +98,9 @@ Only 1-2 issues active at once, and please [give constructive criticism](https:/
 
 - [ ] To `give private feedback` as a `user` I want `an email for Bit Pharma leadership` because `some issues are private`
 
-- [] To `give public feedback` as a `dev` I want `a link to Github Issues` because `this lets me report and track my concerns`
+- [ ] To `give public feedback` as a `dev` I want `a link to Github Issues` because `this lets me report and track my concerns`
 
-- [] To `give feedback` as a `user` I want `an email address for Bit Pharma leadership` because `some issues are private`
+- [ ] To `give feedback` as a `user` I want `an email address for Bit Pharma leadership` because `some issues are private`
 
 - [ ] To `find the reagents I need` as a `researcher` I want `to search inventory in my lab and nearby labs` because `it's hard to find reagents`
 
