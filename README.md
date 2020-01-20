@@ -45,9 +45,7 @@ _For security issues or other sensitive matters, please email bion@bitpharma.com
 
 To contribute a feature request, bug report or comment, ensure it is in the issues list (please don't duplicate existing issues) and move it to "doing" on the issues triage project when you work actively to solve it. 
 
-Only 1-2 issues active at once please!
-
-please [give constructive criticism](https://hbr.org/2019/03/the-feedback-fallacy)!
+Only 1-2 issues active at once, and please [give constructive criticism](https://hbr.org/2019/03/the-feedback-fallacy)!
 
 ## Dependencies
 
