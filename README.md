@@ -58,10 +58,8 @@ We deploy with Github Actions and AWS ECS
 - [Lighthouse](https://github.com/GoogleChrome/lighthouse-ci)
 - [Jest]()
 - [Docker](https://docs.docker.com/develop/dev-best-practices/) and [Docker Compose](https://gist.github.com/jonlabelle/bd667a97666ecda7bbc4f1cc9446d43a)
-- [AWS](https://docs.aws.amazon.com/) and [AWS CDK](https://github.com/aws/aws-cdk)
 - [React](https://reactjs.org/docs/hooks-intro.html) + [NextJS](https://nextjs.org/docs) + [npx create-next-app](https://github.com/zeit/next.js)
 - [tailwind css](https://tailwindcss.com/) and [tufte css](https://edwardtufte.github.io/tufte-css/)
-- [Hasura](hasura.io) + [PostgreSQL](http://postgresql.org)
 - [Auth0](https://auth0.com/docs/)
 - [Stripe Connect](https://stripe.com/docs/connect)
 
