@@ -30,6 +30,26 @@ make up
 make demon
 ```
 
+## Dependencies
+
+- [MacOS](https://www.apple.com/macos/catalina/) + [Ubuntu](https://ubuntu.com/)
+- [git](https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf) and [hub](https://github.com/github/hub) and [GitHub](http://github.com/)
+- [GitHub Actions](https://github.com/marketplace)
+- [VS Code](https://code.visualstudio.com/download)
+- [make](https://news.ycombinator.com/item?id=21566530)
+- [nodemon](https://github.com/remy/nodemon#nodemon)
+- [npm](https://npmjs.com) and [yarn](https://yarnpkg.com/lang/en/)
+- [markdown](https://www.markdownguide.org/cheat-sheet/)
+- [CodeceptJS](https://codecept.io/)
+- [Lighthouse](https://github.com/GoogleChrome/lighthouse-ci)
+- [Jest]()
+- [Docker](https://docs.docker.com/develop/dev-best-practices/) and [Docker Compose](https://gist.github.com/jonlabelle/bd667a97666ecda7bbc4f1cc9446d43a)
+- [React](https://reactjs.org/docs/hooks-intro.html) + [NextJS](https://nextjs.org/docs) + [npx create-next-app](https://github.com/zeit/next.js)
+- [tailwind css](https://tailwindcss.com/) and [tufte css](https://edwardtufte.github.io/tufte-css/)
+- [Auth0](https://auth0.com/docs/)
+- [Stripe Connect](https://stripe.com/docs/connect)
+
+
 ## User Stories
 
 To `serve customers` as a `dev` I want `user stories` because `they help me put benefits before features`
@@ -146,28 +166,11 @@ To `track stuff I like` as a `researcher` I want `a button to add something to a
 
 Not happening yet.
 
-## Dependencies
-
-- [MacOS](https://www.apple.com/macos/catalina/) + [Ubuntu](https://ubuntu.com/)
-- [git](https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf) and [hub](https://github.com/github/hub) and [GitHub](http://github.com/)
-- [GitHub Actions](https://github.com/marketplace)
-- [VS Code](https://code.visualstudio.com/download)
-- [make](https://news.ycombinator.com/item?id=21566530)
-- [nodemon](https://github.com/remy/nodemon#nodemon)
-- [npm](https://npmjs.com) and [yarn](https://yarnpkg.com/lang/en/)
-- [markdown](https://www.markdownguide.org/cheat-sheet/)
-- [CodeceptJS](https://codecept.io/)
-- [Lighthouse](https://github.com/GoogleChrome/lighthouse-ci)
-- [Jest]()
-- [Docker](https://docs.docker.com/develop/dev-best-practices/) and [Docker Compose](https://gist.github.com/jonlabelle/bd667a97666ecda7bbc4f1cc9446d43a)
-- [React](https://reactjs.org/docs/hooks-intro.html) + [NextJS](https://nextjs.org/docs) + [npx create-next-app](https://github.com/zeit/next.js)
-- [tailwind css](https://tailwindcss.com/) and [tufte css](https://edwardtufte.github.io/tufte-css/)
-- [Auth0](https://auth0.com/docs/)
-- [Stripe Connect](https://stripe.com/docs/connect)
-
 ## Contribute
 
-Ensure there is an issue for your feature in the issues list and move it to the "doing" list on the issues triage project
+Ensure there is an issue for your feature in the issues list (please do not duplicate existing issues) and move it to the "doing" list on the issues triage project when you are actively working on the solution. 
+
+Only 1-2 issues active at once please!
 
 Make a feature branch:
 
