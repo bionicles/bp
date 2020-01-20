@@ -132,7 +132,6 @@ Only 1-2 issues active at once, and please [give constructive criticism](https:/
 ## Contributors
 
 - **Bion Howard** - _Initial work_ - [bionicles](https://github.com/bionicles)
-- Aris Symoneidis
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
