@@ -37,11 +37,6 @@ To `serve customers` as a `dev` I want `user stories` because `they help me put 
 - [ ] tested 
 - [ ] delivered
 
-To `learn about Bit Pharma` as a `user` I want `to view a pitch-deck style landing page` because `it helps me understand how this company can help me` 
-- [ ] documented
-- [ ] tested
-- [ ] delivered
-
 To `save time` as a `user` I want `a site which passes Lighthouse` because `I don't like to use slow, inaccessible sites`
 - [ ] documented
 - [ ] tested
