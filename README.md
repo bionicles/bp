@@ -25,10 +25,10 @@ just hacking on Master branch for now
 ```
 git clone https://github.com/bionicles/bp
 
-// in a terminal, run docker-compose and tail logs:
+// in Terminal 1, run docker-compose and tail logs:
 make up
 
-// in another terminal, auto-restart 'make test':
+// in Terminal 2, auto-restart 'make test':
 make demon
 
 // to stop and restart the app (in Terminal 1)
