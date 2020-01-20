@@ -30,6 +30,18 @@ make up
 make demon
 ```
 
+## Contribute
+
+_For security issues or other sensitive matters, please email bion@bitpharma.com_
+
+Ensure there is an issue for your feature in the issues list (please do not duplicate existing issues) and move it to the "doing" list on the issues triage project when you are actively working on the solution. 
+
+Only 1-2 issues active at once please!
+
+To add a solution, right now we're just hacking on Master branch. 
+
+We welcome pull requests and issues, but please [give constructive criticism](https://hbr.org/2019/03/the-feedback-fallacy)!
+
 ## Dependencies
 
 - [MacOS](https://www.apple.com/macos/catalina/) + [Ubuntu](https://ubuntu.com/)
@@ -161,40 +173,6 @@ To `track stuff I like` as a `researcher` I want `a button to add something to a
 - [ ] documented
 - [ ] tested
 - [ ] delivered
-
-## Deployment
-
-Not happening yet.
-
-## Contribute
-
-Ensure there is an issue for your feature in the issues list (please do not duplicate existing issues) and move it to the "doing" list on the issues triage project when you are actively working on the solution. 
-
-Only 1-2 issues active at once please!
-
-Make a feature branch:
-
-```
-git checkout -b FEATURE_NAME dev
-
-# document the feature in README.md
-make test
-# develop the feature inside the subdirectories like api, www
-
-git add .
-git commit -m "feat(FEATURE_NAME): do something"
-git push --set-upstream origin FEATURE_NAME
-# make sure your git command can make pull requests .bash_profile or .bashrc has: eval "$(hub alias -s)"
-git pull-request -m "feat(FEATURE_NAME): do thing1; do thing2"
-```
-
-_For security issues or support with sensitive matters, please email bion@bitpharma.com_
-
-We welcome pull requests and issues, but please [give constructive criticism](https://hbr.org/2019/03/the-feedback-fallacy)!
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
 ## Contributors
 
