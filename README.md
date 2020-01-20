@@ -132,11 +132,6 @@ To `order what I need` as a `researcher` I want `to checkout easily` because `I 
 - [ ] tested
 - [ ] delivered
 
-To `get what I need for my work` as a `researcher` I want `to checkout easily` because `I want to focus on my work`
-- [ ] documented
-- [ ] tested
-- [ ] delivered
-
 To `know when my things arrive` as a `researcher` I want `shipment tracking` because `this helps me plan experiments`
 - [ ] documented
 - [ ] tested
