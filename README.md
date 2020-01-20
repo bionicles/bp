@@ -30,7 +30,7 @@ make up
 make demon
 ```
 
-### User Stories
+## User Stories
 
 To `serve customers` as a `dev` I want `user stories` because `they help me put benefits before features`
 - [ ] documented
