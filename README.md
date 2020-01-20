@@ -43,7 +43,7 @@ make down
 
 _For security issues or other sensitive matters, please email bion@bitpharma.com_
 
-To contribute a feature request, bug report or comment, ensure it is in the issues list (please don't duplicate existing issues) and move it to "doing" on the issues triage project when you work actively to solve it. 
+To contribute a feature request, docs question, bug report or comment, ensure it is in the issues list (please don't duplicate existing issues) and move it to "doing" on the issues triage project when you work actively to solve it. 
 
 Only 1-2 issues active at once, and please [give constructive criticism](https://hbr.org/2019/03/the-feedback-fallacy)!
 
@@ -80,6 +80,21 @@ To `save time` as a `user` I want `a site which passes Lighthouse` because `I do
 - [ ] delivered
 
 To `hack faster` as a `dev` I want `clear docs` because `if it's not documented, I don't know how to use it`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `quickly install what I need to contribute` as a `dev` I want `dependencies tracked` because `then I don't need to install by trial and error`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `quickly test + deliver improvements` as a `dev` I want `a local setup with docker-compose` because `this works on all machines without a long deployment process`
+- [ ] documented
+- [ ] tested
+- [ ] delivered
+
+To `have 1 coherent interface` as a `dev` I want `commands managed in a Makefile` because `it simplifies my workflow`
 - [ ] documented
 - [ ] tested
 - [ ] delivered
