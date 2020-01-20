@@ -20,6 +20,8 @@ View the dev branch:
 
 ## Quick Start
 
+just hacking on Master branch for now
+
 ```
 git clone https://github.com/bionicles/bp
 
@@ -41,13 +43,11 @@ make down
 
 _For security issues or other sensitive matters, please email bion@bitpharma.com_
 
-Ensure there is an issue for your feature in the issues list (please do not duplicate existing issues) and move it to the "doing" list on the issues triage project when you are actively working on the solution. 
+To contribute a feature request, bug report or comment, ensure it is in the issues list (please don't duplicate existing issues) and move it to "doing" on the issues triage project when you work actively to solve it. 
 
 Only 1-2 issues active at once please!
 
-To add a solution, right now we're just hacking on Master branch. 
-
-We welcome pull requests and issues, but please [give constructive criticism](https://hbr.org/2019/03/the-feedback-fallacy)!
+please [give constructive criticism](https://hbr.org/2019/03/the-feedback-fallacy)!
 
 ## Dependencies
 
