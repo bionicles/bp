@@ -1,8 +1,8 @@
 SHELL := /bin/bash
 -include .env
-export
+# export
 
-export PATH=$(npm bin):$PATH
+# export PATH="$(npm bin):$PATH"
 
 dc := $(shell which docker-compose)
 home := ${CURDIR}
@@ -42,11 +42,6 @@ reset: down up
 
 release:
 	npx semantic-release 
-
-zip:
-	git archive --format=tar.gz -o /tmp/${NEXT_VERSION}.tar.gz master
-
-semantic-release:
 
 # stage.deploy:
 # 	cdk synthesize && cdk deploy
