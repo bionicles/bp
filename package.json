@@ -8,6 +8,8 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
+    "@semantic-release/exec": "^4.0.0",
+    "@semantic-release/git": "^8.0.0",
     "semantic-release": "^16.0.2"
   },
   "release": {
@@ -17,7 +19,8 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      "@semantic-release/github"
+      "@semantic-release/github",
+      "@semantic-release/git"
     ]
   }
 }

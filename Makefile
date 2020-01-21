@@ -2,9 +2,10 @@ SHELL := /bin/bash
 include .env
 export
 
+export PATH=$(npm bin):$PATH
+
 dc := $(shell which docker-compose)
 home := ${CURDIR}
-next-version := $(shell npx-semantic-release -d)
 
 up:
 	cd $(home) && $(dc) up --build -d && $(dc) logs --tail=1000 -f -t
@@ -39,13 +40,13 @@ down:
 
 reset: down up
 
-release: zip semantic-release
+release:
+	npx semantic-release 
 
 zip:
 	git archive --format=tar.gz -o /tmp/${NEXT_VERSION}.tar.gz master
 
 semantic-release:
-	npx semantic-release 
 
 # stage.deploy:
 # 	cdk synthesize && cdk deploy
