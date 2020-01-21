@@ -5,6 +5,7 @@ SHELL := /bin/bash
 # export PATH="$(npm bin):$PATH"
 
 dc := $(shell which docker-compose)
+stage = $(shell echo $STAGE)
 home := ${CURDIR}
 
 up:

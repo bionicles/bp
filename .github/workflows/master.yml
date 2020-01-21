@@ -1,4 +1,4 @@
-name: Release each push to Master
+name: Prebuild, Run, Test, Release
 
 on:
   push:
@@ -19,6 +19,8 @@ jobs:
         run: make prebuild
       - name: Run docker-compose
         if: success()
+        env:
+          STAGE: "prod"
         run: make up
       - name: Run e2e tests
         if: success()
