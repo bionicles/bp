@@ -11,6 +11,9 @@ home := ${CURDIR}
 up:
 	cd $(home) && $(dc) up --build -d && $(dc) logs --tail=1000 -f -t
 
+up-ci:
+	cd $(home) && $(dc) up --build -d
+
 demon:
 	nodemon --ext '*' --exec 'make e2e || exit 1'
 

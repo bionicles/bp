@@ -13,15 +13,13 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "12.x"
-      - name: Test yarn
-        run: yarn --version
       - name: Run prebuild test
         run: make prebuild
       - name: Run docker-compose
         if: success()
         env:
           STAGE: "prod"
-        run: make up
+        run: make up-ci
       - name: Run e2e tests
         if: success()
         run: make e2e
