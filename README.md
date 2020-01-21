@@ -2,7 +2,7 @@
 
 Bit Pharma is an international biosecurity and medical research risk management firm
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/bionicles/bp/blob/master/LICENSE) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/bionicles/bp/blob/master/LICENSE)
 
 ## Usage
 
@@ -20,7 +20,7 @@ Staging (old repo) :
 
 ## Document, Test, Deliver
 
-just hacking on Master branch for now
+hack on Master branch for now
 
 ```
 git clone https://github.com/bionicles/bp
@@ -52,7 +52,7 @@ make down
 
 _For security issues or other sensitive matters, please email bion@bitpharma.com_
 
-To contribute feature requests, bug reports, questions, or comments, ensure the issue is on the [issues list](https://github.com/bionicles/bp/issues) (please don't duplicate existing issues) and move it to "doing" on the [issues triage project](https://github.com/bionicles/bp/projects/1) when you work actively to solve it. 
+To contribute feature requests, bug reports, questions, or comments, ensure the issue is on the [issues list](https://github.com/bionicles/bp/issues) (please don't duplicate existing issues) and move it to "doing" on the [issues triage project](https://github.com/bionicles/bp/projects/1) when you work actively to solve it.
 
 Only 1-2 issues active at once, and please [give constructive criticism](https://hbr.org/2019/03/the-feedback-fallacy)!
 
@@ -74,13 +74,11 @@ Only 1-2 issues active at once, and please [give constructive criticism](https:/
 - [tailwind css](https://tailwindcss.com/) and [tufte css](https://edwardtufte.github.io/tufte-css/)
 - [Auth0](https://auth0.com/docs/)
 - [Stripe Connect](https://stripe.com/docs/connect)
-
+- [semantic-release](https://github.com/semantic-release/semantic-release#commit-message-format)
 
 ## User Stories
 
 - [ ] To `serve customers` as a `dev` I want `user stories` because `they help me put benefits before features`
-
-- [ ] To `save time` as a `user` I want `a site which passes Lighthouse` because `I don't like to use slow, inaccessible sites`
 
 - [ ] To `hack faster` as a `dev` I want `clear docs` because `if it's not documented, I don't know how to use it`
 
@@ -91,6 +89,10 @@ Only 1-2 issues active at once, and please [give constructive criticism](https:/
 - [ ] To `have 1 coherent interface` as a `dev` I want `dev commands in a Makefile` because `it simplifies my workflow`
 
 - [ ] To `code Bit Pharma` as a `dev` I want `a simple RPC API` because `this lets me use the service programmatically`
+
+- [ ] To `know when to update` as a `dev` I want `releases on Github` because `this lets me see and download specific versions`
+
+- [ ] To `not use crappy websites` as a `user` I want `a site which passes Lighthouse >90 on all fronts` because `I don't like to use slow, inaccessible sites`
 
 - [ ] To `sign up easily` as a `user` I want `passwordless login` because `I'm sick of dealing with passwords`
 
@@ -120,6 +122,8 @@ Only 1-2 issues active at once, and please [give constructive criticism](https:/
 
 - [ ] To `get paid` as a `provider of goods and services` I want `a way to connect my inventory with stripe` because `this lets me charge money for my contributions to others`
 
+- [ ] To `increase revenue` as a `provider of goods and services` I want `a way to promote my inventory` because `marketing helps potential customers find my offerings`
+
 - [ ] To `make a list of what I need` as a `researcher` I want `to add items to a cart` because `this lets me track what I want to buy`
 
 - [ ] To `order what I need` as a `researcher` I want `to checkout easily` because `I need my stuff faster`
@@ -128,12 +132,19 @@ Only 1-2 issues active at once, and please [give constructive criticism](https:/
 
 - [ ] To `track stuff I like` as a `researcher` I want `a wish list` because `some things are interesting but I'm not ready to purchase them`
 
+- [ ] To `receive critical updates` as a `user` I want `a minimal notification system` because `this makes sure I won't miss anything`
+
+- [ ] To `report critical updates` as a `Stripe dev` I want `a webhook listener` because `our systems need a standard way to report to your systems`
 
 ## Contributors
 
 - **Bion Howard** - _Initial work_ - [bionicles](https://github.com/bionicles)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## References
+
+[The Twelve-Factor App](https://12factor.net/)
 
 ## License
 

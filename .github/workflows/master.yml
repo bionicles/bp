@@ -1,0 +1,33 @@
+name: Release each push to Master
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1
+      - name: Run prebuild test
+        run: make prebuild
+      - name: Run docker-compose
+        if: success()
+        run: make up
+      - name: Run e2e tests
+        if: success()
+        run: make e2e
+      - name: Run lighthouse
+        if: success()
+        uses: treosh/lighthouse-ci-action@v2
+        with:
+          configPath: "./lighthouseci/lighthouse-config.js"
+          urls: |
+            http://localhost:3000
+            http://localhost:3000/blog
+      - name: Release
+        if: success()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release

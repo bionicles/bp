@@ -4,14 +4,15 @@ export
 
 dc := $(shell which docker-compose)
 home := ${CURDIR}
+next-version := $(shell npx-semantic-release -d)
 
 up:
 	cd $(home) && $(dc) up --build -d && $(dc) logs --tail=1000 -f -t
 
 demon:
-	nodemon --ext '*' --exec 'make test || exit 1'
+	nodemon --ext '*' --exec 'make e2e || exit 1'
 
-test: e2e
+test: lighthouse e2e
 
 prebuild: prebuild.lint prebuild.audit prebuild.unit
 
@@ -28,15 +29,23 @@ prebuild.unit:
 	cd www && yarn test
 
 lighthouse:
-	lighthouse http://localhost:3000 --view --output-path=tests/output/lighthouse.html
+	lighthouse http://localhost:3000 --view --config-path=.lighthouseci/lighthouserc.json --output-path=.lighthouseci/lighthouse-results.html 
 
 e2e:
-	docker run --net=host -v ${home}/tests:/tests -e TEST_URL=http://localhost:3000 codeception/codeceptjs codeceptjs run --steps --debug --verbose
+	docker run --net=host -v ${home}/www/__tests__/e2e:/tests -e TEST_URL=http://localhost:3000 codeception/codeceptjs codeceptjs run --steps --debug --verbose
 
 down:
 	docker-compose down --remove-orphans
 
 reset: down up
+
+release: zip semantic-release
+
+zip:
+	git archive --format=tar.gz -o /tmp/${NEXT_VERSION}.tar.gz master
+
+semantic-release:
+	npx semantic-release 
 
 # stage.deploy:
 # 	cdk synthesize && cdk deploy

@@ -1,0 +1,23 @@
+{
+  "name": "bitpharma",
+  "version": "0.0.1",
+  "description": "a startup",
+  "main": "index.js",
+  "repository": "https://github.com/bionicles/bp.git",
+  "author": "Bion Howard <bion@bitpharma.com>",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "semantic-release": "^16.0.2"
+  },
+  "release": {
+    "branches": [
+      "master"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/github"
+    ]
+  }
+}

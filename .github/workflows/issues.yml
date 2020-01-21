@@ -4,17 +4,17 @@ jobs:
   github-actions-automate-projects:
     runs-on: ubuntu-latest
     steps:
-    - name: add-new-issues-to-repository-based-project-column
-      uses: docker://takanabe/github-actions-automate-projects:v0.0.1
-      if: github.event_name == 'issues' && github.event.action == 'opened'
-      env:
-        GITHUB_TOKEN: ${{ secrets.REPO_SCOPE_TOKEN }}
-        GITHUB_PROJECT_URL: https://github.com/bionicles/bp/projects/1
-        GITHUB_PROJECT_COLUMN_NAME: To do
-    - name: add-new-prs-to-repository-based-project-column
-      uses: docker://takanabe/github-actions-automate-projects:v0.0.1
-      if: github.event_name == 'pull_request' && github.event.action == 'opened'
-      env:
-        GITHUB_TOKEN: ${{ secrets.REPO_SCOPE_TOKEN }}
-        GITHUB_PROJECT_URL: https://github.com/bionicles/bp/projects/1
-        GITHUB_PROJECT_COLUMN_NAME: To do
+      - name: add-new-issues-to-repository-based-project-column
+        uses: docker://takanabe/github-actions-automate-projects:v0.0.1
+        if: github.event_name == 'issues' && github.event.action == 'opened'
+        env:
+          GITHUB_TOKEN: ${{ secrets.PUBLIC_REPO_SCOPE_TOKEN }}
+          GITHUB_PROJECT_URL: https://github.com/bionicles/bp/projects/1
+          GITHUB_PROJECT_COLUMN_NAME: To do
+      - name: add-new-prs-to-repository-based-project-column
+        uses: docker://takanabe/github-actions-automate-projects:v0.0.1
+        if: github.event_name == 'pull_request' && github.event.action == 'opened'
+        env:
+          GITHUB_TOKEN: ${{ secrets.PUBLIC_REPO_SCOPE_TOKEN }}
+          GITHUB_PROJECT_URL: https://github.com/bionicles/bp/projects/1
+          GITHUB_PROJECT_COLUMN_NAME: To do
