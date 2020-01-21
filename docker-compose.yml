@@ -1,39 +1,18 @@
 version: "3.7"
 
 services:
-  # db:
-  #   image: orientdb:3.0.27
-  #   command: dserver.sh
-  #   volumes:
-  #     - ./var/odb/config:/orientdb/config
-  #     - ./var/odb/databases:/orientdb/databases
-  #   environment:
-  #     ORIENTDB_ROOT_PASSWORD: root
-  #     ORIENTDB_NODE_NAME: odb
-  #   ports:
-  #     - "127.0.0.1:2480:2480"
-  #     - "127.0.0.1:2424:2424"
   www:
-    # depends_on: [db]
     build:
       context: ./www
+      dockerfile: Dockerfile.${STAGE}
     environment:
-      - PORT=3000
+      - API=http://localhost:8080
       - NODE_ENV=production
-      - API=127.0.0.1:4000
+      - PORT=3000
+    volumes:
+      - ./www:/usr/src/app
+      - /usr/src/app/node_modules
     ports:
       - "127.0.0.1:3000:3000"
-  # chrome:
-  #   image: selenium/standalone-chrome-debug:3.141.59
-  #   ports:
-  #     - "4444"
-  #     - "5900"
-  tests:
-    depends_on: [www]
-    image: codeception/codeceptjs
-    environment:
-      - CODECEPT_ARGS=--debug
-      - NO_OF_WORKERS=1
-      - TEST_URL=localhost:3000
-    volumes:
-      - ./tests:/tests
+    healthcheck:
+      test: curl -s -o /dev/null -w "%{http_code}" localhost:3000 | grep -q 2

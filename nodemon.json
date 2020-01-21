@@ -1,10 +1,9 @@
 {
   "watch": [
-    "docker-compose.yml",
     "www/components",
+    "www/__tests__",
     "www/pages",
-    "www/tools",
-    "e2e",
+    "tests/welcome_test.js",
     "Makefile",
     ".env"
   ]

@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  pipe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build the app
+        run:
+      - name: Run a local deployment
+        run: |
+          docker-compose up  --build -d --force-recreate
+          docker-compose ps -a
+          docker-compose logs --tail=1000 -f -t
+      - name: Lint the code
+        run: docker exec www yarn lint
+      - name: Audit security
+        run: docker exec www yarn audit
+      - name: Upload unit test coverage
+        run: |
+          docker exec www yarn test:coverage
+          docker exec www yarn upload:coverage --token=${{ secrets.CODECOV_TOKEN }}
+      - name: Lighthouse Test Local
+        uses: jakejarvis/lighthouse-action@master
+        with:
+          url: "http://localhost:3000"
+      - name: Test E2E
+        run: |
+          docker build e2e
+          docker run e2e -e TEST_URL=localhost:3000
+      - name: Deploy to staging
+        run: |
+          docker tag www semver
+          aws ecr push www
+          aws cdk synthesize staging
+          aws cdk deploy staging
+      - name: Test the staging environment
+        run: docker run e2e target=gitpharma.com
+      - name: Lighthouse Test Staging
+        uses: jakejarvis/lighthouse-action@master
+        with:
+          url: "http://gitpharma.com"
+      - name: Tag the Image with the Semantic Version
+        run: |
+          docker tag www semver
+          aws ecr push www
+      # - name: Deploy to production
+      #   run: |
+      #     aws cdk synthesize master
+      #     aws cdk deploy master

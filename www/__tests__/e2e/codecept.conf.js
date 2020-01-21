@@ -3,7 +3,7 @@ exports.config = {
   output: "./output",
   helpers: {
     Puppeteer: {
-      url: "http://",
+      url: process.env.TEST_URL,
       show: true,
       chrome: {
         args: ["--no-sandbox"]

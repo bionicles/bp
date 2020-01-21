@@ -1,13 +1,118 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`With Snapshot Testing App shows "Hello world!" 1`] = `
+exports[`With Snapshot Testing App shows "Bion is Cool" 1`] = `
 <div
-  className="jsx-2982525546"
+  className="jsx-243749409"
 >
-  <p
-    className="jsx-2982525546"
+  <nav
+    className="jsx-2055897931"
   >
-    Hello World!
-  </p>
+    <ul
+      className="jsx-2055897931"
+    >
+      <li
+        className="jsx-2055897931"
+      >
+        <a
+          className="jsx-2055897931"
+          href="/"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          Home
+        </a>
+      </li>
+      <li
+        className="jsx-2055897931"
+      >
+        <a
+          className="jsx-2055897931"
+          href="https://zeit.co/now"
+        >
+          ZEIT
+        </a>
+      </li>
+      <li
+        className="jsx-2055897931"
+      >
+        <a
+          className="jsx-2055897931"
+          href="https://github.com/zeit/next.js"
+        >
+          GitHub
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div
+    className="jsx-243749409 hero"
+  >
+    <h1
+      className="jsx-243749409 title"
+      id="hero-title"
+    >
+      Bion is Cool!
+    </h1>
+    <p
+      className="jsx-243749409 description"
+    >
+      To get started, edit 
+      <code
+        className="jsx-243749409"
+      >
+        pages/index.js
+      </code>
+       and save to reload.
+    </p>
+    <div
+      className="jsx-243749409 row"
+    >
+      <a
+        className="jsx-243749409 card"
+        href="https://nextjs.org/docs"
+      >
+        <h3
+          className="jsx-243749409"
+        >
+          Documentation →
+        </h3>
+        <p
+          className="jsx-243749409"
+        >
+          Learn more about Next.js in the documentation.
+        </p>
+      </a>
+      <a
+        className="jsx-243749409 card"
+        href="https://nextjs.org/learn"
+      >
+        <h3
+          className="jsx-243749409"
+        >
+          Next.js Learn →
+        </h3>
+        <p
+          className="jsx-243749409"
+        >
+          Learn about Next.js by following an interactive tutorial!
+        </p>
+      </a>
+      <a
+        className="jsx-243749409 card"
+        href="https://github.com/zeit/next.js/tree/master/examples"
+      >
+        <h3
+          className="jsx-243749409"
+        >
+          Examples →
+        </h3>
+        <p
+          className="jsx-243749409"
+        >
+          Find other example boilerplates on the Next.js GitHub.
+        </p>
+      </a>
+    </div>
+  </div>
 </div>
 `;
