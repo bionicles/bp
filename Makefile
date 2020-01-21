@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-include .env
+-include .env
 export
 
 export PATH=$(npm bin):$PATH
