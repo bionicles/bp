@@ -29,10 +29,11 @@ services:
   #     - "4444"
   #     - "5900"
   tests:
-    # depends_on: [chrome]
+    depends_on: [www]
     image: codeception/codeceptjs
     environment:
       - CODECEPT_ARGS=--debug
       - NO_OF_WORKERS=1
+      - TEST_URL=localhost:3000
     volumes:
       - ./tests:/tests
