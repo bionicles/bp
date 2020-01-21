@@ -27,10 +27,8 @@ jobs:
         if: success()
         uses: treosh/lighthouse-ci-action@v2
         with:
-          configPath: ".lighthouseci/lighthouserc.json"
-          urls: |
-            http://localhost:3000
-            http://localhost:3000/blog
+          configPath: ".lighthouseci/lighthouse-config.json"
+          urls: http://localhost:3000
       - name: Release
         if: success()
         env:
