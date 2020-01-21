@@ -15,7 +15,10 @@ demon:
 
 test: lighthouse e2e
 
-prebuild: prebuild.lint prebuild.audit prebuild.unit
+prebuild: prebuild.yarn prebuild.lint prebuild.audit prebuild.unit
+
+prebuild.yarn:
+	cd www && yarn
 
 prebuild.lint: 
 	cd www && yarn lint
