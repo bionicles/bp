@@ -38,7 +38,7 @@ jobs:
         if: success()
         uses: treosh/lighthouse-ci-action@v2
         with:
-          configPath: ".lighthouseci/lighthouserc.json"
+          configPath: ".lighthouseci/lighthouserc.js"
           urls: |
             ${{ steps.Stage.preview-url }}
             ${{ steps.Stage.preview-url }}/blog

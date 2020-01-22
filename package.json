@@ -13,7 +13,7 @@
     "upload:coverage": "npx codecov --token=$CODECOV_TOKEN",
     "lint": "npx eslint .",
     "e2e": "npx codeceptjs run -c tests/e2e/codecept.conf.js --steps --debug --verbose",
-    "lighthouse": "lhci autorun",
+    "lighthouse": "source .env && lhci autorun",
     "release": "npx semantic-release",
     "watch": "nodemon --ext '*' --exec 'make e2e || exit 1'"
   },
@@ -23,6 +23,7 @@
     "@semantic-release/exec": "^4.0.0",
     "@semantic-release/git": "^8.0.0",
     "cssnano": "^4.1.10",
+    "dotenv": "^8.2.0",
     "isomorphic-unfetch": "^3.0.0",
     "next": "9.2.0",
     "react": "16.12.0",
