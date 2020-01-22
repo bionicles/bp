@@ -38,6 +38,9 @@ jobs:
         with:
           configPath: ".lighthouseci/lighthouserc.json"
           urls: http://localhost:3000
+      - name: Install semantic-release plugins
+        if: success()
+        run: yarn
       - name: Release
         if: success()
         env:

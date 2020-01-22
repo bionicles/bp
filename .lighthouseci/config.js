@@ -5,12 +5,8 @@ module.exports = {
       performance: 90,
       accessibility: 90,
       "best-practices": 90,
-      seo: 80
+      seo: 90
     },
-    onlyCategories: ["performance", "accessibility", "best-practices", "seo"],
-    skipAudits: [
-      "byte-efficiency/uses-responsive-images",
-      "byte-efficiency/uses-webp-images"
-    ]
+    onlyCategories: ["performance", "accessibility", "best-practices", "seo"]
   }
 };
