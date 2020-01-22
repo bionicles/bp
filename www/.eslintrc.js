@@ -1,11 +1,20 @@
 module.exports = {
+  plugins: ["react", "security", "ramda"],
+  rules: {
+    "react/react-in-jsx-scope": "off"
+  },
+  extends: [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:security/recommended",
+    "plugin:ramda/recommended"
+  ],
   env: {
     browser: true,
     es6: true,
     node: true,
     jest: true
   },
-  extends: ["eslint:recommended", "plugin:react/recommended"],
   settings: {
     react: {
       version: "detect"
@@ -21,9 +30,5 @@ module.exports = {
     },
     ecmaVersion: 2018,
     sourceType: "module"
-  },
-  plugins: ["react"],
-  rules: {
-    "react/react-in-jsx-scope": "off"
   }
 };

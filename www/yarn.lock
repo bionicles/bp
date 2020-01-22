@@ -2767,6 +2767,13 @@ create-ecdh@^4.0.0:
     bn.js "^4.1.0"
     elliptic "^6.0.0"
 
+create-eslint-index@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/create-eslint-index/-/create-eslint-index-1.0.0.tgz#d954372d86d5792fcd67e9f2b791b1ab162411bb"
+  integrity sha1-2VQ3LYbVeS/NZ+nyt5GxqxYkEbs=
+  dependencies:
+    lodash.get "^4.3.0"
+
 create-hash@^1.1.0, create-hash@^1.1.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/create-hash/-/create-hash-1.2.0.tgz#889078af11a63756bcfb59bd221996be3a9ef196"
@@ -3578,6 +3585,15 @@ eslint-plugin-node@^11.0.0:
     resolve "^1.10.1"
     semver "^6.1.0"
 
+eslint-plugin-ramda@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ramda/-/eslint-plugin-ramda-2.5.1.tgz#36c2592300c383471aaac1ba26e9fca6f37a11b2"
+  integrity sha512-1Uuyl5hMiyBNsn1F0Px0q8hGX95HC6CAzaEBeKngwixXwsbw+j98U7fatxDME8lUKyLPXuO5Ulon2QOcwVDrxw==
+  dependencies:
+    create-eslint-index "^1.0.0"
+    ramda "0.25.0"
+    req-all "^1.0.0"
+
 eslint-plugin-react@^7.18.0:
   version "7.18.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.18.0.tgz#2317831284d005b30aff8afb7c4e906f13fa8e7e"
@@ -3592,6 +3608,13 @@ eslint-plugin-react@^7.18.0:
     object.values "^1.1.1"
     prop-types "^15.7.2"
     resolve "^1.14.2"
+
+eslint-plugin-security@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-security/-/eslint-plugin-security-1.4.0.tgz#d4f314484a80b1b613b8c8886e84f52efe1526c2"
+  integrity sha512-xlS7P2PLMXeqfhyf3NpqbvbnW04kN8M9NtmhpR3XGyOvt/vNKS7XPXT5EDbwKW9vCjWH4PpfQvgD/+JgN0VJKA==
+  dependencies:
+    safe-regex "^1.1.0"
 
 eslint-scope@^4.0.3:
   version "4.0.3"
@@ -5698,6 +5721,11 @@ lodash.flattendeep@^4.4.0:
   resolved "https://registry.yarnpkg.com/lodash.flattendeep/-/lodash.flattendeep-4.4.0.tgz#fb030917f86a3134e5bc9bec0d69e0013ddfedb2"
   integrity sha1-+wMJF/hqMTTlvJvsDWngAT3f7bI=
 
+lodash.get@^4.3.0:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+  integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
+
 lodash.isequal@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
@@ -7726,7 +7754,7 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-purgecss@^2.0.3, purgecss@^2.0.5:
+purgecss@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/purgecss/-/purgecss-2.0.5.tgz#b7aa3e3634704aa041d03f007504c303e8c6586e"
   integrity sha512-VwQoDXImH0pabZ6ivLPCsWuRGd979NEzACaT/P3pWzDVCwHXSgXUM4QDbnMklMawU0r4MrCvdaORM84KJvsCIA==
@@ -7775,6 +7803,11 @@ railroad-diagrams@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/railroad-diagrams/-/railroad-diagrams-1.0.0.tgz#eb7e6267548ddedfb899c1b90e57374559cddb7e"
   integrity sha1-635iZ1SN3t+4mcG5Dlc3RVnN234=
+
+ramda@0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.25.0.tgz#8fdf68231cffa90bc2f9460390a0cb74a29b29a9"
+  integrity sha512-GXpfrYVPwx3K7RQ6aYT8KPS8XViSXUVJT1ONhoKPE9VAleW42YE+U+8VEyGWt41EnEQW7gwecYJriTI0pKoecQ==
 
 randexp@0.4.6:
   version "0.4.6"
@@ -8081,6 +8114,11 @@ replace-ext@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/replace-ext/-/replace-ext-1.0.0.tgz#de63128373fcbf7c3ccfa4de5a480c45a67958eb"
   integrity sha1-3mMSg3P8v3w8z6TeWkgMRaZ5WOs=
+
+req-all@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/req-all/-/req-all-1.0.0.tgz#d128569451c340b432409c656cf166260cd2628d"
+  integrity sha1-0ShWlFHDQLQyQJxlbPFmJgzSYo0=
 
 request-promise-core@1.1.3:
   version "1.1.3"

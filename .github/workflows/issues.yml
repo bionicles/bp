@@ -1,5 +1,5 @@
 name: Add issues to the project board
-on: [issues, pull_request]
+on: [issues]
 jobs:
   github-actions-automate-projects:
     runs-on: ubuntu-latest
