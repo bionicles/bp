@@ -77,7 +77,7 @@ Only 1-2 issues active at once, and please [give constructive criticism](https:/
 ## User Stories
 
 - [ ] To `serve customers` as a `dev` I want `user stories` because `they help me put benefits before features`
-- [ ]
+
 - [ ] To `work on stuff people want` as a `dev` I want `market demand testing` because `this confirms or refutes people want the platform`
 
 - [ ] To `hack faster` as a `dev` I want `clear docs` because `if it's not documented, I don't know how to use it`
