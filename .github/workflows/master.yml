@@ -21,6 +21,8 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Prebuild
         run: yarn prebuild
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: Stage
         if: success()
         uses: amondnet/now-deployment@v1
