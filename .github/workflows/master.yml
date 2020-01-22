@@ -39,7 +39,9 @@ jobs:
         uses: treosh/lighthouse-ci-action@v2
         with:
           configPath: ".lighthouseci/lighthouserc.json"
-          urls: http://localhost:3000
+          urls: |
+            ${{ steps.Stage.preview-url }}
+            ${{ steps.Stage.preview-url }}/blog
       - name: Release
         if: success()
         env:

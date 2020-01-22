@@ -12,7 +12,6 @@
     "test:coverage": "jest --coverage -u",
     "upload:coverage": "npx codecov --token=$CODECOV_TOKEN",
     "lint": "npx eslint .",
-    "stage": "now",
     "e2e": "npx codeceptjs --steps --debug --verbose",
     "lighthouse": "lhci autorun",
     "release": "npx semantic-release",
