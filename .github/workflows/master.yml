@@ -1,6 +1,6 @@
 name: Prebuild, Stage, Test, Release
 
-on: [pull_request]
+on: [push]
 
 jobs:
   build:
