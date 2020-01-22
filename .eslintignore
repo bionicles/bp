@@ -1,5 +1,5 @@
 /dist/*
-/coverage/*
-/reports/*
+tests/coverage/*
+tests/reports/*
 node_modules
-__tests__/e2e
+tests/e2e
