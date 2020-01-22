@@ -8,13 +8,13 @@ var
 .pnp.js
 
 # testing
-/www/coverage
-/tests/output
+tests/coverage
+tests/e2e/output
 
 # next.js
-/www/.next/
-/www/out/
-/www/build
+.next
+out
+build
 
 # misc
 .DS_Store
