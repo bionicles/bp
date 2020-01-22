@@ -71,28 +71,29 @@ Only 1-2 issues active at once, and please [give constructive criticism](https:/
 - [React](https://reactjs.org/docs/hooks-intro.html) + [NextJS](https://nextjs.org/docs) + [npx create-next-app](https://github.com/zeit/next.js)
 - [tailwind css](https://tailwindcss.com/) and [tufte css](https://edwardtufte.github.io/tufte-css/)
 - [Auth0](https://auth0.com/docs/)
+- [Twilio](https://www.twilio.com/docs)
 - [Stripe Connect](https://stripe.com/docs/connect)
 - [semantic-release](https://github.com/semantic-release/semantic-release#commit-message-format)
 
 ## User Stories
 
-- [ ] To `serve customers` as a `dev` I want `user stories` because `they help me put benefits before features`
+- [x] To `serve customers` as a `dev` I want `user stories` because `they help me put benefits before features`
 
 - [ ] To `work on stuff people want` as a `dev` I want `market demand testing` because `this confirms or refutes people want the platform`
 
 - [ ] To `hack faster` as a `dev` I want `clear docs` because `if it's not documented, I don't know how to use it`
 
-- [ ] To `quickly install what I need to contribute` as a `dev` I want `dependencies tracked` because `then I don't need to install by trial and error`
+- [x] To `quickly install what I need to contribute` as a `dev` I want `dependencies tracked` because `then I don't need to install by trial and error`
 
-- [ ] To `quickly test + deliver improvements` as a `dev` I want `a local setup with docker-compose` because `this works on all machines without a long deployment process`
+- [x] To `quickly test + deliver improvements` as a `dev` I want `a local setup with docker-compose` because `this works on all machines without a long deployment process`
 
-- [ ] To `have 1 coherent interface` as a `dev` I want `dev commands in a Makefile` because `it simplifies my workflow`
+- [x] To `have 1 coherent interface` as a `dev` I want `dev commands in a Makefile` because `it simplifies my workflow`
 
 - [ ] To `code Bit Pharma` as a `dev` I want `a simple RPC API` because `this lets me use the service programmatically`
 
-- [ ] To `know when to update` as a `dev` I want `releases on Github` because `this lets me see and download specific versions`
+- [x] To `know when to update` as a `dev` I want `releases on Github` because `this lets me see and download specific versions`
 
-- [ ] To `not use crappy websites` as a `user` I want `a site which passes Lighthouse >90 on all fronts` because `I don't like to use slow, inaccessible sites`
+- [x] To `not use crappy websites` as a `user` I want `releases to require Lighthouse >90 on all fronts` because `I don't like to use slow, inaccessible sites`
 
 - [ ] To `sign up easily` as a `user` I want `passwordless login` because `I'm sick of dealing with passwords`
 

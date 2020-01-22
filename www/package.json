@@ -16,6 +16,7 @@
     "@mdx-js/loader": "^1.5.5",
     "@next/mdx": "^9.2.0",
     "cssnano": "^4.1.10",
+    "isomorphic-unfetch": "^3.0.0",
     "next": "9.2.0",
     "react": "16.12.0",
     "react-dom": "16.12.0"
