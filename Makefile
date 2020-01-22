@@ -37,7 +37,7 @@ prebuild.unit:
 	cd www && yarn test
 
 lighthouse:
-	lighthouse http://localhost:3000 --view --config-path=.lighthouseci/lighthouse-config.json --output-path=.lighthouseci/lighthouse-results.html 
+	lighthouse http://localhost:3000 --view --config-path=.lighthouseci/config.js --output-path=.lighthouseci/lighthouse-results.html 
 
 e2e:
 	docker run --net=host -v ${home}/www/__tests__/e2e:/tests -e TEST_URL=http://localhost:3000 codeception/codeceptjs codeceptjs run --steps --debug --verbose
