@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 console.log("lighthouserc.js TEST_URL", process.env.TEST_URL);
 
 module.exports = {

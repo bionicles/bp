@@ -1,9 +1,12 @@
+require("dotenv").config();
+
+console.log("CODECEPT CONF JS TEST_URL", process.env.TEST_URL);
+
 exports.config = {
   tests: "./*_test.js",
   output: "./output",
   helpers: {
     Puppeteer: {
-      url: process.env.TEST_URL,
       show: true,
       chrome: {
         args: ["--no-sandbox"]

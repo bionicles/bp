@@ -23,6 +23,7 @@ jobs:
         run: yarn prep
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: true
       - name: Stage
         if: success()
         uses: amondnet/now-deployment@v1

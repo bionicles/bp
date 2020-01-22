@@ -12,8 +12,8 @@
     "test:coverage": "jest --coverage -u",
     "upload:coverage": "npx codecov --token=$CODECOV_TOKEN",
     "lint": "npx eslint .",
-    "e2e": "npx codeceptjs run -c tests/e2e/codecept.conf.js --steps --debug --verbose",
-    "lighthouse": "source .env && lhci autorun",
+    "e2e": "codeceptjs run --config=./tests/e2e/codecept.conf.js --steps --debug --verbose",
+    "lighthouse": "lhci autorun",
     "release": "npx semantic-release",
     "watch": "nodemon --ext '*' --exec 'make e2e || exit 1'"
   },
