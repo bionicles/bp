@@ -1,5 +1,0 @@
-/dist/*
-tests/coverage/*
-tests/reports/*
-node_modules
-tests/e2e

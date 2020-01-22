@@ -12,7 +12,7 @@
     "test:coverage": "jest --coverage -u",
     "upload:coverage": "npx codecov --token=$CODECOV_TOKEN",
     "lint": "npx eslint .",
-    "e2e": "npx codeceptjs run --steps --debug --verbose",
+    "e2e": "npx codeceptjs run -c tests/e2e/codecept.conf.js steps_file.js--steps --debug --verbose",
     "lighthouse": "lhci autorun",
     "release": "npx semantic-release",
     "watch": "nodemon --ext '*' --exec 'make e2e || exit 1'"
@@ -73,6 +73,60 @@
       "<rootDir>/node_modules/",
       "<rootDir>/tests/e2e",
       "<rootDir>/.next/"
+    ]
+  },
+  "eslintConfig": {
+    "ignorePatterns": [
+      "tests/__snapshots__/*",
+      "tests/coverage/*",
+      "node_modules",
+      "tests/e2e"
+    ],
+    "plugins": [
+      "react",
+      "security",
+      "ramda"
+    ],
+    "rules": {
+      "react/react-in-jsx-scope": "off"
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:security/recommended",
+      "plugin:ramda/recommended"
+    ],
+    "env": {
+      "browser": true,
+      "es6": true,
+      "node": true,
+      "jest": true
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+    }
+  },
+  "nodemonConfig": {
+    "watch": [
+      "components",
+      "pages",
+      "tests/e2e/*_test.js",
+      "tests/*.test.js",
+      "Makefile",
+      ".env"
     ]
   }
 }
