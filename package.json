@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "yarn && yarn lint && yarn audit && yarn test && yarn test:coverage -u && yarn upload:coverage",
-    "dev": "now dev",
+    "dev": "next dev",
     "build": "next build",
+    "prep": "yarn && yarn lint && yarn audit && yarn test && yarn test:coverage -u && yarn upload:coverage",
     "start": "next start",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -65,6 +65,14 @@
   },
   "jest": {
     "coverageDirectory": "./tests/coverage/",
-    "collectCoverage": true
+    "collectCoverage": true,
+    "setupFiles": [
+      "<rootDir>/tests/jest.setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/tests/e2e",
+      "<rootDir>/.next/"
+    ]
   }
 }

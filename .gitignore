@@ -1,5 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-node_modules
+node_modules/
 .env
 var
 
@@ -8,8 +8,8 @@ var
 .pnp.js
 
 # testing
-tests/coverage
-tests/e2e/output
+tests/coverage/
+tests/e2e/output/
 
 # next.js
 .next

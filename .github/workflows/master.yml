@@ -20,7 +20,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Prebuild
-        run: yarn prebuild
+        run: yarn prep
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: Stage
