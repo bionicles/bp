@@ -1,19 +1,57 @@
 {
-  "name": "bitpharma",
-  "version": "0.0.1",
-  "description": "a startup",
-  "main": "index.js",
-  "repository": "https://github.com/bionicles/bp.git",
-  "author": "Bion Howard <bion@bitpharma.com>",
-  "license": "MIT",
-  "private": false,
+  "name": "www",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "build": "next build --output public"
+    "prebuild": "yarn && yarn lint && yarn audit && yarn test && yarn test:coverage -u && yarn upload:coverage",
+    "dev": "now dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage -u",
+    "upload:coverage": "source .env && npx codecov --token=$CODECOV_TOKEN",
+    "lint": "npx eslint .",
+    "stage": "now",
+    "e2e": "npx codeceptjs --steps --debug --verbose",
+    "lighthouse": "lhci autorun",
+    "release": "npx semantic-release",
+    "watch": "nodemon --ext '*' --exec 'make e2e || exit 1'"
   },
-  "devDependencies": {
+  "dependencies": {
+    "@mdx-js/loader": "^1.5.5",
+    "@next/mdx": "^9.2.0",
     "@semantic-release/exec": "^4.0.0",
     "@semantic-release/git": "^8.0.0",
+    "cssnano": "^4.1.10",
+    "isomorphic-unfetch": "^3.0.0",
+    "next": "9.2.0",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
     "semantic-release": "^16.0.2"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^2.0.5",
+    "autoprefixer": "^9.7.4",
+    "codeceptjs": "^2.4.1",
+    "codecov": "^3.6.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "eslint": "^6.8.0",
+    "eslint-plugin-jest": "^23.6.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-ramda": "^2.5.1",
+    "eslint-plugin-react": "^7.18.0",
+    "eslint-plugin-security": "^1.4.0",
+    "jest": "^25.1.0",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^7.1.0",
+    "prettier": "^1.19.1",
+    "puppeteer": "^2.0.0",
+    "purgecss": "^2.0.5",
+    "react-test-renderer": "^16.12.0",
+    "source-map-explorer": "^2.2.2",
+    "tailwindcss": "^1.1.4"
   },
   "release": {
     "branches": [
@@ -25,5 +63,9 @@
       "@semantic-release/github",
       "@semantic-release/git"
     ]
+  },
+  "jest": {
+    "coverageDirectory": "./tests/coverage/",
+    "collectCoverage": true
   }
 }

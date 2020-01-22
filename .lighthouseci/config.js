@@ -2,11 +2,11 @@ module.exports = {
   extends: "lighthouse:default",
   settings: {
     scores: {
-      performance: 90,
-      accessibility: 90,
-      "best-practices": 90,
-      seo: 90
-    },
-    onlyCategories: ["performance", "accessibility", "best-practices", "seo"]
+      performance: 80,
+      accessibility: 80,
+      "best-practices": 80,
+      seo: 80,
+      pwa: 0
+    }
   }
 };

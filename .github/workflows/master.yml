@@ -1,9 +1,6 @@
-name: Prebuild, Run, Test, Release
+name: Prebuild, Stage, Test, Release
 
-on:
-  push:
-    branches:
-      - master
+on: [pull_request]
 
 jobs:
   build:
@@ -22,27 +19,27 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: Run prebuild test
-        run: make prebuild
-      - name: Run docker-compose
+      - name: Prebuild
+        run: yarn prebuild
+      - name: Stage
         if: success()
+        uses: amondnet/now-deployment@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          zeit-token: ${{ secrets.ZEIT_TOKEN }}
+      - name: E2E
+        if: success()
+        run: yarn e2e
         env:
-          STAGE: "prod"
-        run: make up-ci
-      - name: Run e2e tests
-        if: success()
-        run: make e2e
-      - name: Run lighthouse
+          TEST_URL: ${{ steps.Stage.preview-url }}
+      - name: Lighthouse
         if: success()
         uses: treosh/lighthouse-ci-action@v2
         with:
           configPath: ".lighthouseci/lighthouserc.json"
           urls: http://localhost:3000
-      - name: Install semantic-release plugins
-        if: success()
-        run: yarn
       - name: Release
         if: success()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
+        run: yarn release

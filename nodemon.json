@@ -1,9 +1,9 @@
 {
   "watch": [
-    "www/components",
-    "www/__tests__",
-    "www/pages",
-    "tests/welcome_test.js",
+    "components",
+    "pages",
+    "tests/e2e/*_test.js",
+    "tests/*.test.js",
     "Makefile",
     ".env"
   ]
