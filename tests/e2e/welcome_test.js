@@ -1,3 +1,6 @@
+/*global Feature */
+/*global Scenario */
+
 Feature("welcome");
 
 Scenario("visit the page", I => {
