@@ -83,11 +83,15 @@ Only 1-2 issues active at once, and please [give constructive criticism](https:/
 
 -   [x] To `quickly install what I need to contribute` as a `dev` I want `dependencies tracked` because `then I don't need to install by trial and error`
 
--   [x] To `quickly test + deliver improvements` as a `dev` I want `a local setup with docker-compose` because `this works on all machines without a long deployment process`
-
--   [x] To `have 1 coherent interface` as a `dev` I want `dev commands in a Makefile` because `it simplifies my workflow`
-
 -   [ ] To `code Bit Pharma` as a `dev` I want `a simple RPC API` because `this lets me use the service programmatically`
+
+```js
+
+const result = await fetch(`https://bitpharma.com/api`, { method: 'POST', body: { action: "HELLO" } })
+console.log(result)
+// WORLD
+
+```
 
 -   [x] To `know when to update` as a `dev` I want `releases on Github` because `this lets me see and download specific versions`
 
