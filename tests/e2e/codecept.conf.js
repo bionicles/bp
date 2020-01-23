@@ -1,6 +1,12 @@
-require("dotenv").config();
+// require("dotenv").config();
 
 console.log("CODECEPT CONF JS TEST_URL", process.env.TEST_URL);
+
+// const executablePath = require("child_process").execSync(
+//   "which chromium-browser",
+//   { encoding: "utf-8" }
+// );
+// console.log("codecept.conf.js executablePath", executablePath);
 
 exports.config = {
   tests: "./*_test.js",
@@ -9,7 +15,14 @@ exports.config = {
     Puppeteer: {
       show: true,
       chrome: {
-        args: ["--no-sandbox"]
+        args: ["--no-sandbox", "--disable-setuid-sandbox"]
+        // executablePath
+      }
+    },
+    REST: {
+      endpoint: `${process.env.TEST_URL}/api`,
+      onRequest: request => {
+        request.headers.auth = "123";
       }
     }
   },

@@ -12,10 +12,10 @@
     "test:coverage": "jest --coverage -u",
     "upload:coverage": "npx codecov --token=$CODECOV_TOKEN",
     "lint": "npx eslint .",
-    "e2e": "codeceptjs run --config=./tests/e2e/codecept.conf.js --steps --debug --verbose",
+    "e2e": "docker run --net=host -v $PWD/tests:/tests -e TEST_URL=$TEST_URL codeception/codeceptjs codeceptjs run --config=./e2e/codecept.conf.js --steps",
     "lighthouse": "lhci autorun",
     "release": "npx semantic-release",
-    "watch": "nodemon --ext '*' --exec 'make e2e || exit 1'"
+    "watch": "nodemon --ext '*' --exec 'yarn e2e || exit 1'"
   },
   "dependencies": {
     "@mdx-js/loader": "^1.5.5",
