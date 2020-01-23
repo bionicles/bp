@@ -3,6 +3,7 @@
 Bit Pharma is an international biosecurity and medical research risk management firm
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/bionicles/bp/blob/master/LICENSE)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbionicles%2Fbp.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbionicles%2Fbp?ref=badge_shield)
 
 ## Usage
 
@@ -152,3 +153,6 @@ See also the list of [contributors](https://github.com/your/project/contributors
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbionicles%2Fbp.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbionicles%2Fbp?ref=badge_large)
