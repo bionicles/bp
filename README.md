@@ -6,13 +6,13 @@ Bit Pharma is an international biosecurity and medical research risk management 
 
 ## Usage
 
-Prod:
+Prod (old repo) :
 [http://bitpharma.com](http://bitpharma.com)
 [https://bitpharma.com](https://bitpharma.com)
 [http://www.bitpharma.com](http://www.bitpharma.com)
 [https://www.bitpharma.com](https://www.bitpharma.com)
 
-Staging (old repo) :
+Staging:
 [http://gitpharma.com](http://gitpharma.com)
 [https://gitpharma.com](https://gitpharma.com)
 [http://www.gitpharma.com](http://www.gitpharma.com)
@@ -80,6 +80,8 @@ Only 1-2 issues active at once, and please [give constructive criticism](https:/
 - [x] To `serve customers` as a `dev` I want `user stories` because `they help me put benefits before features`
 
 - [ ] To `work on stuff people want` as a `dev` I want `market demand testing` because `this confirms or refutes people want the platform`
+
+- [ ] To `understand license issues` as a `dev` I want `a license badge and license analyzer tool` because `license issues are confusing and litigous`
 
 - [ ] To `hack faster` as a `dev` I want `clear docs` because `if it's not documented, I don't know how to use it`
 
