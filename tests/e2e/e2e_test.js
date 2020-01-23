@@ -44,3 +44,12 @@ Scenario("use API HELLO method with params with name", async I => {
   console.log("response.data", response.data);
   assert.equal(response.data.result, "HELLO BENDER B. RODRIGUEZ");
 });
+Scenario("use API NONEXISTENT method", async I => {
+  const response = await I.sendPostRequest(`/rpc`, {
+    id: 1,
+    method: "NONEXISTENT",
+    params: { name: "PROFESSOR HUBERT J. FARNSWORTH" }
+  });
+  console.log("response.data", response.data);
+  assert.equal(response.data.error.code, -32601);
+});

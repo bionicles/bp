@@ -18,8 +18,10 @@ export default (req, res) => {
     }
   }
   if (!body.result && !body.error) {
-    body.code = -32601;
-    body.message = "allowedMethods: POST; allowedActions: HELLO";
+    body.error = {
+      code: -32601,
+      message: "allowedMethods: POST; allowedActions: HELLO"
+    };
   }
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
