@@ -44,6 +44,83 @@ hack on Master branch for now.
     yarn watch
 ```
 
+## API Quickstart
+
+Our API adheres to the [JSON-RPC 2.0 specification](https://www.jsonrpc.org/specification) 
+
+To use it, send a POST request to the /api/rpc endpoint
+
+Request Body Format:
+jsonrpc: "2.0",
+id: a string or number (if missing, we process requests as notifications and respond with status 204 if successful)
+method: a method from the list below
+params: an optional object containing the list of arguments to the method
+
+### Example
+
+```js
+
+const result = await fetch(`https://bitpharma.com/api`, { method: 'POST', body: {  jsonrpc: "2.0", 
+id: 1, method: "PING" } })
+console.log(result.status, result.data)
+// 200, { id: 1, jsonrpc: "2.0", result: "PONG" }
+
+```
+
+### GET_METHODS
+
+request body:
+    id: String or Number (required for response)
+    method: "GET_METHODS"
+    params: Not used
+
+response:
+    status: 200 or 204 if id missing
+    data: Object if id is provided
+        id: Same as request if id is provided
+        result: "Methods: ${METHODS_LIST}"
+
+### PING
+
+request body:
+    id: String or Number (optional to notify)
+    method: "PING"
+    params: Not used
+
+response:
+    status: 200 or 204 if id missing
+    data: Object if id is provided
+        id: Same as request if id is provided
+        result: "PONG"
+
+### HELLO
+
+request body:
+    id: String or Number (optional to notify)
+    method: "HELLO"
+    params: Optional Object
+        name: String
+
+response:
+    status: 200 or 204 if id missing
+    data: Object if id is provided
+        id: Same as request if id is provided
+        result: "HELLO ${name}"
+
+### SIGNUP
+
+request body:
+    id: String or Number 
+    method: "SIGNUP"
+    params: Object required for successful signup
+        phone: a phone number 
+
+response:
+    status: 200 or 204 if id missing
+    data: Object if id is provided
+        id: Same as request if id is provided
+        result: "HELLO ${name}"
+
 ## Contribute
 
 _For security issues or other sensitive matters, please email bion@bitpharma.com_ -- To contribute feature requests, bug reports, questions, or comments, ensure the issue is on the [issues list](https://github.com/bionicles/bp/issues) (please don't duplicate existing issues) and move it to "doing" on the [issues triage project](https://github.com/bionicles/bp/projects/1) when you work actively to solve it.
@@ -84,14 +161,6 @@ Only 1-2 issues active at once, and please [give constructive criticism](https:/
 -   [x] To `quickly install what I need to contribute` as a `dev` I want `dependencies tracked` because `then I don't need to install by trial and error`
 
 -   [ ] To `code Bit Pharma` as a `dev` I want `a simple RPC API` because `this lets me use the service programmatically`
-
-```js
-
-const result = await fetch(`https://bitpharma.com/api`, { method: 'POST', body: { action: "HELLO" } })
-console.log(result)
-// WORLD
-
-```
 
 -   [x] To `know when to update` as a `dev` I want `releases on Github` because `this lets me see and download specific versions`
 

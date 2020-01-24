@@ -1,6 +1,12 @@
 // const PARSE_ERROR = -32700;
-const INVALID_REQUEST = -32600;
-const METHOD_NOT_FOUND = -32601;
+const INVALID_REQUEST = {
+  error: -32600,
+  status: 500
+};
+const METHOD_NOT_FOUND = {
+  error: -32601,
+  status: 404
+};
 // const INVALID_PARAMS = -32602;
 // const SERVER_ERROR = -32000;
 // const SERVER_ERROR_MAX = -32099;
@@ -12,58 +18,66 @@ export default (req, res) => {
   const {
     body: { jsonrpc, id, method, params }
   } = req;
-
+  res.setHeader("Content-Type", "application/json");
   let body = { jsonrpc: "2.0" };
-  if (id) {
-    body.id = id;
-  }
 
+  // handle wrong jsonrpc version
   if (!jsonrpc || jsonrpc != "2.0") {
+    res.status(INVALID_REQUEST.status);
     body.error = {
-      code: INVALID_REQUEST,
-      message: "Invalid value for req.body.jsonrpc. Only '2.0' is supported."
+      code: INVALID_REQUEST.error,
+      message: "Invalid request does not specify jsonrpc: 2.0"
     };
+    res.end(JSON.stringify(body));
+    return;
   }
 
-  if (id && req.method === "POST") {
+  if (req.method !== "POST") {
+    res.status(INVALID_REQUEST.status);
+    body.error = {
+      code: INVALID_REQUEST.error,
+      message: "Invalid method. Only POST is supported."
+    };
+    res.end();
+    return;
+  }
+
+  if (req.method === "POST") {
     switch (method) {
       case "PING": {
+        res.status(200);
         body.result = "PONG";
         break;
       }
       case "HELLO": {
+        res.status(200);
         const name = !params || !params.name ? "WORLD" : params.name;
         body.result = `HELLO ${name}`;
         break;
       }
       case "GET_METHODS": {
+        res.status(200);
         body.result = METHODS;
         break;
       }
       default: {
+        res.status(METHOD_NOT_FOUND.status);
         body.error = {
-          code: METHOD_NOT_FOUND,
+          code: METHOD_NOT_FOUND.error,
           message: METHODS
         };
+        res.end(JSON.stringify(body));
       }
     }
-  } else if (id && req.method !== "POST") {
-    body.error = {
-      code: INVALID_REQUEST,
-      message: "Invalid method. Only POST is supported."
-    };
   }
-  if (!body.result && !body.error) {
-    body.error = {
-      code: METHOD_NOT_FOUND,
-      message: "Methods: PING, GET_METHODS, HELLO"
-    };
-  }
+
+  console.log("RES.STATUSCODE", res.statusCode);
   if (!id) {
     res.status(204).end();
     return;
+  } else {
+    body.id = id;
+    res.end(JSON.stringify(body));
+    return;
   }
-  res.setHeader("Content-Type", "application/json");
-  res.status(200).end(JSON.stringify(body));
-  return;
 };
