@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next",
     "build": "next build",
     "prep": "yarn && yarn lint && yarn audit && yarn test && yarn test:coverage -u && yarn upload:coverage",
     "start": "next start",
@@ -12,10 +12,11 @@
     "test:coverage": "jest --coverage -u",
     "upload:coverage": "npx codecov --token=$CODECOV_TOKEN",
     "lint": "npx eslint .",
-    "e2e": "docker run --net=host -v $PWD/tests:/tests -e TEST_URL=$TEST_URL codeception/codeceptjs codeceptjs run --config=./e2e/codecept.conf.js --steps",
+    "e2e": "docker run -it --net=host -v $PWD/tests:/tests -e TEST_URL=$TEST_URL codeception/codeceptjs codeceptjs run --config=./e2e/codecept.conf.js --steps",
     "lighthouse": "lhci autorun",
     "release": "npx semantic-release",
-    "watch": "nodemon --ext '*' --exec 'yarn e2e || exit 1'"
+    "watch": "nodemon --ext '*' --exec 'yarn e2e || exit 1'",
+    "clean": "docker container stop $(docker container ls -aq) && docker container rm $(docker container ls -aq)"
   },
   "dependencies": {
     "@mdx-js/loader": "^1.5.5",
@@ -26,6 +27,7 @@
     "dotenv": "^8.2.0",
     "isomorphic-unfetch": "^3.0.0",
     "next": "9.2.0",
+    "puppeteer": "^2.0.0",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "semantic-release": "^16.0.3"
@@ -47,7 +49,6 @@
     "npm-run-all": "^4.1.5",
     "postcss-cli": "^7.1.0",
     "prettier": "^1.19.1",
-    "puppeteer": "^2.0.0",
     "purgecss": "^2.0.5",
     "react-test-renderer": "^16.12.0",
     "source-map-explorer": "^2.2.2",
