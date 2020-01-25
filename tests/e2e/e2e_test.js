@@ -1,7 +1,6 @@
 /*global Feature */
 /*global Scenario */
 let assert = require("assert");
-let http = require("http");
 
 const url = process.env.TEST_URL;
 console.log("e2e test url:", url);
@@ -18,38 +17,16 @@ Scenario("visit the blog", async I => {
   I.see("Bit Pharma Blog");
 });
 
-Feature("API");
-Scenario("use API HELLO method with no params", async I => {
+Feature("GET_METHODS method");
+Scenario("get status 200 and methods list when I use GET_METHODS", async I => {
   const response = await I.sendPostRequest(`/rpc`, {
     jsonrpc: "2.0",
     id: 1,
-    method: "HELLO"
+    method: "GET_METHODS"
   });
-  assert.equal(response.data.result, "HELLO WORLD");
+  assert.equal(response.data.result.slice(0, 7), "Methods");
+  assert.equal(response.status, 200);
   assert.equal(response.data.id, 1);
-  assert.equal(response.status, 200);
-});
-Scenario("use API HELLO method with params but no name", async I => {
-  const response = await I.sendPostRequest(`/rpc`, {
-    jsonrpc: "2.0",
-    id: 2,
-    method: "HELLO",
-    params: { bender: "cool" }
-  });
-  assert.equal(response.data.result, "HELLO WORLD");
-  assert.equal(response.data.id, 2);
-  assert.equal(response.status, 200);
-});
-Scenario("use API HELLO method with params with name", async I => {
-  const response = await I.sendPostRequest(`/rpc`, {
-    jsonrpc: "2.0",
-    id: 3,
-    method: "HELLO",
-    params: { name: "BENDER B. RODRIGUEZ" }
-  });
-  assert.equal(response.data.result, "HELLO BENDER B. RODRIGUEZ");
-  assert.equal(response.status, 200);
-  assert.equal(response.data.id, 3);
 });
 Scenario(
   "get status code 404, error code -32601, and methods when I use nonexistent methods",
@@ -68,28 +45,33 @@ Scenario(
 Scenario("get status 204 and no result when I notify with no id", async I => {
   const { status, data } = await I.sendPostRequest(`/rpc`, {
     jsonrpc: "2.0",
-    method: "PING"
+    method: "GET_METHODS"
   });
   assert.equal(status, 204);
   assert(!data.result);
 });
 Scenario(
-  "get status code 500, error code -32600 and no result when I don't specify jsonrpc 2.0",
+  "get status code 500, error code -32600, error message, and no result when I don't specify jsonrpc 2.0",
   async I => {
     const { status, data } = await I.sendPostRequest(`/rpc`, {
-      method: "PING"
+      method: "GET_METHODS"
     });
     assert.equal(data.error.code, -32600);
+    assert(data.error.message);
     assert.equal(status, 500);
     assert(!data.result);
   }
 );
-Scenario("get PONG and status 200 when I PING", async I => {
-  const { status, data } = await I.sendPostRequest(`/rpc`, {
-    id: 5,
-    jsonrpc: "2.0",
-    method: "PING"
-  });
-  assert.equal(data.result, "PONG");
-  assert.equal(status, 200);
-});
+
+// Feature("SIGN_UP method");
+// Scenario("I SIGN_UP with a phone number", async I => {
+//   const { status, data } = await I.sendPostRequest(`/rpc`, {
+//     id: 5,
+//     jsonrpc: "2.0",
+//     method: "SIGN_UP",
+//     params: {
+//       number: process.env.PHONE_NUMBER
+//     }
+//   });
+//   assert.equal(status, 200);
+// });

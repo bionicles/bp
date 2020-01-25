@@ -50,20 +50,29 @@ Our API adheres to the [JSON-RPC 2.0 specification](https://www.jsonrpc.org/spec
 
 To use it, send a POST request to the /api/rpc endpoint
 
-Request Body Format:
+Request Body Format: JSON Object
 jsonrpc: "2.0",
-id: a string or number (if missing, we process requests as notifications and respond with status 204 if successful)
-method: a method from the list below
+id: a string or number (if missing, we process a notification and reply with status 204 on success)
+method: a method from the list below (CAPS_LOCK_WITH_UNDERSCORES)
 params: an optional object containing the list of arguments to the method
 
-### Example
+### Try the API
 
 ```js
+const HOST = "http://localhost:3000" (or web domain)
+const api = `${HOST}/api/rpc`
 
-const result = await fetch(`https://bitpharma.com/api`, { method: 'POST', body: {  jsonrpc: "2.0", 
-id: 1, method: "PING" } })
-console.log(result.status, result.data)
-// 200, { id: 1, jsonrpc: "2.0", result: "PONG" }
+const callBitPharmaAPI = body => fetch(api, { method: 'POST', body })
+
+const requestBody = {  
+    method: "GET_METHODS",
+    jsonrpc: "2.0", 
+    id: 1
+} 
+
+const response = await callBitPharmaAPI(requestBody)
+console.log(response.status) // 200
+console.log(response.data.result) // Methods: ${METHODS_LIST}
 
 ```
 
@@ -80,38 +89,11 @@ response:
         id: Same as request if id is provided
         result: "Methods: ${METHODS_LIST}"
 
-### PING
+### SIGN_UP
 
 request body:
-    id: String or Number (optional to notify)
-    method: "PING"
-    params: Not used
-
-response:
-    status: 200 or 204 if id missing
-    data: Object if id is provided
-        id: Same as request if id is provided
-        result: "PONG"
-
-### HELLO
-
-request body:
-    id: String or Number (optional to notify)
-    method: "HELLO"
-    params: Optional Object
-        name: String
-
-response:
-    status: 200 or 204 if id missing
-    data: Object if id is provided
-        id: Same as request if id is provided
-        result: "HELLO ${name}"
-
-### SIGNUP
-
-request body:
-    id: String or Number 
-    method: "SIGNUP"
+    id: String or Number (not required)
+    method: "SIGN_UP"
     params: Object required for successful signup
         phone: a phone number 
 

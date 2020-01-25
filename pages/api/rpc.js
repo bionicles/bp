@@ -11,12 +11,12 @@ const METHOD_NOT_FOUND = {
 // const SERVER_ERROR = -32000;
 // const SERVER_ERROR_MAX = -32099;
 
-export const METHODS = "Methods: PING, GET_METHODS, HELLO";
+export const METHODS = "Methods: GET_METHODS, SIGN_UP";
 
 export default (req, res) => {
   console.log(new Date(), req.body);
   const {
-    body: { jsonrpc, id, method, params }
+    body: { jsonrpc, id, method }
   } = req;
   res.setHeader("Content-Type", "application/json");
   let body = { jsonrpc: "2.0" };
@@ -31,7 +31,7 @@ export default (req, res) => {
     res.end(JSON.stringify(body));
     return;
   }
-
+  // handle wrong request method
   if (req.method !== "POST") {
     res.status(INVALID_REQUEST.status);
     body.error = {
@@ -44,18 +44,12 @@ export default (req, res) => {
 
   if (req.method === "POST") {
     switch (method) {
-      case "PING": {
-        res.status(200);
-        body.result = "PONG";
-        break;
-      }
-      case "HELLO": {
-        res.status(200);
-        const name = !params || !params.name ? "WORLD" : params.name;
-        body.result = `HELLO ${name}`;
-        break;
-      }
       case "GET_METHODS": {
+        res.status(200);
+        body.result = METHODS;
+        break;
+      }
+      case "SIGN_UP": {
         res.status(200);
         body.result = METHODS;
         break;
@@ -81,3 +75,24 @@ export default (req, res) => {
     return;
   }
 };
+
+// MFA testing stuff for later
+// const auth0 = require("auth0-js");
+// var auth0Client = new auth0.WebAuth({
+//   clientID: process.env.AUTH0_CLIENT_ID,
+//   domain: process.env.AUTH0_DOMAIN,
+//   redirectUri: process.env.TEST_URL,
+//   responseType: "token id_token"
+// });
+// const twilioClient = require("twilio")(
+//   process.env.TWILIO_ACCOUNT_SID,
+//   process.env.TWILIO_AUTH_TOKEN
+// );
+// client.messages
+//   .list({
+//     dateSent: new Date(Date.UTC(2016, 7, 31, 0, 0, 0)),
+//     from: "+15017122661",
+//     to: "+15558675310",
+//     limit: 20
+//   })
+//   .then(messages => messages.forEach(m => console.log(m.sid)));

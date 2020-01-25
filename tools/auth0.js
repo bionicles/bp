@@ -1,5 +1,5 @@
 import { initAuth0 } from "@auth0/nextjs-auth0";
-import config from "./config";
+import { config } from "tools";
 
 export default initAuth0({
   clientId: config.AUTH0_CLIENT_ID,
