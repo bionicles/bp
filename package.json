@@ -36,7 +36,7 @@
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.0.5",
     "autoprefixer": "^9.7.4",
-    "codeceptjs": "^2.4.1",
+    "codeceptjs": "^2.4.3",
     "codecov": "^3.6.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
