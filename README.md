@@ -95,13 +95,16 @@ request body:
     id: String or Number (not required)
     method: "SIGN_UP"
     params: Object required for successful signup
-        phone: a phone number 
+        phoneNumber
+: a phone number 
 
 response:
     status: 200 or 204 if id missing
     data: Object if id is provided
         id: Same as request if id is provided
         result: "HELLO ${name}"
+
+// a code will be sent to the phoneNumber
 
 ## Contribute
 
