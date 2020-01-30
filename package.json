@@ -21,14 +21,14 @@
   "dependencies": {
     "@auth0/nextjs-auth0": "^0.10.0",
     "@mdx-js/loader": "^1.5.5",
-    "@next/mdx": "^9.2.0",
-    "@semantic-release/exec": "^4.0.0",
+    "@next/mdx": "^9.2.1",
+    "@semantic-release/exec": "^5.0.0",
     "@semantic-release/git": "^9.0.0",
     "cssnano": "^4.1.10",
     "dotenv": "^8.2.0",
     "isomorphic-unfetch": "^3.0.0",
     "next": "9.2.1",
-    "puppeteer": "^2.0.0",
+    "puppeteer": "^2.1.0",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "semantic-release": "^16.0.4"
