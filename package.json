@@ -21,7 +21,7 @@
   "dependencies": {
     "@auth0/nextjs-auth0": "^0.10.0",
     "@mdx-js/loader": "^1.5.5",
-    "@next/mdx": "^9.2.0",
+    "@next/mdx": "^9.2.1",
     "@semantic-release/exec": "^4.0.0",
     "@semantic-release/git": "^9.0.0",
     "cssnano": "^4.1.10",
