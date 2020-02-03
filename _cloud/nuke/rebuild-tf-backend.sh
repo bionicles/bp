@@ -1,0 +1,2 @@
+aws s3 create-bucket --acl public-read --bucket $TF_STATE_BUCKET_NAME
+aws dynamodb create-table --table-name $TF_STATE_LOCK_TABLE_NAME --attribute-definitions AttributeName=LockID,AttributeType=S --key-schema AttributeName=LockID,KeyType=HASH --billing-mode PAY_PER_REQUEST

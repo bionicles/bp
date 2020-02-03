@@ -1,0 +1,44 @@
+# variable "lb_url" {}
+  # lb_origin_id = "${var.name}_LB_${var.lb_url}"
+
+  origin {
+    domain_name = var.lb_url
+    # origin_id   = aws_cloudfront_origin_access_identity.api.cloudfront_access_identity_path
+    origin_id   = "${var.name}_LB_${var.lb_url}"
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "http-only"
+      origin_ssl_protocols   = ["TLSv1", "TLSv1.1", "TLSv1.2"]
+    }
+  }
+   ordered_cache_behavior {
+    path_pattern     = "/graphql"
+    allowed_methods  = ["POST"]
+    cached_methods   = []
+    target_origin_id = local.lb_origin_id
+    forwarded_values {
+      query_string = true
+      headers      = ["*"]
+      cookies {
+        forward = "none"
+      }
+    }
+    compress               = true
+    viewer_protocol_policy = "redirect-to-https"
+  }
+   ordered_cache_behavior {
+    path_pattern     = "/graphiql"
+    allowed_methods  = ["GET"]
+    cached_methods   = []
+    target_origin_id = local.lb_origin_id
+    forwarded_values {
+      query_string = true
+      headers      = ["*"]
+      cookies {
+        forward = "none"
+      }
+    }
+    compress               = true
+    viewer_protocol_policy = "redirect-to-https"
+  }

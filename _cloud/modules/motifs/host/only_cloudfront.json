@@ -1,0 +1,14 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "OnlyCloudfrontReadAccess",
+      "Principal": {
+        "CanonicalUser": "${s3_canonical_user_id}"
+      },
+      "Effect": "Allow",
+      "Action": ["s3:GetObject"],
+      "Resource": "arn:aws:s3:::${site_name}/*"
+    }
+  ]
+}

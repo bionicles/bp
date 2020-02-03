@@ -1,0 +1,17 @@
+# https://github.com/rebuy-de/aws-nuke
+---
+regions:
+  - "global" # This is for all global resource types e.g. IAM
+  - "us-west-2"
+
+account-blacklist:
+  - 1234567890 # Doesn't work without this default here
+
+resource-types:
+  excludes:
+    - IAMUserPolicyAttachment
+    - IAMUserAccessKey
+    - IAMUser
+
+accounts:
+  XXXXXXXXXXXX:
