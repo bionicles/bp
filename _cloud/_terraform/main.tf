@@ -52,8 +52,7 @@ module "vpc" {
   cidr_block = "10.0.0.0/16"
 }
 # https://www.terraform.io/docs/providers/aws/r/rds_cluster.html
-resource "aws_rds_cluster" "aurora serverless postgresql" {
-  source                   = "git::https://github.com/cloudposse/terraform-aws-rds-cluster.git?ref=tags/0.15.0"
+resource "aws_rds_cluster" "aurora_serverless_postgresql" {
   stage                    = var.stage
   name                     = "postgres"
   engine                   = "aurora-postgresql"
