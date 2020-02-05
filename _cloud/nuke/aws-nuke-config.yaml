@@ -2,7 +2,7 @@
 ---
 regions:
   - "global" # This is for all global resource types e.g. IAM
-  - "us-west-2"
+  - "us-east-1"
 
 account-blacklist:
   - 1234567890 # Doesn't work without this default here

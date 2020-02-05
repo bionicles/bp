@@ -11,6 +11,10 @@ var
 tests/coverage/
 tests/e2e/output/
 
+# terraform
+_cloud/_terraform/.terraform/modules
+_cloud/_terraform/.terraform/plugins
+
 # next.js
 .next
 out
