@@ -1,7 +1,8 @@
+import { DB_URL } from "tools";
+const postgres = require("pg");
+
 export function remove(id, callback) {
-  const postgres = require("pg");
-  const conString = "postgres://user:pass@localhost/mydb";
-  postgres.connect(conString, function(err, client, done) {
+  postgres.connect(DB_URL, function(err, client, done) {
     if (err) return callback(err);
 
     const query = "DELETE FROM users WHERE id = $1";

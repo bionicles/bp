@@ -1,8 +1,9 @@
-export function loginByEmail(email, callback) {
-  const postgres = require("pg");
+const { Pool } = require("pg");
 
-  const conString = "postgres://user:pass@localhost/mydb";
-  postgres.connect(conString, function(err, client, done) {
+const pool = new Pool();
+
+export function me(email, callback) {
+  pool.connect((err, client, done) => {
     if (err) return callback(err);
 
     const query = "SELECT id, nickname, email FROM users WHERE email = $1";

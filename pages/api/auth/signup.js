@@ -1,24 +1,26 @@
+import { DB_URL } from "tools";
 const bcrypt = require("bcrypt");
-const postgres = require("pg");
+const { Pool } = require("pg");
 
-const conString = "postgres://user:pass@localhost/mydb";
+const pool = new Pool();
 
-export function signUp(req, res) {
+export default (req, res) => {
   res.setHeader("Content-Type", "application/json");
   const { email, password } = req.body;
 
-  postgres.connect(conString, function(err, client, done) {
+  pool.connect(DB_URL, (err, client, done) => {
     if (err) {
       res.status(503);
       return res.end(JSON.stringify(err));
     }
-    bcrypt.hash(password, 10, function(err, hashedPassword) {
+    bcrypt.hash(password, 10, (err, hashedPassword) => {
       if (err) {
         res.status(503);
         return res.end(JSON.stringify(err));
       }
-      const query = "INSERT INTO users(email, password) VALUES ($1, $2)";
-      client.query(query, [email, hashedPassword], function(err, result) {
+      const query =
+        "INSERT INTO users(email, password) VALUES ($1, $2) ON CONFLICT (email) DO NOTHING";
+      client.query(query, [email, hashedPassword], (err, result) => {
         done(); // close the db connection
         res.status(200);
         return err
@@ -27,7 +29,7 @@ export function signUp(req, res) {
       });
     });
   });
-}
+};
 
 // blank
 // export default function create(user, callback) {
