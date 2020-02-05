@@ -30,7 +30,7 @@
     "dotenv": "^8.2.0",
     "isomorphic-unfetch": "^3.0.0",
     "next": "9.2.1",
-    "puppeteer": "^2.1.0",
+    "puppeteer": "^2.1.1",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "semantic-release": "^17.0.2"
@@ -55,7 +55,7 @@
     "purgecss": "^2.0.6",
     "react-test-renderer": "^16.12.0",
     "source-map-explorer": "^2.2.2",
-    "tailwindcss": "^1.1.4"
+    "tailwindcss": "^1.2.0"
   },
   "release": {
     "branches": [
