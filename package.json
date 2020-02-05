@@ -36,7 +36,7 @@
     "semantic-release": "^17.0.2"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^2.0.5",
+    "@fullhuman/postcss-purgecss": "^2.0.6",
     "autoprefixer": "^9.7.4",
     "codeceptjs": "^2.4.3",
     "codecov": "^3.6.4",
