@@ -1,21 +1,29 @@
-export function signUp(user, callback) {
-  const bcrypt = require("bcrypt");
-  const postgres = require("pg");
+const bcrypt = require("bcrypt");
+const postgres = require("pg");
 
-  const conString = "postgres://user:pass@localhost/mydb";
+const conString = "postgres://user:pass@localhost/mydb";
+
+export function signUp(req, res) {
+  res.setHeader("Content-Type", "application/json");
+  const { email, password } = req.body;
+
   postgres.connect(conString, function(err, client, done) {
-    if (err) return callback(err);
-
-    bcrypt.hash(user.password, 10, function(err, hashedPassword) {
-      if (err) return callback(err);
-
+    if (err) {
+      res.status(503);
+      return res.end(JSON.stringify(err));
+    }
+    bcrypt.hash(password, 10, function(err, hashedPassword) {
+      if (err) {
+        res.status(503);
+        return res.end(JSON.stringify(err));
+      }
       const query = "INSERT INTO users(email, password) VALUES ($1, $2)";
-      client.query(query, [user.email, hashedPassword], function(err, result) {
-        // NOTE: always call `done()` here to close
-        // the connection to the database
-        done();
-
-        return callback(err);
+      client.query(query, [email, hashedPassword], function(err, result) {
+        done(); // close the db connection
+        res.status(200);
+        return err
+          ? res.end(JSON.stringify(err))
+          : res.end(JSON.stringify(result));
       });
     });
   });
