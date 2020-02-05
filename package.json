@@ -18,7 +18,8 @@
     "watch": "nodemon --ext '*' --exec 'yarn e2e || exit 1'",
     "clean": "docker container stop $(docker container ls -aq) && docker container rm $(docker container ls -aq) && docker network prune",
     "connect-postgres": "psql -h $POSTGRES_HOST -U postgres -d postgres",
-    "dump-schema": "pg_dump -s postgres -h $POSTGRES_HOST -p 5432 -U postgres -n public -f ./schema.sql"
+    "dump-schema": "pg_dump -s postgres -h $POSTGRES_HOST -p 5432 -U postgres -n public -f ./schema.sql",
+    "deploy": "cd _cloud/_terraform && terraform apply --auto-approve"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^0.10.0",
