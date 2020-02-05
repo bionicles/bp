@@ -9,10 +9,10 @@ terraform {
   }
 }
 variable "namespace" {
-  default = "www" 
+  default = "gp" 
 }
 variable "name" {
-  default = "bitpharma" 
+  default = "gitpharma" 
 }
 variable "region" {
   default = "us-east-1"
@@ -24,10 +24,10 @@ variable "stage" {
   default = "dev"
 }
 variable "dns_zone_id" {
-  default = "gitpharma.com."
+  default = "gitpharma.com"
 }
 provider "aws" {
-  region = var.region
+  region = "us-east-1"
 }
 
 module "vpc" {
@@ -149,6 +149,15 @@ resource "aws_instance" "bastion" {
   security_groups             = [aws_security_group.bastion-sg.name]
   associate_public_ip_address = true
 }
+# aws acm request-certificate --domain-name example.com --subject-alternative-names a.example.com b.example.com *.c.example.com
+module "cdn" {
+  source           = "git::https://github.com/cloudposse/terraform-aws-cloudfront-s3-cdn.git?ref=master"
+  namespace        = var.namespace
+  stage            = var.stage
+  name             = var.name
+  aliases          = ["cdn.${var.dns_zone_id}"]
+  parent_zone_name = var.dns_zone_id
+}
 
 output "bastion_public_ip" {
   value = aws_instance.bastion.public_ip
@@ -157,7 +166,9 @@ output "bastion_public_ip" {
 output "db_host" {
   value = aws_rds_cluster.aurora_serverless_postgresql.endpoint
 }
-
+output "cdn_zone_id" {
+  value = module.cdn.cf_hosted_zone_id
+}
 # resource "local_file" "api_outputs" {
 #   filename = "${path.module}/../../../engage/react/src/state/tf-out.js"
 #   content  = <<EOF
