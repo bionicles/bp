@@ -1,10 +1,11 @@
-import isEmail from "validator/es/lib/isEmail";
+const isEmail = require("validator/es/lib/isEmail");
 const bcrypt = require("bcrypt");
 const { Pool } = require("pg");
+import { pgConfig } from "tools";
 
 const query =
   "INSERT INTO users(email, password) VALUES ($1, $2) ON CONFLICT (email) DO NOTHING";
-const pool = new Pool();
+const pool = new Pool(pgConfig);
 
 export default async (req, res) => {
   const { email, password } = req.body;
