@@ -54,6 +54,15 @@ module "subnets" {
   nat_gateway_enabled  = true
   nat_instance_enabled = false
 }
+resource "aws_rds_cluster_parameter_group" "force_ssl" {
+  name   = "database"
+  family = "postgres11.4"
+  parameter {
+    name         = "rds.force_ssl"
+    value        = "1"
+    apply_method = "pending-reboot"
+  }
+}
 # https://www.terraform.io/docs/providers/aws/r/rds_cluster.html
 resource "aws_rds_cluster" "aurora_serverless_postgresql" {
   engine                          = "aurora-postgresql"
@@ -64,6 +73,7 @@ resource "aws_rds_cluster" "aurora_serverless_postgresql" {
   master_username                 = var.db_master_user
   master_password                 = var.db_master_pass
   vpc_security_group_ids          = [aws_security_group.ouroboros.id]
+  db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.force_ssl.name
   scaling_configuration {
     auto_pause               = true
     max_capacity             = "32"
