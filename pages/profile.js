@@ -1,8 +1,6 @@
 import React from "react";
 
-// This import is only needed when checking authentication status directly from getInitialProps
-// import auth0 from '../lib/auth0'
-import { useFetchUser } from "user";
+import { useFetchUser } from "tools";
 import Layout from "components";
 
 const ProfileCard = ({ user: { picture, nickname, name } }) => {

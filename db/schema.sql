@@ -1,19 +1,38 @@
-CREATE DATABASE IF NOT EXISTS bp;
+create database if not exists bp;
+\c bp;
 
-CREATE USER IF NOT EXISTS api WITH PASSWORD :password;
+create user if not exists migrator with password :password;
+grant all privileges on database bp to api;
 
-GRANT ALL PRIVILEGES ON DATABASE bp TO api;
+create schema if not exists app
 
-CREATE SCHEMA IF NOT EXISTS bp
-
-CREATE TABLE bp.users (
-    id bigint NOT NULL PRIMARY KEY,
-    email text NOT NULL,
-    created_at timestamptz DEFAULT now(),
-    updated_at timestamptz NOT NULL
+create table app.users (
+    id uuid not null primary key default gen_random_uuid(),
+    num bigserial not null,
+    created_at timestamptz default now(),
+    updated_at timestamptz not null,
+    email text not null,
+    pw text not null,
+    email_verified boolean not null default false,
 );
 
-CREATE TABLE bp.goals (
-    id bigint NOT NULL PRIMARY KEY,
+-- TODO: ensure only a given user can select their password
+
+create table app.offerings (
+    id uuid not null primary key default gen_random_uuid(),
+    num bigserial not null,
+    created_at timestamptz default now(),
+    updated_at timestamptz not null,
+    label text not null,
+    description text not null
 )
+
+-- users
+-- teams
+-- projects
+-- offerings
+-- orders
+-- shipments
+-- subscriptions
+-- references
 

@@ -1,24 +1,28 @@
-export function verify(email, callback) {
-  //this example uses the "pg" library
-  //more info here: https://github.com/brianc/node-postgres
+import isEmail from "validator/es/lib/isEmail";
+import { Pool } from "pg";
+const pool = new Pool();
 
-  const postgres = require("pg");
+const query =
+  "UPDATE users SET email_verified = true WHERE email_verified = false AND email = $1";
 
-  const conString = "postgres://user:pass@localhost/mydb";
-  postgres.connect(conString, function(err, client, done) {
-    if (err) return callback(err);
-
-    const query =
-      "UPDATE users SET email_Verified = true WHERE email_Verified = false AND email = $1";
-    client.query(query, [email], function(err, result) {
-      // NOTE: always call `done()` here to close
-      // the connection to the database
-      done();
-
-      return callback(err, result && result.rowCount > 0);
-    });
-  });
-}
+export default async (req, res) => {
+  const { email } = req.body;
+  if (!isEmail(email)) {
+    return res.status(403).send("Invalid email.");
+  }
+  const client = await pool.connect();
+  if (!client) {
+    return res.status(503).send("Failed to connect to database.");
+  }
+  try {
+    await client.query(query, [email]);
+    return res.status(200).send("Email verified.");
+  } catch (err) {
+    return res.status(500).send(`Failed to execute database query: ${err}`);
+  } finally {
+    await pool.end();
+  }
+};
 
 // blank
 // export default function verify(email, callback) {

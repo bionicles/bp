@@ -1,28 +1,38 @@
-export function changePassword(email, newPassword, callback) {
-  //this example uses the "pg" library
-  //more info here: https://github.com/brianc/node-postgres
+import isEmail from "validator/es/lib/isEmail";
+import bcrypt from "bcrypt";
+import { Pool } from "pg";
 
-  const bcrypt = require("bcrypt");
-  const postgres = require("pg");
+const query = "UPDATE users SET password = $1 WHERE email = $2";
+const pool = new Pool();
 
-  const conString = "postgres://user:pass@localhost/mydb";
-  postgres.connect(conString, function(err, client, done) {
-    if (err) return callback(err);
-
-    bcrypt.hash(newPassword, 10, function(err, hash) {
-      if (err) return callback(err);
-
-      const query = "UPDATE users SET password = $1 WHERE email = $2";
-      client.query(query, [hash, email], function(err, result) {
-        // NOTE: always call `done()` here to close
-        // the connection to the database
-        done();
-
-        return callback(err, result && result.rowCount > 0);
-      });
-    });
-  });
-}
+export default async (req, res) => {
+  const { email, newPassword } = req.body;
+  if (!isEmail(email)) {
+    return res.status(403).send("Invalid email.");
+  }
+  if (!newPassword) {
+    return res.status(403).send("No password provided.");
+  }
+  const client = await pool.connect();
+  if (!client) {
+    return res.status(503).end("Failed to connect to database.");
+  }
+  try {
+    const hash = await bcrypt.hash(newPassword, 10);
+    if (!hash) {
+      return res.status(500).send("Failed to hash password.");
+    }
+    const queryResult = await client.query(query, [hash, email]);
+    if (!queryResult) {
+      return res.status(500).send("Failed to change password.");
+    }
+    return res.status(200).send("Password successfully changed.");
+  } catch (err) {
+    return res.status(500).send(`Error executing query: ${err}`);
+  } finally {
+    await pool.end();
+  }
+};
 
 // blank
 // export default function changePassword(email, newPassword, callback) {
