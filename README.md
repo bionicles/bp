@@ -82,7 +82,11 @@ Only 1-2 issues active at once, and please [give constructive criticism](https:/
 
 - [ ] To `reproducibly deploy cloud resources` as a `dev` I want `infrastructure as code` because `IaC lets me destroy and recreate the backend with 2 lines of code`
 
-- [ ] To `test Bit Pharma` as a `dev` I want `CodeceptJS E2E tests` because `semantic test syntax helps me write tests faster and maintain tests easily`
+- [ ] To `know when to stop` as a `dev` I want `CodeceptJS E2E tests` because `semantic test syntax helps me write tests faster and maintain tests easily`
+
+- [ ] To `know the site won't crash` as a `dev` I want `automated load testing` because `an e2e test doesn't necessarily replicate production conditions`
+
+- [ ] To `secure customer data` as a `dev` I want `encryption in transit and at rest` because `the most valuable thing is trust`
 
 - [ ] To `code Bit Pharma` as a `dev` I want `an API` because `this lets me use the service programmatically`
 

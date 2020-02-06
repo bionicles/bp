@@ -9,10 +9,10 @@ terraform {
   }
 }
 variable "namespace" {
-  default = "gp" 
+  default = "gp"
 }
 variable "name" {
-  default = "gitpharma" 
+  default = "gitpharma"
 }
 variable "region" {
   default = "us-east-1"
@@ -60,9 +60,10 @@ resource "aws_rds_cluster" "aurora_serverless_postgresql" {
   engine_mode                     = "serverless"
   engine_version                  = "11.4"
   enabled_cloudwatch_logs_exports = ["audit"]
-  enable_http_endpoint            =  true
+  enable_http_endpoint            = true
   master_username                 = var.db_master_user
   master_password                 = var.db_master_pass
+  vpc_security_group_ids          = [aws_security_group.ouroboros.id]
   scaling_configuration {
     auto_pause               = true
     max_capacity             = "32"
@@ -82,10 +83,10 @@ module "show_secret_to_server" {
   viewer_role_name = module.elastic_beanstalk_environment.ec2_instance_profile_role_name
 }
 module "elastic_beanstalk_application" {
-  source      = "git::https://github.com/cloudposse/terraform-aws-elastic-beanstalk-application.git?ref=tags/0.3.0"
-  namespace   = var.namespace
-  stage       = var.stage
-  name        = var.name
+  source    = "git::https://github.com/cloudposse/terraform-aws-elastic-beanstalk-application.git?ref=tags/0.3.0"
+  namespace = var.namespace
+  stage     = var.stage
+  name      = var.name
 }
 module "elastic_beanstalk_environment" {
   source                             = "git::https://github.com/cloudposse/terraform-aws-elastic-beanstalk-environment.git?ref=master"
@@ -97,16 +98,16 @@ module "elastic_beanstalk_environment" {
   dns_zone_id                        = var.dns_zone_id
   dns_subdomain                      = "www"
   elastic_beanstalk_application_name = module.elastic_beanstalk_application.elastic_beanstalk_application_name
-  instance_type           = "t3.small"
-  autoscale_min           = 1
-  autoscale_max           = 4
-  updating_min_in_service = 0
-  updating_max_batch      = 1
-  loadbalancer_type       = "application"
-  vpc_id                  = module.vpc.vpc_id
-  loadbalancer_subnets    = module.subnets.public_subnet_ids
-  application_subnets     = module.subnets.private_subnet_ids
-  allowed_security_groups = [module.vpc.vpc_default_security_group_id]
+  instance_type                      = "t3.nano"
+  autoscale_min                      = 1
+  autoscale_max                      = 8
+  updating_min_in_service            = 0
+  updating_max_batch                 = 1
+  loadbalancer_type                  = "application"
+  vpc_id                             = module.vpc.vpc_id
+  loadbalancer_subnets               = module.subnets.public_subnet_ids
+  application_subnets                = module.subnets.private_subnet_ids
+  allowed_security_groups            = [module.vpc.vpc_default_security_group_id, aws_security_group.ouroboros.id]
   // https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html
   solution_stack_name = "64bit Amazon Linux 2018.03 v4.13.0 running Node.js 12.14.1"
   additional_settings = [
@@ -122,6 +123,23 @@ module "elastic_beanstalk_environment" {
     }
   ]
 }
+# allow elastic beanstalk to access aurora with a self-referential security group
+resource "aws_security_group" "ouroboros" {
+  name   = "ouroboros-sg"
+  vpc_id = module.vpc.vpc_id
+  ingress {
+    protocol  = -1
+    from_port = 0
+    to_port   = 0
+    self      = true
+  }
+  egress {
+    protocol  = -1
+    from_port = 0
+    to_port   = 0
+    self      = true
+  }
+}
 resource "aws_security_group" "bastion-sg" {
   name   = "bastion-sg"
   vpc_id = module.vpc.vpc_id
@@ -133,8 +151,8 @@ resource "aws_security_group" "bastion-sg" {
   }
   egress {
     protocol    = -1
-    from_port   = 0 
-    to_port     = 0 
+    from_port   = 0
+    to_port     = 0
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
@@ -160,7 +178,7 @@ module "cdn" {
 }
 
 output "bastion_public_ip" {
-  value = aws_instance.bastion.public_ip
+  value     = aws_instance.bastion.public_ip
   sensitive = true
 }
 output "db_host" {
@@ -169,8 +187,9 @@ output "db_host" {
 output "cdn_zone_id" {
   value = module.cdn.cf_hosted_zone_id
 }
+# you can also provision local JS files which export critical parameters:
 # resource "local_file" "api_outputs" {
-#   filename = "${path.module}/../../../engage/react/src/state/tf-out.js"
+#   filename = "${path.module}/../../tools/tf-out.js"
 #   content  = <<EOF
 # export const dbUrl = "${module.db.url}"
 # EOF
