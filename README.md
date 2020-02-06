@@ -74,63 +74,67 @@ Only 1-2 issues active at once, and please [give constructive criticism](https:/
 
 ## User Stories
 
-- [x] To `serve customers` as a `dev` I want `user stories` because `they help me put benefits before features`
-
 - [ ] To `work on stuff people want` as a `dev` I want `market demand testing` because `this confirms or refutes people want the platform`
 
-- [x] To `understand license issues` as a `dev` I want `a license badge and license analyzer tool` because `license issues are confusing and litigous`
+- [ ] To `deploy continuously` as a `dev` I want `a legit automated CI/CD build-deploy-test-release/rollback process` because `this lets me test and deliver code faster`
 
-- [ ] To `hack faster` as a `dev` I want `clear docs` because `if it's not documented, I don't know how to use it`
+- [ ] To `hack faster` as a `dev` I want `clear docs in one README file` because `if it's not documented, I don't know how to use it, and if it's all in the README then I can CTRL-F to find what I need`
+
+- [ ] To `reproducibly deploy cloud resources` as a `dev` I want `infrastructure as code` because `IaC lets me destroy and recreate the backend with 2 lines of code`
+
+- [ ] To `test Bit Pharma` as a `dev` I want `CodeceptJS E2E tests` because `semantic test syntax helps me write tests faster and maintain tests easily`
+
+- [ ] To `code Bit Pharma` as a `dev` I want `an API` because `this lets me use the service programmatically`
+
+* [ ] To `sign up easily` as a `user` I want `only one email/password login option` because `I often forget which of N auth providers I used... if it's just a password, then I cannot forget which option I chose`
+
+* [ ] To `give private feedback` as a `user` I want `an email for Bit Pharma leadership` because `some issues are private`
+
+* [ ] To `give public feedback` as a `dev` I want `a link to Github Issues` because `this lets me report and track my concerns`
+
+* [ ] To `find the reagents I need` as a `researcher` I want `to search inventory in my lab and nearby labs` because `it's hard to find reagents`
+
+* [ ] To `save my inventory` as a `researcher` I want `a keyboard form to add inventory` because `it's faster to type`
+
+* [ ] To `read inventory` as a `researcher` I want `to view an item's data` because `this lets me see where it is`
+
+* [ ] To `know what I have` as a `researcher` I want `to view an item's data` because `this lets me see where it is`
+
+* [ ] To `stay up to date` as a `researcher` I want `to click on and edit inventory data` because `things change`
+
+* [ ] To `delete inventory` as a `researcher` I want `to archive items` because `stuff goes bad or gets used up`
+
+* [ ] To `comply with regulations` as a `researcher` I want `an immutable audit trail of events` because `this helps me prove to others what happened`
+
+* [ ] To `prevent theft and terrorism` as a `biologist` I want `to be notified when stuff goes missing` because `my reagents are expensive and potentially dangerous`
+
+* [ ] To `get paid` as a `provider of goods and services` I want `a way to connect my inventory with stripe` because `this lets me charge money for my contributions to others`
+
+* [ ] To `increase revenue` as a `provider of goods and services` I want `a way to promote my inventory` because `marketing helps potential customers find my offerings`
+
+* [ ] To `make a list of what I need` as a `researcher` I want `to add items to a cart` because `this lets me track what I want to buy`
+
+* [ ] To `order what I need` as a `researcher` I want `to checkout easily` because `I need my stuff faster`
+
+* [ ] To `know when my things arrive` as a `researcher` I want `shipment tracking` because `this helps me plan experiments`
+
+* [ ] To `track stuff I like` as a `researcher` I want `a wish list` because `some things are interesting but I'm not ready to purchase them`
+
+* [ ] To `receive critical updates` as a `user` I want `a minimal notification system` because `this makes sure I won't miss anything`
+
+* [ ] To `report critical updates` as a `Stripe dev` I want `a webhook listener` because `our systems need a standard way to report to your systems`
+
+- [x] To `serve customers` as a `dev` I want `user stories` because `they help me put benefits before features`
+
+- [x] To `focus` as a `dev` I want `an automated kanban board for issues` because `this helps me figure out what to work on in a glance`
 
 - [x] To `quickly install what I need to contribute` as a `dev` I want `dependencies tracked` because `then I don't need to install by trial and error`
 
-- [ ] To `code Bit Pharma` as a `dev` I want `a simple RPC API` because `this lets me use the service programmatically`
+* [x] To `know when to update` as a `dev` I want `releases on Github` because `this lets me see and download specific versions`
 
-- [x] To `know when to update` as a `dev` I want `releases on Github` because `this lets me see and download specific versions`
+* [x] To `not use crappy websites` as a `user` I want `releases to require Lighthouse >90 on all fronts` because `I don't like to use slow, inaccessible sites`
 
-- [x] To `not use crappy websites` as a `user` I want `releases to require Lighthouse >90 on all fronts` because `I don't like to use slow, inaccessible sites`
-
-- [ ] To `sign up easily` as a `user` I want `passwordless login` because `I'm sick of dealing with passwords`
-
-- [ ] To `secure my account` as a `user` I want `multifactor auth` because `I don't want my account abused`
-
-- [ ] To `give private feedback` as a `user` I want `an email for Bit Pharma leadership` because `some issues are private`
-
-- [ ] To `give public feedback` as a `dev` I want `a link to Github Issues` because `this lets me report and track my concerns`
-
-- [ ] To `give feedback` as a `user` I want `an email address for Bit Pharma leadership` because `some issues are private`
-
-- [ ] To `find the reagents I need` as a `researcher` I want `to search inventory in my lab and nearby labs` because `it's hard to find reagents`
-
-- [ ] To `save my inventory` as a `researcher` I want `a keyboard form to add inventory` because `it's faster to type`
-
-- [ ] To `read inventory` as a `researcher` I want `to view an item's data` because `this lets me see where it is`
-
-- [ ] To `know what I have` as a `researcher` I want `to view an item's data` because `this lets me see where it is`
-
-- [ ] To `stay up to date` as a `researcher` I want `to click on and edit inventory data` because `things change`
-
-- [ ] To `delete inventory` as a `researcher` I want `to archive items` because `stuff goes bad or gets used up`
-
-- [ ] To `comply with regulations` as a `researcher` I want `an immutable audit trail of events` because `this helps me prove to others what happened`
-
-- [ ] To `prevent theft and terrorism` as a `biologist` I want `to be notified when stuff goes missing` because `my reagents are expensive and potentially dangerous`
-
-- [ ] To `get paid` as a `provider of goods and services` I want `a way to connect my inventory with stripe` because `this lets me charge money for my contributions to others`
-
-- [ ] To `increase revenue` as a `provider of goods and services` I want `a way to promote my inventory` because `marketing helps potential customers find my offerings`
-
-- [ ] To `make a list of what I need` as a `researcher` I want `to add items to a cart` because `this lets me track what I want to buy`
-
-- [ ] To `order what I need` as a `researcher` I want `to checkout easily` because `I need my stuff faster`
-
-- [ ] To `know when my things arrive` as a `researcher` I want `shipment tracking` because `this helps me plan experiments`
-
-- [ ] To `track stuff I like` as a `researcher` I want `a wish list` because `some things are interesting but I'm not ready to purchase them`
-
-- [ ] To `receive critical updates` as a `user` I want `a minimal notification system` because `this makes sure I won't miss anything`
-
-- [ ] To `report critical updates` as a `Stripe dev` I want `a webhook listener` because `our systems need a standard way to report to your systems`
+- [x] To `understand license issues` as a `dev` I want `a license badge and license analyzer tool` because `license issues are confusing and litigous`
 
 ## Contributors
 
