@@ -140,6 +140,18 @@ Only 1-2 issues active at once, and please [give constructive criticism](https:/
 
 - [x] To `understand license issues` as a `dev` I want `a license badge and license analyzer tool` because `license issues are confusing and litigous`
 
+## How do you enable emmet with Next.js in vscode?
+
+```
+// settings.json
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+    "emmet.syntaxProfiles": {
+        "javascript": "jsx"
+    }
+```
+
 ## Contributors
 
 - **Bion Howard** - _Initial work_ - [bionicles](https://github.com/bionicles)
