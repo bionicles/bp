@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 const links = [
-  { href: "mailto:bion@bitpharma.com", label: "Contact" }
+  { href: "mailto:bion@bitpharma.com", label: "Contact" },
   { href: "https://github.com/bionicles/bp/issues", label: "Feedback" }
 ].map(link => {
   link.key = `nav-link-${link.href}-${link.label}`;

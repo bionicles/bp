@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "baseUrl": "."
-  },
-  "include": ["pages", "components", "tools"]
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"]
+    }
+  }
 }

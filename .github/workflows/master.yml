@@ -59,12 +59,10 @@ jobs:
         run: yarn prep
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      - name: Stage
-        if: success()
-        uses: amondnet/now-deployment@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          zeit-token: ${{ secrets.ZEIT_TOKEN }}
+      - name: Build
+        run: yarn build
+      - name: Package
+        run: zip deploy.zip .next package.json next.config.js
       - name: E2E
         if: success()
         run: yarn e2e

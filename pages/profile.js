@@ -1,7 +1,7 @@
 import React from "react";
 
-import { useFetchUser } from "tools";
-import Layout from "components";
+import { useFetchUser } from "~/tools";
+import { Layout } from "~/components";
 
 const ProfileCard = ({ user: { picture, nickname, name } }) => {
   return (
