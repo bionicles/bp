@@ -187,6 +187,15 @@ module "cdn" {
   parent_zone_name = var.dns_zone_id
 }
 
+output "aws_region" {
+  value = var.region
+}
+output "beanstalk_app_name" {
+  value = module.elastic_beanstalk_application.name
+}
+output "beanstalk_env_name" {
+  value = module.elastic_beanstalk_environment.name
+}
 output "bastion_public_ip" {
   value     = aws_instance.bastion.public_ip
   sensitive = true

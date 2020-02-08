@@ -1,4 +1,4 @@
-export * from "./server-cookies";
+export * from "./session";
 export * from "./pgConfig";
 export * from "./config";
 export * from "./user";

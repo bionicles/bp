@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "prep": "yarn && yarn lint && yarn audit && yarn test && yarn test:coverage -u && yarn upload:coverage",
+    "prep": "yarn && yarn document-api && yarn lint && yarn audit && yarn test && yarn test:coverage -u && yarn upload:coverage",
     "start": "next start",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -19,7 +19,8 @@
     "clean": "docker container stop $(docker container ls -aq) && docker container rm $(docker container ls -aq) && docker network prune",
     "connect-postgres": "psql -h $POSTGRES_HOST -U postgres -d postgres",
     "dump-schema": "pg_dump -s postgres -h $POSTGRES_HOST -p 5432 -U postgres -n public -f ./schema.sql",
-    "deploy": "cd _cloud/_terraform && terraform apply --auto-approve"
+    "deploy": "cd _cloud/_terraform && terraform apply --auto-approve",
+    "document-api": "jsdoc2md --partial ./partials/link.hbs --template ./partials/README.hbs --files ./pages/api/**.js —param-list-format list >> README.md"
   },
   "dependencies": {
     "@mdx-js/loader": "^1.5.5",
@@ -51,6 +52,7 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.8.0",
     "eslint-plugin-jest": "^23.6.0",
+    "eslint-plugin-jsdoc": "^21.0.0",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-ramda": "^2.5.1",
     "eslint-plugin-react": "^7.18.3",
@@ -97,7 +99,8 @@
     "plugins": [
       "react",
       "security",
-      "ramda"
+      "ramda",
+      "jsdoc"
     ],
     "rules": {
       "react/react-in-jsx-scope": "off",
@@ -107,7 +110,8 @@
       "eslint:recommended",
       "plugin:react/recommended",
       "plugin:security/recommended",
-      "plugin:ramda/recommended"
+      "plugin:ramda/recommended",
+      "plugin:jsdoc/recommended"
     ],
     "env": {
       "browser": true,

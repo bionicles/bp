@@ -1,48 +1,16 @@
-name: Prebuild, Stage, Test, Release
+name: CI/CD
 
 on: [push]
 
 jobs:
-  build:
+  CI/CD:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v1
-      - name: "Terraform Format"
-        uses: hashicorp/terraform-github-actions@master
+      - name: Generate build number
+        uses: einaregilsson/build-number@v2
         with:
-          tf_actions_version: 0.12.20
-          tf_actions_subcommand: "fmt"
-          tf_actions_working_dir: "_cloud/_terraform"
-          tf_actions_comment: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: "Terraform Init"
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.12.20
-          tf_actions_subcommand: "init"
-          tf_actions_working_dir: "_cloud/_terraform"
-          tf_actions_comment: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: "Terraform Validate"
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.12.20
-          tf_actions_subcommand: "validate"
-          tf_actions_working_dir: "_cloud/_terraform"
-          tf_actions_comment: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: "Terraform Plan"
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.12.20
-          tf_actions_subcommand: "plan"
-          tf_actions_working_dir: "_cloud/_terraform"
-          tf_actions_comment: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{secrets.GITHUB_TOKEN}}
       - uses: actions/setup-node@v1
         with:
           node-version: "12.x"
@@ -55,29 +23,143 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+      - name: "Catch insensitive, inconsiderate writing"
+        uses: theashraf/alex-action@master
+      - name: Terraform Format
+        if: success()
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.12.20
+          tf_actions_subcommand: "fmt"
+          tf_actions_working_dir: "_cloud/_terraform"
+          tf_actions_comment: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Terraform Init
+        if: success()
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.12.20
+          tf_actions_subcommand: "init"
+          tf_actions_working_dir: "_cloud/_terraform"
+          tf_actions_comment: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check Terraform Security
+        if: success()
+        uses: reviewdog/action-tfsec@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review # Change reporter
+          flags: "./_cloud/terraform" # Optional
+      - name: Lint Terraform
+        if: success()
+        uses: reviewdog/action-tflint@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review # Change reporter
+          flags: "./_cloud/terraform --deep" # Optional
+      - name: Terraform Validate
+        if: success()
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.12.20
+          tf_actions_subcommand: "validate"
+          tf_actions_working_dir: "_cloud/_terraform"
+          tf_actions_comment: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Terraform Plan
+        if: success()
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.12.20
+          tf_actions_subcommand: "plan"
+          tf_actions_working_dir: "_cloud/_terraform"
+          tf_actions_comment: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Save TF Outputs as Environment Variables
+        if: success()
+        run: |
+          echo "::set-env name=BEANSTALK_APP_NAME::$(cd _cloud/_terraform && terraform output beanstalk_app_name)"
+          echo "::set-env name=BEANSTALK_ENV_NAME::$(cd _cloud/_terraform && terraform output beanstalk_env_name)"
+          echo "::set-env name=AWS_REGION::$(cd _cloud/_terraform && terraform output aws_region)"
       - name: Prebuild
+        if: success()
         run: yarn prep
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: Sync API docs in readme from JSDoc
+        if: success()
+        run: yarn document-api
+      - name: TOC Generator
+        if: success()
+        uses: technote-space/toc-generator@v2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Lint README.md
+        if: success()
+        uses: avto-dev/markdown-lint@v1
+        with:
+          args: "./README.md"
+      - name: Commit README.md
+        if: success()
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git commit -m "chore(docs): updated API docs and TOC in README.md (automated)"
+      - name: Push README.md
+        if: success()
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build
+        if: success()
         run: yarn build
       - name: Package
-        run: zip deploy.zip .next package.json next.config.js
-      - name: E2E
         if: success()
+        run: zip deploy.zip .next package.json next.config.js migrations
+      - name: Deploy to EB
+        if: success()
+        uses: einaregilsson/beanstalk-deploy@v5
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: $BEANSTALK_APP_NAME
+          environment_name: $BEANSTALK_ENV_NAME
+          version_label: $BUILD_NUMBER
+          region: $AWS_REGION
+          deployment_package: deploy.zip
+      - name: Test E2E
+        if: success()
+        id: e2e
         run: yarn e2e
-        env:
-          TEST_URL: ${{ steps.Stage.preview-url }}
-      - name: Lighthouse
+      - name: Audit Lighthouse
         if: success()
+        id: lh
         uses: treosh/lighthouse-ci-action@v2
         with:
           configPath: ".lighthouseci/lighthouserc.js"
           urls: |
-            ${{ steps.Stage.preview-url }}
-            ${{ steps.Stage.preview-url }}/blog
+            $TEST_URL
+            ${{ $TEST_URL }}/blog
+      - name: Save $LAST_SUCCESSFUL_BUILD_NUMBER
+        if: success()
+        run: echo "::set-env name=LAST_SUCCESSFUL_BUILD_NUMBER::$BUILD_NUMBER"
       - name: Release
         if: success()
+        run: yarn release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: yarn release
+      - name: Rollback
+        if: job.steps.e2e.status == failure() || job.steps.lh.status == failure()
+        uses: einaregilsson/beanstalk-deploy@v5
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: $BEANSTALK_APP_NAME
+          environment_name: $BEANSTALK_ENV_NAME
+          version_label: $LAST_SUCCESSFUL_BUILD_NUMBER
+          region: $AWS_REGION
