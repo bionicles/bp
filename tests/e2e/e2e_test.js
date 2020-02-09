@@ -5,18 +5,59 @@ let assert = require("assert");
 const url = process.env.TEST_URL;
 console.log("e2e test url:", url);
 
-Feature("Landing Page");
+Feature("Home");
 Scenario("visit the site", async I => {
   I.amOnPage(url);
-  I.see("Bion is Cool");
+  I.see("Search");
+});
+
+Feature("Feedback");
+Scenario("give feedback", async I => {
+  I.amOnPage(url);
+  I.see("Feedback");
+  I.click("#feedback-link");
+  I.see("Leave a comment");
+});
+
+Feature("Docs");
+Scenario(
+  "to understand how Bit Pharma works, as a dev, I want to read the docs",
+  async I => {
+    I.amOnPage(url);
+    I.see("Docs");
+    I.click("#docs-link");
+    I.see("Table of Contents");
+    I.see("Quick Start");
+    I.see("API");
+    I.see("Deep Dive");
+    I.see("FAQ");
+  }
+);
+
+Feature("API");
+Scenario("1. I try a Hello World route", async I => {
+  I.amOnPage(url);
+  const helloWorldResponse = await I.sendGetRequest("/hello");
+  assert.equal(response.status, 200);
+  assert.equal(response.data, "Hello World!");
+});
+Scenario("2. I sign up", async I => {
+  I.amOnPage(url);
+  const signUpResponse = await I.sendPostRequest("/auth/signup");
+  assert.equal(response.status, 200);
+  I.amOnPage("gmail.com");
+  I.fillField("identifier", process.env.ALICE_EMAIL);
+  I.click("Next");
+  I.fillField("password", process.env.ALICE_PW);
+  I.click("Verify with Bit Pharma");
+  const code = await I.grabTextFrom("");
 });
 
 Feature("Blog");
 Scenario("visit the blog", async I => {
   I.amOnPage(`${url}/blog`);
-  I.see("Bit Pharma Blog");
+  I.see("Blog");
 });
-
 Feature("GET_METHODS method");
 Scenario("get status 200 and methods list when I use GET_METHODS", async I => {
   const response = await I.sendPostRequest(`/rpc`, {

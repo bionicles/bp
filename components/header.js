@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 function Header({ user, loading }) {
   return (
@@ -6,35 +6,24 @@ function Header({ user, loading }) {
       <nav>
         <ul>
           <li>
-            <Link href="/">
-              <a>Home</a>
-            </Link>
+            <input type="text" placeholder="To search, press ?" />
           </li>
           <li>
-            <Link href="/about">
-              <a>About</a>
-            </Link>
+            <a href="https://github.com/bionicles/bp/issues/new">Feedback</a>
+          </li>
+          <li>
+            <a href="mailto:bion@bitpharma.com">Contact</a>
           </li>
           {!loading &&
             (user ? (
-              <>
-                <li>
-                  <Link href="/profile">
-                    <a>Client-rendered profile</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/advanced/ssr-profile">
-                    <a>Server rendered profile (advanced)</a>
-                  </Link>
-                </li>
-                <li>
-                  <a href="/api/logout">Logout</a>
-                </li>
-              </>
+              <li>
+                <Link href="/profile">
+                  <a>Profile</a>
+                </Link>
+              </li>
             ) : (
               <li>
-                <a href="/api/login">Login</a>
+                <a href="/auth">Login</a>
               </li>
             ))}
         </ul>
@@ -75,7 +64,7 @@ function Header({ user, loading }) {
         }
       `}</style>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;
