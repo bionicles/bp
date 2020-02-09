@@ -14,7 +14,6 @@ export const setSession = (
   res.setHeader("Set-Cookie", serialize("session", session, options));
 };
 
-
 export const getSession = req => {
     let requester_id = "anon";
     if (req.cookies.session) {
