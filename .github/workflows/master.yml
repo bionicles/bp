@@ -120,7 +120,7 @@ jobs:
         run: yarn build
       - name: Package
         if: success()
-        run: zip deploy.zip .next package.json next.config.js migrations
+        run: zip deploy.zip .next package.json next.config.js
       - name: Deploy to EB
         if: success()
         uses: einaregilsson/beanstalk-deploy@v5
@@ -132,6 +132,11 @@ jobs:
           version_label: $BUILD_NUMBER
           region: $AWS_REGION
           deployment_package: deploy.zip
+      - name: Migrate PostgreSQL
+        run: |
+          scp migrations migrations
+          ssh $BASTION 
+          node migrate.js
       - name: Test E2E
         if: success()
         id: e2e

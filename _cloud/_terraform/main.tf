@@ -175,7 +175,20 @@ resource "aws_instance" "bastion" {
   key_name                    = aws_key_pair.bastion_key.key_name
   instance_type               = "t3.nano"
   security_groups             = [aws_security_group.bastion-sg.name]
+  subnet_id                   = module.subnets.public_subnet_ids[0]
   associate_public_ip_address = true
+  provisioner "file" {
+    source      = "../../postgresql"
+    destination = "."
+  }
+  provisioner "remote_exec" {
+    inline = [
+      "yarn && node migrate.js"
+    ]
+  }
+  depends_on = [
+    aws_rds_cluster.aurora_serverless_postgresql
+  ]
 }
 # aws acm request-certificate --domain-name example.com --subject-alternative-names a.example.com b.example.com *.c.example.com
 module "cdn" {

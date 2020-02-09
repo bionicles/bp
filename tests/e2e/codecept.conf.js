@@ -15,6 +15,7 @@ exports.config = {
     Puppeteer: {
       show: true,
       chrome: {
+        keepCookies: true,
         args: ["--no-sandbox", "--disable-setuid-sandbox"]
         // executablePath
       }
@@ -23,6 +24,52 @@ exports.config = {
       endpoint: `${process.env.TEST_URL}/api`,
       onRequest: request => {
         request.headers.auth = "123";
+      }
+    },
+    autoLogin: {
+      enabled: true,
+      saveToFile: true,
+      inject: "signin",
+      users: {
+        super: {
+          login: async I => {
+            await I.sendPostRequest(
+              `/users/${process.env.TEST_SUPER_DISPLAY_NAME}/signin`,
+              { password: process.env.TEST_SUPER_PASSWORD }
+            );
+          },
+          check: I => {
+            I.amOnPage("/");
+            I.see(process.env.TEST_SUPER_DISPLAY_NAME);
+            I.seeCookie("session");
+          }
+        },
+        admin: {
+          login: async I => {
+            await I.sendPostRequest(
+              `/users/${process.env.TEST_ADMIN_DISPLAY_NAME}/signin`,
+              { password: process.env.TEST_ADMIN_PASSWORD }
+            );
+          },
+          check: I => {
+            I.amOnPage("/");
+            I.see(process.env.TEST_ADMIN_DISPLAY_NAME);
+            I.seeCookie("session");
+          }
+        },
+        viewer: {
+          login: async I => {
+            await I.sendPostRequest(
+              `/users/${process.env.TEST_VIEWER_DISPLAY_NAME}/signin`,
+              { password: process.env.TEST_VIEWER_PASSWORD }
+            );
+          },
+          check: I => {
+            I.amOnPage("/");
+            I.see(process.env.TEST_SUPER_DISPLAY_NAME);
+            I.seeCookie("session");
+          }
+        }
       }
     }
   },
