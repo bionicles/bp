@@ -76,6 +76,8 @@ jobs:
           TF_VAR_db_master_pass: ${{ secrets.db_master_pass }}
           TF_VAR_ssh_key: ${{ secrets.ssh_key }}
           TF_VAR_bastion_ami_id: $BASTION_AMI_ID
+      - name: Apply Terraform Plan
+        run: cd _cloud/_terraform && terraform apply --auto-approve
       - name: Save TF Outputs as Environment Variables
         if: success()
         run: |
