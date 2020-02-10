@@ -75,25 +75,25 @@ resource "aws_security_group" "ouroboros" {
   }
 }
 # aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily" | grep postgresql
-# resource "aws_rds_cluster_parameter_group" "force_ssl" {
-#   name   = "database"
-#   family = "aurora-postgresql10.7"
-#   parameter {
-#     name         = "rds.force_ssl"
-#     value        = "1"
-#     apply_method = "pending-reboot"
-#   }
-# }
+resource "aws_rds_cluster_parameter_group" "force_ssl" {
+  name   = "database"
+  family = "aurora-postgresql10.7"
+  parameter {
+    name         = "rds.force_ssl"
+    value        = "1"
+    apply_method = "pending-reboot"
+  }
+}
 resource "aws_rds_cluster" "aurora_serverless_postgresql" {
-  engine         = "aurora-postgresql"
-  engine_mode    = "serverless"
-  engine_version = "10.7"
-  # enabled_cloudwatch_logs_exports = ["audit"]
-  enable_http_endpoint   = false # "data api"
-  master_username        = var.db_master_user
-  master_password        = var.db_master_pass
-  vpc_security_group_ids = [aws_security_group.ouroboros.id]
-  # db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.force_ssl.name
+  engine                          = "aurora-postgresql"
+  engine_mode                     = "serverless"
+  engine_version                  = "10.7"
+  enabled_cloudwatch_logs_exports = ["audit"]
+  enable_http_endpoint            = false # "data api"
+  master_username                 = var.db_master_user
+  master_password                 = var.db_master_pass
+  vpc_security_group_ids          = [aws_security_group.ouroboros.id]
+  db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.force_ssl.name
   scaling_configuration {
     auto_pause               = true
     seconds_until_auto_pause = 300
