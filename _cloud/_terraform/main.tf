@@ -97,11 +97,6 @@ module "show_secret_to_migrator" {
   secret_arn       = aws_ssm_parameter.secret.arn
   viewer_role_name = module.migrator_role.name
 }
-module "show_secret_to_server" {
-  source           = "../modules/motifs/secret"
-  secret_arn       = aws_ssm_parameter.secret.arn
-  viewer_role_name = module.migrator.role.name
-}
 module "elastic_beanstalk_application" {
   source    = "git::https://github.com/cloudposse/terraform-aws-elastic-beanstalk-application.git?ref=tags/0.3.0"
   namespace = var.namespace
