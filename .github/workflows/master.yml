@@ -53,8 +53,8 @@ jobs:
           tf_actions_comment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Terraform Destroy
-        run: cd _cloud/_terraform && terraform destroy --auto-approve
+      # - name: Terraform Destroy
+      #   run: cd _cloud/_terraform && terraform destroy --auto-approve
       - name: Terraform Apply
         id: apply
         run: cd _cloud/_terraform && terraform apply --auto-approve
