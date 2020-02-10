@@ -19,9 +19,9 @@ jobs:
         if: success()
         uses: hashicorp/terraform-github-actions@master
         with:
-          tf_actions_version: 0.12.20
-          tf_actions_subcommand: "init"
           tf_actions_working_dir: "_cloud/_terraform"
+          tf_actions_subcommand: "init"
+          tf_actions_version: 0.12.20
           tf_actions_comment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -29,9 +29,9 @@ jobs:
         if: success()
         uses: hashicorp/terraform-github-actions@master
         with:
-          tf_actions_version: 0.12.20
-          tf_actions_subcommand: "validate"
           tf_actions_working_dir: "_cloud/_terraform"
+          tf_actions_subcommand: "validate"
+          tf_actions_version: 0.12.20
           tf_actions_comment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

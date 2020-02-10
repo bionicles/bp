@@ -1,8 +1,4 @@
-import { createDb, migrate } from "postgres-migrations";
-
-const { PGHOST, PGDATABASE, PGPASSWORD } = process.env;
-
-const awsCert = `
+export const awsCert = `
 -----BEGIN CERTIFICATE-----
 MIIDQTCCAimgAwIBAgITBmyfz5m/jAo54vB4ikPmljZbyjANBgkqhkiG9w0BAQsF
 ADA5MQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQW1hem9uMRkwFwYDVQQDExBBbWF6
@@ -24,19 +20,3 @@ o/ufQJVtMVT8QtPHRh8jrdkPSHCa2XV4cdFyQzR1bldZwgJcJmApzyMZFo6IQ6XU
 rqXRfboQnoZsG4q5WTP468SQvvG5
 -----END CERTIFICATE-----
 `;
-
-const migrate = async () => {
-  const dbConfig = {
-    database: PGDATABASE,
-    password: PGPASSWORD,
-    host: PGHOST,
-    ssl: {
-      rejectUnauthorized: false,
-      ca: [awsCert, "ascii"]
-    }
-  };
-  await createDb(PGDATABASE, dbConfig);
-  await migrate(dbConfig, "/migrations");
-};
-
-migrate();

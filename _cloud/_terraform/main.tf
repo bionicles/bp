@@ -96,9 +96,9 @@ resource "aws_rds_cluster" "aurora_serverless_postgresql" {
   db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.force_ssl.name
   scaling_configuration {
     auto_pause               = true
+    seconds_until_auto_pause = 300
     max_capacity             = "32"
     min_capacity             = "8"
-    seconds_until_auto_pause = 300
   }
 }
 module "elastic_beanstalk_application" {
