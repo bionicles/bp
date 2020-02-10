@@ -194,11 +194,11 @@ resource "aws_instance" "bastion" {
   subnet_id                   = module.subnets.public_subnet_ids[0]
   iam_instance_profile        = aws_iam_instance_profile.migrator_profile.name
   associate_public_ip_address = true
+  user_data                   = file("./install.sh")
   provisioner "file" {
     source      = "../../postgresql"
     destination = "~/postgresql"
   }
-  user_data = file("install.sh")
 }
 # aws acm request-certificate --domain-name example.com --subject-alternative-names a.example.com b.example.com *.c.example.com
 module "cdn" {
