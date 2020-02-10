@@ -148,8 +148,8 @@ jobs:
         with:
           configPath: ".lighthouseci/lighthouserc.js"
           urls: |
-            ${{ $TEST_URL }}
-            ${{ $TEST_URL }}/blog
+            $TEST_URL
+            $TEST_URL/blog
       - name: Save $LAST_SUCCESSFUL_BUILD_NUMBER
         if: success()
         run: echo "::set-env name=LAST_SUCCESSFUL_BUILD_NUMBER::$BUILD_NUMBER"
