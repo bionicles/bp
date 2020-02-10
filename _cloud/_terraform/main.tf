@@ -163,7 +163,7 @@ resource "aws_iam_instance_profile" "migrator_profile" {
   name = "migrator_profile"
   role = module.migrator_role.name
 }
-resource "aws_security_group" "bastion-sg" {
+resource "aws_security_group" "bastion_sg" {
   name   = "bastion-sg"
   vpc_id = module.vpc.vpc_id
   ingress {
@@ -210,7 +210,7 @@ output "aws_region" {
   value = var.region
 }
 output "beanstalk_app_name" {
-  value = module.elastic_beanstalk_application.name
+  value = module.elastic_beanstalk_application.elastic_beanstalk_application_name
 }
 output "beanstalk_env_name" {
   value = module.elastic_beanstalk_environment.name
