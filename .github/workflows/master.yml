@@ -44,8 +44,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Terraform Destroy
         run: cd _cloud/_terraform && terraform destroy --auto-approve
-        env: 
-          TF_VAR_db_master_pass: ${{ secrets.TF_VAR_db_master_pass }}
       - name: Terraform Apply
         if: success()
         uses: hashicorp/terraform-github-actions@master
