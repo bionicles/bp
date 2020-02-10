@@ -85,14 +85,17 @@ resource "aws_ssm_parameter" "secret" {
   type  = "SecureString"
   value = var.db_master_pass
 }
+locals {
+  secret_arn = "arn:aws:ssm:${data.aws_region.current.value}:${data.aws_caller_identity.current.account_id}:parameter/${var.name}/db/pass"
+}
 module "show_secret_to_server" {
   source           = "../modules/motifs/secret"
-  secret_arn       = aws_ssm_parameter.secret.arn
+  secret_arn       = local.secret_arn
   viewer_role_name = module.elastic_beanstalk_environment.ec2_instance_profile_role_name
 }
 module "show_secret_to_migrator" {
   source           = "../modules/motifs/secret"
-  secret_arn       = aws_ssm_parameter.secret.arn
+  secret_arn       = local.secret_arn
   viewer_role_name = module.migrator_role.name
 }
 module "elastic_beanstalk_application" {
