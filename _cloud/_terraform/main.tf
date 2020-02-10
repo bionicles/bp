@@ -42,13 +42,13 @@ module "vpc" {
   name       = "app"
   cidr_block = "10.0.0.0/16"
 }
-module "flow_logs" {
-  source    = "git::https://github.com/cloudposse/terraform-aws-vpc-flow-logs-s3-bucket.git?ref=master"
-  namespace = var.namespace
-  stage     = var.stage
-  name      = "flow"
-  vpc_id    = module.vpc.vpc_id
-}
+# module "flow_logs" {
+#   source    = "git::https://github.com/cloudposse/terraform-aws-vpc-flow-logs-s3-bucket.git?ref=master"
+#   namespace = var.namespace
+#   stage     = var.stage
+#   name      = "flow"
+#   vpc_id    = module.vpc.vpc_id
+# }
 module "subnets" {
   source             = "git::https://github.com/cloudposse/terraform-aws-dynamic-subnets.git?ref=tags/0.18.1"
   availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
@@ -94,7 +94,7 @@ resource "aws_rds_cluster" "aurora_serverless_postgresql" {
   enable_http_endpoint            = false # "data api"
   master_username                 = var.db_master_user
   master_password                 = var.db_master_pass
-  vpc_security_group_ids          = [aws_security_group.ouroboros.id]
+  vpc_security_group_ids          = [module.vpc.vpc_default_security_group_id, aws_security_group.ouroboros.id]
   db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.force_ssl.name
   scaling_configuration {
     auto_pause               = true
