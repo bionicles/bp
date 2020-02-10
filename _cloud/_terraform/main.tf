@@ -194,7 +194,7 @@ resource "aws_instance" "bastion" {
   subnet_id                   = module.subnets.public_subnet_ids[0]
   iam_instance_profile        = aws_iam_instance_profile.migrator_profile.name
   associate_public_ip_address = true
-  user_data                   = file("./install.sh")
+  user_data                   = "${file("./install.sh")}"
   provisioner "file" {
     source      = "../../postgresql"
     destination = "~/postgresql"
