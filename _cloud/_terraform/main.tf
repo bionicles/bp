@@ -37,16 +37,18 @@ variable "instance_type" {
 
 module "vpc" {
   source     = "git::https://github.com/cloudposse/terraform-aws-vpc.git?ref=0.8.1"
+  namespace  = var.namespace
   stage      = var.stage
   name       = "app"
   cidr_block = "10.0.0.0/16"
 }
-# module "flow_logs" {
-#   source = "git::https://github.com/cloudposse/terraform-aws-vpc-flow-logs-s3-bucket.git?ref=master"
-#   stage  = var.stage
-#   name   = "flow"
-#   vpc_id = module.vpc.vpc_id
-# }
+module "flow_logs" {
+  source    = "git::https://github.com/cloudposse/terraform-aws-vpc-flow-logs-s3-bucket.git?ref=master"
+  namespace = var.namespace
+  stage     = var.stage
+  name      = "flow"
+  vpc_id    = module.vpc.vpc_id
+}
 module "subnets" {
   source             = "git::https://github.com/cloudposse/terraform-aws-dynamic-subnets.git?ref=tags/0.18.1"
   availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
@@ -77,7 +79,7 @@ resource "aws_security_group" "ouroboros" {
 # aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily" | grep postgresql
 resource "aws_rds_cluster_parameter_group" "force_ssl" {
   name   = "database"
-  family = "aurora-postgresql10.7"
+  family = "aurora-postgresql10"
   parameter {
     name         = "rds.force_ssl"
     value        = "1"
