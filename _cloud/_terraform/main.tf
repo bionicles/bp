@@ -198,13 +198,7 @@ resource "aws_instance" "bastion" {
     source      = "../../postgresql"
     destination = "~/postgresql"
   }
-  user_data = << EOF
-#! /bin/bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-. ~/.nvm/nvm.sh
-nvm install --lts
-npm install yarn -g
-EOF
+  user_data = file("install.sh")
 }
 # aws acm request-certificate --domain-name example.com --subject-alternative-names a.example.com b.example.com *.c.example.com
 module "cdn" {
