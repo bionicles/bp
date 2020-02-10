@@ -42,13 +42,27 @@ module "vpc" {
   name       = "app"
   cidr_block = "10.0.0.0/16"
 }
-# module "flow_logs" {
-#   source    = "git::https://github.com/cloudposse/terraform-aws-vpc-flow-logs-s3-bucket.git?ref=master"
-#   namespace = var.namespace
-#   stage     = var.stage
-#   name      = "flow"
-#   vpc_id    = module.vpc.vpc_id
-# }
+resource "aws_kms_key" "flow_bucket_key" {
+  description             = "This key is used to encrypt bucket objects"
+  deletion_window_in_days = 10
+}
+resource "aws_s3_bucket" "flow" {
+  bucket = "${var.namespace}-${var.name}-flow"
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        kms_master_key_id = "${aws_kms_key.mykey.arn}"
+        sse_algorithm     = "aws:kms"
+      }
+    }
+  }
+}
+resource "aws_flow_log" "flow" {
+  log_destination      = aws_s3_bucket.flow.arn
+  vpc_id               = module.vpc.vpc_id
+  log_destination_type = "s3"
+  traffic_type         = "ALL"
+}
 module "subnets" {
   source             = "git::https://github.com/cloudposse/terraform-aws-dynamic-subnets.git?ref=tags/0.18.1"
   availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
