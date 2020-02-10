@@ -86,12 +86,16 @@ resource "aws_rds_cluster_parameter_group" "force_ssl" {
     apply_method = "pending-reboot"
   }
 }
+resource "aws_db_subnet_group" "db_subnet_group" {
+  subnet_ids = module.subnets.private_subnet_ids
+}
 resource "aws_rds_cluster" "aurora_serverless_postgresql" {
   engine                          = "aurora-postgresql"
   engine_mode                     = "serverless"
   engine_version                  = "10.7"
   enabled_cloudwatch_logs_exports = ["audit"]
   enable_http_endpoint            = false # "data api"
+  db_subnet_group_name            = aws_db_subnet_group.db_subnet_group.id
   master_username                 = var.db_master_user
   master_password                 = var.db_master_pass
   vpc_security_group_ids          = [module.vpc.vpc_default_security_group_id, aws_security_group.ouroboros.id]
