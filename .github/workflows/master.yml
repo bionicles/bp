@@ -3,7 +3,7 @@ name: CI/CD
 on: [push]
 
 jobs:
-  CI/CD:
+  CI-CD:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v1
