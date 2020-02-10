@@ -75,15 +75,15 @@ resource "aws_security_group" "ouroboros" {
   }
 }
 # aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily" | grep postgresql
-resource "aws_rds_cluster_parameter_group" "force_ssl" {
-  name   = "database"
-  family = "aurora-postgresql10.7"
-  parameter {
-    name         = "rds.force_ssl"
-    value        = "1"
-    apply_method = "pending-reboot"
-  }
-}
+# resource "aws_rds_cluster_parameter_group" "force_ssl" {
+#   name   = "database"
+#   family = "aurora-postgresql10.7"
+#   parameter {
+#     name         = "rds.force_ssl"
+#     value        = "1"
+#     apply_method = "pending-reboot"
+#   }
+# }
 resource "aws_rds_cluster" "aurora_serverless_postgresql" {
   engine         = "aurora-postgresql"
   engine_mode    = "serverless"
