@@ -1,5 +1,4 @@
 # why?: deploy 3 tier app
-
 terraform {
   backend "s3" {
     dynamodb_table = "bitpharma-tf-state-lock"
@@ -8,14 +7,14 @@ terraform {
     region         = "us-east-1"
   }
 }
+provider "aws" {
+  region = "us-east-1"
+}
 variable "namespace" {
   default = "gp"
 }
 variable "name" {
   default = "gitpharma"
-}
-variable "region" {
-  default = "us-east-1"
 }
 variable "db_master_user" {
   default = "postgres"
@@ -29,9 +28,6 @@ variable "stage" {
 variable "dns_zone_id" {
   default = "gitpharma.com"
 }
-provider "aws" {
-  region = "us-east-1"
-}
 
 module "vpc" {
   source     = "git::https://github.com/cloudposse/terraform-aws-vpc.git?ref=master"
@@ -39,34 +35,32 @@ module "vpc" {
   name       = "app"
   cidr_block = "10.0.0.0/16"
 }
-module "flow_logs" {
-  source = "git::https://github.com/cloudposse/terraform-aws-vpc-flow-logs-s3-bucket.git?ref=master"
-  stage  = var.stage
-  name   = "flow"
-  vpc_id = module.vpc.vpc_id
-}
+# module "flow_logs" {
+#   source = "git::https://github.com/cloudposse/terraform-aws-vpc-flow-logs-s3-bucket.git?ref=master"
+#   stage  = var.stage
+#   name   = "flow"
+#   vpc_id = module.vpc.vpc_id
+# }
 module "subnets" {
-  source               = "git::https://github.com/cloudposse/terraform-aws-dynamic-subnets.git?ref=tags/0.16.0"
-  availability_zones   = ["us-east-1a", "us-east-1b", "us-east-1c"]
-  namespace            = var.namespace
-  stage                = var.stage
-  name                 = var.name
-  vpc_id               = module.vpc.vpc_id
-  igw_id               = module.vpc.igw_id
-  cidr_block           = module.vpc.vpc_cidr_block
-  nat_gateway_enabled  = true
-  nat_instance_enabled = false
+  source             = "git::https://github.com/cloudposse/terraform-aws-dynamic-subnets.git?ref=tags/0.16.0"
+  availability_zones = ["us-east-1a", "us-east-1b"]
+  namespace          = var.namespace
+  stage              = var.stage
+  name               = var.name
+  vpc_id             = module.vpc.vpc_id
+  igw_id             = module.vpc.igw_id
+  cidr_block         = module.vpc.vpc_cidr_block
+  max_subnet_count   = 2
 }
 resource "aws_rds_cluster_parameter_group" "force_ssl" {
   name   = "database"
-  family = "postgres11.4"
+  family = "postgres11"
   parameter {
     name         = "rds.force_ssl"
     value        = "1"
     apply_method = "pending-reboot"
   }
 }
-# https://www.terraform.io/docs/providers/aws/r/rds_cluster.html
 resource "aws_rds_cluster" "aurora_serverless_postgresql" {
   engine                          = "aurora-postgresql"
   engine_mode                     = "serverless"
@@ -84,7 +78,6 @@ resource "aws_rds_cluster" "aurora_serverless_postgresql" {
     seconds_until_auto_pause = 300
   }
 }
-# must do this in main.tf cuz we can't define sensitive variables in modules (circa 15 nov 2019)
 resource "aws_ssm_parameter" "secret" {
   name  = "/${var.name}/db/pass"
   type  = "SecureString"
@@ -111,7 +104,7 @@ module "elastic_beanstalk_environment" {
   namespace                          = var.namespace
   stage                              = var.stage
   name                               = var.name
-  region                             = var.region
+  region                             = data.aws_region.current.name
   availability_zone_selector         = "Any 2"
   dns_zone_id                        = var.dns_zone_id
   dns_subdomain                      = "www"
@@ -141,7 +134,6 @@ module "elastic_beanstalk_environment" {
     }
   ]
 }
-# allow elastic beanstalk to access aurora with a self-referential security group
 resource "aws_security_group" "ouroboros" {
   name   = "ouroboros-sg"
   vpc_id = module.vpc.vpc_id
@@ -200,17 +192,17 @@ resource "aws_instance" "bastion" {
   }
 }
 # aws acm request-certificate --domain-name example.com --subject-alternative-names a.example.com b.example.com *.c.example.com
-module "cdn" {
-  source           = "git::https://github.com/cloudposse/terraform-aws-cloudfront-s3-cdn.git?ref=master"
-  namespace        = var.namespace
-  stage            = var.stage
-  name             = var.name
-  aliases          = ["cdn.${var.dns_zone_id}"]
-  parent_zone_name = var.dns_zone_id
-}
+# module "cdn" {
+#   source           = "git::https://github.com/cloudposse/terraform-aws-cloudfront-s3-cdn.git?ref=master"
+#   namespace        = var.namespace
+#   stage            = var.stage
+#   name             = var.name
+#   aliases          = ["cdn.${var.dns_zone_id}"]
+#   parent_zone_name = var.dns_zone_id
+# }
 
 output "aws_region" {
-  value = var.region
+  value = data.aws_region.current.name
 }
 output "beanstalk_app_name" {
   value = module.elastic_beanstalk_application.elastic_beanstalk_application_name
@@ -225,10 +217,10 @@ output "bastion_public_ip" {
 output "db_host" {
   value = aws_rds_cluster.aurora_serverless_postgresql.endpoint
 }
-output "cdn_zone_id" {
-  value = module.cdn.cf_hosted_zone_id
-}
-# you can also provision local JS files which export critical parameters:
+# output "cdn_zone_id" {
+#   value = module.cdn.cf_hosted_zone_id
+# }
+# provision local JS files to export critical parameters:
 # resource "local_file" "api_outputs" {
 #   filename = "${path.module}/../../tools/tf-out.js"
 #   content  = <<EOF

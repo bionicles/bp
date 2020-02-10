@@ -78,6 +78,14 @@ jobs:
           TF_VAR_bastion_ami_id: $BASTION_AMI_ID
       - name: Apply Terraform Plan
         run: cd _cloud/_terraform && terraform apply --auto-approve
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TF_VAR_db_master_pass: ${{ secrets.db_master_pass }}
+          TF_VAR_ssh_key: ${{ secrets.ssh_key }}
+          TF_VAR_bastion_ami_id: $BASTION_AMI_ID
+      - name: Destroy if the Plan Failed
+        if: failure()
+        run: cd _cloud/_terraform && terraform destroy
       - name: Save TF Outputs as Environment Variables
         if: success()
         run: |
