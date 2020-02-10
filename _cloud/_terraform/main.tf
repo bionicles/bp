@@ -53,9 +53,10 @@ module "subnets" {
   cidr_block         = module.vpc.vpc_cidr_block
   max_subnet_count   = 2
 }
+# aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily" | grep postgresql
 resource "aws_rds_cluster_parameter_group" "force_ssl" {
   name   = "database"
-  family = "postgres11"
+  family = "aurora-postgresql11"
   parameter {
     name         = "rds.force_ssl"
     value        = "1"
@@ -176,7 +177,6 @@ resource "aws_security_group" "bastion_sg" {
   }
 }
 resource "aws_key_pair" "bastion_key" {
-  key_name   = "bastion-ssh-public-key"
   public_key = var.ssh_key
 }
 resource "aws_instance" "bastion" {
