@@ -69,7 +69,7 @@ resource "aws_rds_cluster" "aurora_serverless_postgresql" {
   engine_mode                     = "serverless"
   engine_version                  = "11.4"
   enabled_cloudwatch_logs_exports = ["audit"]
-  enable_http_endpoint            = true
+  enable_http_endpoint            = false # "data api"
   master_username                 = var.db_master_user
   master_password                 = var.db_master_pass
   vpc_security_group_ids          = [aws_security_group.ouroboros.id]
@@ -91,6 +91,16 @@ module "show_secret_to_server" {
   source           = "../modules/motifs/secret"
   secret_arn       = aws_ssm_parameter.secret.arn
   viewer_role_name = module.elastic_beanstalk_environment.ec2_instance_profile_role_name
+}
+module "show_secret_to_migrator" {
+  source           = "../modules/motifs/secret"
+  secret_arn       = aws_ssm_parameter.secret.arn
+  viewer_role_name = module.migrator_role.name
+}
+module "show_secret_to_server" {
+  source           = "../modules/motifs/secret"
+  secret_arn       = aws_ssm_parameter.secret.arn
+  viewer_role_name = module.migrator.role.name
 }
 module "elastic_beanstalk_application" {
   source    = "git::https://github.com/cloudposse/terraform-aws-elastic-beanstalk-application.git?ref=tags/0.3.0"
@@ -150,6 +160,14 @@ resource "aws_security_group" "ouroboros" {
     self      = true
   }
 }
+module "migrator_role" {
+  source  = "../modules/services/iam/role/role"
+  service = "ec2"
+}
+resource "aws_iam_instance_profile" "migrator_profile" {
+  name = "migrator_profile"
+  role = module.migrator_role.name
+}
 resource "aws_security_group" "bastion-sg" {
   name   = "bastion-sg"
   vpc_id = module.vpc.vpc_id
@@ -172,23 +190,16 @@ resource "aws_key_pair" "bastion_key" {
 }
 resource "aws_instance" "bastion" {
   ami                         = "ami-969ab1f6"
-  key_name                    = aws_key_pair.bastion_key.key_name
   instance_type               = "t3.nano"
-  security_groups             = [aws_security_group.bastion-sg.name]
+  key_name                    = aws_key_pair.bastion_key.key_name
+  security_groups             = [aws_security_group.ouroboros.name, aws_security_group.bastion_sg.name]
   subnet_id                   = module.subnets.public_subnet_ids[0]
+  instance_profile            = aws_iam_instance_profile.migrator_profile.name
   associate_public_ip_address = true
   provisioner "file" {
     source      = "../../postgresql"
     destination = "."
   }
-  provisioner "remote_exec" {
-    inline = [
-      "yarn && node migrate.js"
-    ]
-  }
-  depends_on = [
-    aws_rds_cluster.aurora_serverless_postgresql
-  ]
 }
 # aws acm request-certificate --domain-name example.com --subject-alternative-names a.example.com b.example.com *.c.example.com
 module "cdn" {
