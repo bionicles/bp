@@ -189,7 +189,7 @@ resource "aws_instance" "bastion" {
   key_name                    = aws_key_pair.bastion_key.key_name
   security_groups             = [aws_security_group.ouroboros.name, aws_security_group.bastion_sg.name]
   subnet_id                   = module.subnets.public_subnet_ids[0]
-  instance_profile            = aws_iam_instance_profile.migrator_profile.name
+  iam_instance_profile        = aws_iam_instance_profile.migrator_profile.name
   associate_public_ip_address = true
   provisioner "file" {
     source      = "../../postgresql"
