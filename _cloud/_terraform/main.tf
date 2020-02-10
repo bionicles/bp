@@ -42,8 +42,8 @@ module "vpc" {
   name       = "app"
   cidr_block = "10.0.0.0/16"
 }
-resource "aws_kms_key" "flow_bucket_key" {
-  description             = "This key is used to encrypt bucket objects"
+resource "aws_kms_key" "flow" {
+  description             = "vpc flow log bucket encryption key"
   deletion_window_in_days = 10
 }
 resource "aws_s3_bucket" "flow" {
@@ -51,7 +51,7 @@ resource "aws_s3_bucket" "flow" {
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        kms_master_key_id = "${aws_kms_key.mykey.arn}"
+        kms_master_key_id = aws_kms_key.flow.arn
         sse_algorithm     = "aws:kms"
       }
     }
