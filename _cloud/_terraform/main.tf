@@ -93,7 +93,6 @@ resource "aws_rds_cluster" "aurora_serverless_postgresql" {
   engine                          = "aurora-postgresql"
   engine_mode                     = "serverless"
   engine_version                  = "10.7"
-  enabled_cloudwatch_logs_exports = ["audit"]
   enable_http_endpoint            = false # "data api"
   db_subnet_group_name            = aws_db_subnet_group.db_subnet_group.id
   master_username                 = var.db_master_user
