@@ -15,6 +15,15 @@ jobs:
           aws-region: us-east-1
       # - name: Obtain Latest AWS Linux 2 AMI id
       #   run: echo "::set-env name=BASTION_AMI_ID::$(aws ec2 describe-images --owners amazon --filters 'Name=name,Values=amzn2-ami-hvm-2.0.????????.?-x86_64-gp2' 'Name=state,Values=available' --query 'reverse(sort_by(Images, &CreationDate))[:1].ImageId' --output text)"
+      - name: Terraform Format
+        if: success()
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_working_dir: "_cloud/_terraform"
+          tf_actions_subcommand: "fmt"
+          tf_actions_version: 0.12.20
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Terraform Init
         if: success()
         uses: hashicorp/terraform-github-actions@master
@@ -22,7 +31,6 @@ jobs:
           tf_actions_working_dir: "_cloud/_terraform"
           tf_actions_subcommand: "init"
           tf_actions_version: 0.12.20
-          tf_actions_comment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Terraform Validate
@@ -32,17 +40,20 @@ jobs:
           tf_actions_working_dir: "_cloud/_terraform"
           tf_actions_subcommand: "validate"
           tf_actions_version: 0.12.20
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Terraform Apply
+        if: success()
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_working_dir: "_cloud/_terraform"
+          tf_actions_subcommand: "apply"
+          tf_actions_version: 0.12.20
           tf_actions_comment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: Terraform Destroy
       #   run: cd _cloud/_terraform && terraform destroy --auto-approve
-      - name: Terraform Apply
-        id: apply
-        run: cd _cloud/_terraform && terraform apply --auto-approve
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TF_VAR_db_master_pass: ${{ secrets.db_master_pass }}
       - name: Save TF Outputs as Environment Variables
         if: success()
         run: |

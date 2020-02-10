@@ -41,12 +41,12 @@ module "vpc" {
   name       = "app"
   cidr_block = "10.0.0.0/16"
 }
-module "flow_logs" {
-  source = "git::https://github.com/cloudposse/terraform-aws-vpc-flow-logs-s3-bucket.git?ref=master"
-  stage  = var.stage
-  name   = "flow"
-  vpc_id = module.vpc.vpc_id
-}
+# module "flow_logs" {
+#   source = "git::https://github.com/cloudposse/terraform-aws-vpc-flow-logs-s3-bucket.git?ref=master"
+#   stage  = var.stage
+#   name   = "flow"
+#   vpc_id = module.vpc.vpc_id
+# }
 module "subnets" {
   source             = "git::https://github.com/cloudposse/terraform-aws-dynamic-subnets.git?ref=tags/0.18.1"
   availability_zones = ["us-east-1a", "us-east-1b"]
