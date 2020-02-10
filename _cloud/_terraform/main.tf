@@ -86,7 +86,7 @@ resource "aws_ssm_parameter" "secret" {
   value = var.db_master_pass
 }
 locals {
-  secret_arn = "arn:aws:ssm:${data.aws_region.current.value}:${data.aws_caller_identity.current.account_id}:parameter/${var.name}/db/pass"
+  secret_arn = "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/${var.name}/db/pass"
 }
 module "show_secret_to_server" {
   source           = "../modules/motifs/secret"
