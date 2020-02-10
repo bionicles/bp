@@ -56,14 +56,14 @@ jobs:
         uses: reviewdog/action-tfsec@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review # Change reporter
+          reporter: github-check # Change reporter
           flags: "./_cloud/terraform" # Optional
       - name: Lint Terraform
         if: success()
         uses: reviewdog/action-tflint@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review # Change reporter
+          reporter: github-check # Change reporter
           flags: "./_cloud/terraform --deep" # Optional
       - name: Terraform Validate
         if: success()
@@ -75,6 +75,8 @@ jobs:
           tf_actions_comment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Obtain Latest AWS Linux 2 AMI id
+        run: echo "::set-env name=BASTION_AMI_ID::$(aws ec2 describe-images --owners amazon --filters 'Name=name,Values=amzn2-ami-hvm-2.0.????????.?-x86_64-gp2' 'Name=state,Values=available' --query 'reverse(sort_by(Images, &CreationDate))[:1].ImageId' --output text)
       - name: Terraform Plan
         if: success()
         uses: hashicorp/terraform-github-actions@master
@@ -85,12 +87,28 @@ jobs:
           tf_actions_comment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TF_VAR_db_master_pass: ${{ secrets.db_master_pass }}
+          TF_VAR_ssh_key: ${{ secrets.ssh_key }}
+          TF_VAR_bastion_ami_id: $BASTION_AMI_ID
       - name: Save TF Outputs as Environment Variables
         if: success()
         run: |
           echo "::set-env name=BEANSTALK_APP_NAME::$(cd _cloud/_terraform && terraform output beanstalk_app_name)"
           echo "::set-env name=BEANSTALK_ENV_NAME::$(cd _cloud/_terraform && terraform output beanstalk_env_name)"
+          echo "::set-env name=BASTION_HOST::$(cd _cloud/_terraform && terraform output bastion_host)"
           echo "::set-env name=AWS_REGION::$(cd _cloud/_terraform && terraform output aws_region)"
+      - name: SSH to Bastion and Migrate PostgreSQL Schema
+        uses: appleboy/ssh-action@master
+        with:
+          host: $BASTION_HOST
+          username: cicd
+          passphrase: ${{ secrets.PK_PASSPHRASE }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: |
+            node -e "console.log(`Node ${process.version}`)"
+            cd ~/postgresql
+            yarn
+            node migrate.js
       - name: Prebuild
         if: success()
         run: yarn prep

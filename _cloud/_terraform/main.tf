@@ -17,9 +17,12 @@ variable "name" {
 variable "region" {
   default = "us-east-1"
 }
-variable "db_master_user" {}
-variable "db_master_pass" {} # $TF_VAR_DB_PASS -> aws-sdk/client/ssm.getParameter 
-variable "public_key" {}
+variable "db_master_user" {
+  default = "postgres"
+}
+variable "bastion_ami_id" {}
+variable "db_master_pass" {} # $TF_VAR_db_master_pass -> aws-sdk/client/ssm.getParameter 
+variable "ssh_key" {}
 variable "stage" {
   default = "dev"
 }
@@ -181,10 +184,10 @@ resource "aws_security_group" "bastion_sg" {
 }
 resource "aws_key_pair" "bastion_key" {
   key_name   = "bastion-ssh-public-key"
-  public_key = var.public_key
+  public_key = var.ssh_key
 }
 resource "aws_instance" "bastion" {
-  ami                         = "ami-969ab1f6"
+  ami                         = var.bastion_ami_id
   instance_type               = "t3.nano"
   key_name                    = aws_key_pair.bastion_key.key_name
   security_groups             = [aws_security_group.ouroboros.name, aws_security_group.bastion_sg.name]
@@ -193,8 +196,15 @@ resource "aws_instance" "bastion" {
   associate_public_ip_address = true
   provisioner "file" {
     source      = "../../postgresql"
-    destination = "."
+    destination = "~/postgresql"
   }
+  user_data = << EOF
+#! /bin/bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+. ~/.nvm/nvm.sh
+nvm install --lts
+npm install yarn -g
+EOF
 }
 # aws acm request-certificate --domain-name example.com --subject-alternative-names a.example.com b.example.com *.c.example.com
 module "cdn" {
