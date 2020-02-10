@@ -53,6 +53,8 @@ jobs:
           tf_actions_comment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Terraform Destroy
+        run: cd _cloud/_terraform && terraform destroy --auto-approve
       - name: Terraform Apply
         id: apply
         run: cd _cloud/_terraform && terraform apply --auto-approve
@@ -62,7 +64,7 @@ jobs:
           TF_VAR_ssh_key: ${{ secrets.ssh_key }}
           TF_VAR_bastion_ami_id: $BASTION_AMI_ID
       - name: Save TF Outputs as Environment Variables
-        if: job.steps.apply.status == success()
+        if: success()
         run: |
           echo "::set-env name=BEANSTALK_APP_NAME::$(cd _cloud/_terraform && terraform output beanstalk_app_name)"
           echo "::set-env name=BEANSTALK_ENV_NAME::$(cd _cloud/_terraform && terraform output beanstalk_env_name)"
