@@ -42,6 +42,10 @@ jobs:
           tf_actions_version: 0.12.20
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Terraform Destroy
+        run: cd _cloud/_terraform && terraform destroy --auto-approve
+        env: 
+          TF_VAR_db_master_pass: ${{ secrets.TF_VAR_db_master_pass }}
       - name: Terraform Apply
         if: success()
         uses: hashicorp/terraform-github-actions@master
@@ -52,9 +56,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TF_VAR_db_master_pass: ${{ secrets.TF_VAR_db_master_pass }}
-      # - name: Terraform Destroy
-      #   run: cd _cloud/_terraform && terraform destroy --auto-approve
-      - name: Save TF Outputs as Environment Variables
+     - name: Save TF Outputs as Environment Variables
         if: success()
         run: |
           echo "::set-env name=BEANSTALK_APP_NAME::$(cd _cloud/_terraform && terraform output beanstalk_app_name)"
