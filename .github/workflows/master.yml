@@ -25,12 +25,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: Setup reviewdog
-        run: |
-          mkdir -p $HOME/bin && curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh| sh -s -- -b $HOME/bin
-          echo ::add-path::$HOME/bin
-          echo ::add-path::$(go env GOPATH)/bin # for Go projects
-      - name: "Catch insensitive, inconsiderate writing"
+      - name: Catch insensitive, inconsiderate writing
         uses: theashraf/alex-action@master
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -58,20 +53,6 @@ jobs:
           tf_actions_comment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Check Terraform Security
-        if: success()
-        uses: reviewdog/action-tfsec@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-check # Change reporter
-          flags: "./_cloud/terraform" # Optional
-      - name: Lint Terraform
-        if: success()
-        uses: reviewdog/action-tflint@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-check # Change reporter
-          flags: "./_cloud/terraform --deep" # Optional
       - name: Terraform Validate
         if: success()
         uses: hashicorp/terraform-github-actions@master
