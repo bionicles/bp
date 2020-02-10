@@ -13,8 +13,8 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      - name: Obtain Latest AWS Linux 2 AMI id
-        run: echo "::set-env name=BASTION_AMI_ID::$(aws ec2 describe-images --owners amazon --filters 'Name=name,Values=amzn2-ami-hvm-2.0.????????.?-x86_64-gp2' 'Name=state,Values=available' --query 'reverse(sort_by(Images, &CreationDate))[:1].ImageId' --output text)"
+      # - name: Obtain Latest AWS Linux 2 AMI id
+      #   run: echo "::set-env name=BASTION_AMI_ID::$(aws ec2 describe-images --owners amazon --filters 'Name=name,Values=amzn2-ami-hvm-2.0.????????.?-x86_64-gp2' 'Name=state,Values=available' --query 'reverse(sort_by(Images, &CreationDate))[:1].ImageId' --output text)"
       - name: Terraform Init
         if: success()
         uses: hashicorp/terraform-github-actions@master
@@ -43,43 +43,22 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TF_VAR_db_master_pass: ${{ secrets.db_master_pass }}
-          TF_VAR_ssh_key: ${{ secrets.ssh_key }}
-          TF_VAR_bastion_ami_id: $BASTION_AMI_ID
       - name: Save TF Outputs as Environment Variables
         if: success()
         run: |
           echo "::set-env name=BEANSTALK_APP_NAME::$(cd _cloud/_terraform && terraform output beanstalk_app_name)"
           echo "::set-env name=BEANSTALK_ENV_NAME::$(cd _cloud/_terraform && terraform output beanstalk_env_name)"
-          echo "::set-env name=BASTION_HOST::$(cd _cloud/_terraform && terraform output bastion_host)"
           echo "::set-env name=AWS_REGION::$(cd _cloud/_terraform && terraform output aws_region)"
-      - name: SSH to Bastion and Migrate PostgreSQL Schema
-        uses: appleboy/ssh-action@master
+      - name: Generate build number
+        if: success()
+        uses: einaregilsson/build-number@v2
         with:
-          host: $BASTION_HOST
-          username: cicd
-          passphrase: ${{ secrets.PK_PASSPHRASE }}
-          key: ${{ secrets.PRIVATE_KEY }}
-          script_stop: true
-          debug: true
-          script: |
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-            . ~/.nvm/nvm.sh
-            nvm install --lts
-            npm install yarn -g
-            node -e "console.log(`Node ${process.version}`)"
-            cd ~/postgresql
-            yarn
-            node migrate.js
-      # - name: Generate build number
-      #   if: success()
-      #   uses: einaregilsson/build-number@v2
-      #   with:
-      #     token: ${{secrets.GITHUB_TOKEN}}
-      # - name: Setup Node
-      #   if: success()
-      #   uses: actions/setup-node@v1
-      #   with:
-      #     node-version: "12.x"
+          token: ${{secrets.GITHUB_TOKEN}}
+      - name: Setup Node
+        if: success()
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
       # - name: Get yarn cache
       #   if: success()
       #   id: yarn-cache
@@ -92,11 +71,11 @@ jobs:
       #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       #     restore-keys: |
       #       ${{ runner.os }}-yarn-
-      # - name: Prebuild
-      #   if: success()
-      #   run: yarn prep
-      #   env:
-      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: Prebuild
+        if: success()
+        run: yarn prep
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       # - name: Sync API docs in readme from JSDoc
       #   if: success()
       #   run: yarn document-api
@@ -117,56 +96,51 @@ jobs:
       #   uses: ad-m/github-push-action@master
       #   with:
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Build
-      #   if: success()
-      #   run: yarn build
-      # - name: Package
-      #   if: success()
-      #   run: zip deploy.zip .next package.json next.config.js
-      # - name: Deploy to EB
-      #   if: success()
-      #   uses: einaregilsson/beanstalk-deploy@v5
-      #   with:
-      #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     application_name: $BEANSTALK_APP_NAME
-      #     environment_name: $BEANSTALK_ENV_NAME
-      #     version_label: $BUILD_NUMBER
-      #     region: $AWS_REGION
-      #     deployment_package: deploy.zip
-      # - name: Migrate PostgreSQL
-      #   run: |
-      #     scp migrations migrations
-      #     ssh $BASTION
-      #     node migrate.js
-      # - name: Test E2E
-      #   if: success()
-      #   id: e2e
-      #   run: yarn e2e
-      # - name: Audit Lighthouse
-      #   if: success()
-      #   id: lh
-      #   uses: treosh/lighthouse-ci-action@v2
-      #   with:
-      #     configPath: ".lighthouseci/lighthouserc.js"
-      #     urls: |
-      #       $TEST_URL
-      #       $TEST_URL/blog
-      # - name: Save $LAST_SUCCESSFUL_BUILD_NUMBER
-      #   if: success()
-      #   run: echo "::set-env name=LAST_SUCCESSFUL_BUILD_NUMBER::$BUILD_NUMBER"
-      # - name: Release
-      #   if: success()
-      #   run: yarn release
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Rollback
-      #   if: job.steps.e2e.status == failure() || job.steps.lh.status == failure()
-      #   uses: einaregilsson/beanstalk-deploy@v5
-      #   with:
-      #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     application_name: $BEANSTALK_APP_NAME
-      #     environment_name: $BEANSTALK_ENV_NAME
-      #     version_label: $LAST_SUCCESSFUL_BUILD_NUMBER
-      #     region: $AWS_REGION
+      - name: Build
+        if: success()
+        run: yarn build
+      - name: Package
+        if: success()
+        run: zip deploy.zip .next package.json next.config.js
+      - name: Deploy to EB
+        if: success()
+        uses: einaregilsson/beanstalk-deploy@v5
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: $BEANSTALK_APP_NAME
+          environment_name: $BEANSTALK_ENV_NAME
+          version_label: $BUILD_NUMBER
+          region: $AWS_REGION
+          deployment_package: deploy.zip
+      - name: Test E2E
+        if: success()
+        id: e2e
+        run: yarn e2e
+      - name: Audit Lighthouse
+        if: success()
+        id: lh
+        uses: treosh/lighthouse-ci-action@v2
+        with:
+          configPath: ".lighthouseci/lighthouserc.js"
+          urls: |
+            $TEST_URL
+            $TEST_URL/blog
+      - name: Save $LAST_SUCCESSFUL_BUILD_NUMBER
+        if: success()
+        run: echo "::set-env name=LAST_SUCCESSFUL_BUILD_NUMBER::$BUILD_NUMBER"
+      - name: Release
+        if: success()
+        run: yarn release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Rollback
+        if: job.steps.e2e.status == failure() || job.steps.lh.status == failure()
+        uses: einaregilsson/beanstalk-deploy@v5
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: $BEANSTALK_APP_NAME
+          environment_name: $BEANSTALK_ENV_NAME
+          version_label: $LAST_SUCCESSFUL_BUILD_NUMBER
+          region: $AWS_REGION
