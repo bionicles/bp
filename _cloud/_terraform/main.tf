@@ -49,14 +49,14 @@ module "vpc" {
 # }
 module "subnets" {
   source             = "git::https://github.com/cloudposse/terraform-aws-dynamic-subnets.git?ref=tags/0.18.1"
-  availability_zones = ["us-east-1a", "us-east-1b"]
+  availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
   namespace          = var.namespace
   stage              = var.stage
   name               = var.name
   vpc_id             = module.vpc.vpc_id
   igw_id             = module.vpc.igw_id
   cidr_block         = module.vpc.vpc_cidr_block
-  max_subnet_count   = 2
+  max_subnet_count   = 3
 }
 resource "aws_security_group" "ouroboros" {
   name   = "ouroboros-sg"
@@ -87,7 +87,7 @@ resource "aws_rds_cluster_parameter_group" "force_ssl" {
 resource "aws_rds_cluster" "aurora_serverless_postgresql" {
   engine         = "aurora-postgresql"
   engine_mode    = "serverless"
-  engine_version = "11.4"
+  engine_version = "3.0"
   # enabled_cloudwatch_logs_exports = ["audit"]
   enable_http_endpoint            = false # "data api"
   master_username                 = var.db_master_user
