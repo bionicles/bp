@@ -122,13 +122,27 @@
       "chai-friendly"
     ],
     "rules": {
-      "node/no-missing-import": "warn",
-      "node/no-missing-require": "warn",
-      "node/no-unsupported-features/es-syntax": "warn",
+      "node/no-unpublished-import": "off",
+      "node/no-missing-import": "off",
+      "node/no-missing-require": "off",
+      "node/no-unsupported-features/es-syntax": "off",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
       "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off"
+      "react/prop-types": "off",
+      "jsdoc/require-example": "error",
+      "jsdoc/require-jsdoc": [
+        "error",
+        {
+          "require": {
+            "FunctionDeclaration": true,
+            "MethodDefinition": true,
+            "ClassDeclaration": true,
+            "ArrowFunctionExpression": true,
+            "FunctionExpression": true
+          }
+        }
+      ]
     },
     "extends": [
       "eslint:recommended",
@@ -150,6 +164,13 @@
     "settings": {
       "react": {
         "version": "detect"
+      },
+      "jsdoc": {
+        "tagNamePreference": {
+          "todo": {
+            "message": "We expect immediate perfection, so don't leave to-dos in your code."
+          }
+        }
       }
     },
     "globals": {
