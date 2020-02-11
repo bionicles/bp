@@ -150,7 +150,7 @@ module "elastic_beanstalk_environment" {
   application_subnets                = module.subnets.private_subnet_ids
   allowed_security_groups            = [module.vpc.vpc_default_security_group_id, aws_security_group.ouroboros.id]
   # aws elasticbeanstalk list-available-solution-stacks | grep Node
-  solution_stack_name = "64bit Amazon Linux 2018.03 v4.13.03 running Node.js"
+  solution_stack_name = "64bit Amazon Linux 2018.03 v4.13.0 running Node.js"
   additional_settings = [
     {
       namespace = "aws:elasticbeanstalk:application:environment"
