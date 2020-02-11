@@ -1,6 +1,7 @@
 const isEmail = require("validator/es/lib/isEmail");
 const bcrypt = require("bcrypt");
 
+
 const parseIn = req => {
   const { username, email, password } = req.body;
   if (!username) throw Error("No username");
