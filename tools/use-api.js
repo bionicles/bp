@@ -1,4 +1,4 @@
-import fetch from "unfetch";
+import fetch from "isomorphic-fetch";
 import useSWR from "swr";
 
 const fetcher = async path => {
