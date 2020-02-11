@@ -111,6 +111,8 @@ resource "aws_rds_cluster" "aurora_serverless_postgresql" {
   db_subnet_group_name            = aws_db_subnet_group.db_subnet_group.id
   master_username                 = var.db_master_user
   master_password                 = var.db_master_pass
+  final_snapshot_identifier       = "${var.namespace}-${var.name}-aurora-serverless-postgresql"
+  skip_final_snapshot             = true
   vpc_security_group_ids          = [module.vpc.vpc_default_security_group_id, aws_security_group.ouroboros.id]
   db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.force_ssl.name
   scaling_configuration {
