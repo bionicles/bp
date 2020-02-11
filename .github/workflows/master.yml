@@ -24,7 +24,7 @@ jobs:
         id: terraform
         run: echo "##[set-output name=changed;]$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | grep -q '_cloud/_terraform')"
       - name: Terraform Format
-        if: steps.terraform.output.changed
+        # if: steps.terraform.output.changed
         uses: hashicorp/terraform-github-actions@master
         with:
           tf_actions_working_dir: "_cloud/_terraform"
@@ -33,7 +33,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Terraform Init
-        if: steps.terraform.output.changed
+        # if: steps.terraform.output.changed
         uses: hashicorp/terraform-github-actions@master
         with:
           tf_actions_working_dir: "_cloud/_terraform"
@@ -42,7 +42,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Terraform Validate
-        if: steps.terraform.output.changed
+        # if: steps.terraform.output.changed
         uses: hashicorp/terraform-github-actions@master
         with:
           tf_actions_working_dir: "_cloud/_terraform"
@@ -51,12 +51,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Terraform Destroy
-        if: steps.terraform.output.changed
+        # if: steps.terraform.output.changed
         run: cd _cloud/_terraform && terraform destroy --auto-approve
         env:
           TF_VAR_db_master_pass: ${{ secrets.TF_VAR_db_master_pass }}
       - name: Terraform Apply
-        if: steps.terraform.output.changed
+        # if: steps.terraform.output.changed
         uses: hashicorp/terraform-github-actions@master
         with:
           tf_actions_working_dir: "_cloud/_terraform"
