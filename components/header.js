@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Header = ({ user, loading }) => (
+export const Header = ({ user, loading }) => (
   <header>
     <nav>
       <ul>
@@ -64,5 +64,3 @@ const Header = ({ user, loading }) => (
     `}</style>
   </header>
 );
-
-export default Header;

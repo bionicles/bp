@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Layout } from "~/components/layout";
-import { useFetchUser } from "~/tools/user";
+import { useFetchUser } from "tools/user";
+import { Layout } from "components/layout";
 
 function Home() {
   const { user, loading } = useFetchUser();

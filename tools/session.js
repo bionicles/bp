@@ -2,7 +2,7 @@
 import { serialize } from "cookie";
 import jwt from "jsonwebtoken";
 
-export const setSession = (
+export const setSession = async (
   res,
   value,
   options = { httpOnly: true, secure: true }
@@ -14,11 +14,14 @@ export const setSession = (
   res.setHeader("Set-Cookie", serialize("session", session, options));
 };
 
-export const getSession = req => {
-    let requester_id = "anon";
-    if (req.cookies.session) {
-      const { id } = await jwt.verify(req.cookies.token, process.env.SESSION_COOKIE_SECRET);
-      requester_id = id;
-    }
-    return requester_id
+export const getSession = async req => {
+  let requester_id = "anon";
+  if (req.cookies.session) {
+    const { id } = await jwt.verify(
+      req.cookies.token,
+      process.env.SESSION_COOKIE_SECRET
+    );
+    requester_id = id;
+  }
+  return requester_id;
 };
