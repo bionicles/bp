@@ -2,8 +2,16 @@ import { useApi } from "~/tools";
 
 const Change = () => {
   const { data, error } = useApi("/auth/me");
-  const { state, update } = useState({ newPassword: "" });
+  const { newPassword, setNewPassword } = useState("");
 
+  const handleSubmit = useMemo(
+    () =>
+      fetch(`/users/${data.displayName}/password`, {
+        method: "POST",
+        body: { newPassword }
+      }),
+    [newPassword]
+  );
   if (error) return <div>You must sign in to change your password.</div>;
   if (!data) return <div>Loading...</div>;
   return (
@@ -13,7 +21,8 @@ const Change = () => {
         type="password"
         key="newPassword"
         name="newPassword"
-        onChange={handleChange}
+        value={newPassword}
+        onChange={setNewPassword}
       />
     </form>
   );
