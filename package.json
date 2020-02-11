@@ -54,11 +54,14 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.8.0",
+    "eslint-plugin-chai-expect": "^2.1.0",
+    "eslint-plugin-chai-friendly": "^0.5.0",
     "eslint-plugin-jest": "^23.7.0",
     "eslint-plugin-jsdoc": "^21.0.0",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-ramda": "^2.5.1",
     "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-react-hooks": "^2.3.0",
     "eslint-plugin-security": "^1.4.0",
     "jest": "^25.1.0",
     "mailslurp-client": "^6.7.4",
@@ -104,9 +107,16 @@
       "react",
       "security",
       "ramda",
-      "jsdoc"
+      "jsdoc",
+      "react-hooks",
+      "node",
+      "jest",
+      "chai-expect",
+      "chai-friendly"
     ],
     "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off"
     },
@@ -115,7 +125,11 @@
       "plugin:react/recommended",
       "plugin:security/recommended",
       "plugin:ramda/recommended",
-      "plugin:jsdoc/recommended"
+      "plugin:jsdoc/recommended",
+      "plugin:node/recommended",
+      "plugin:jest/recommended",
+      "plugin:chai-expect/recommended",
+      "plugin:chai-friendly/recommended"
     ],
     "env": {
       "browser": true,

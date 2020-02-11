@@ -67,7 +67,7 @@ jobs:
           TF_VAR_db_master_pass: ${{ secrets.TF_VAR_db_master_pass }}
           TF_VAR_dns_zone_id: ${{ secrets.TF_VAR_dns_zone_id }}
       - name: Save TF Outputs as Environment Variables
-        if: steps.terraform.output.changed
+        if: success()
         run: |
           echo "::set-env name=BEANSTALK_APP_NAME::$(cd _cloud/_terraform && terraform output beanstalk_app_name)"
           echo "::set-env name=BEANSTALK_ENV_NAME::$(cd _cloud/_terraform && terraform output beanstalk_env_name)"
