@@ -28,9 +28,7 @@ variable "db_master_pass" {} # $TF_VAR_db_master_pass -> aws-sdk/client/ssm.getP
 variable "stage" {
   default = "dev"
 }
-variable "dns_zone_id" {
-  default = "gitpharma.com"
-}
+variable "dns_zone_id" {}
 variable "instance_type" {
   default = "t3.nano"
 }
