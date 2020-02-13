@@ -168,6 +168,9 @@ module "elastic_beanstalk_environment" {
   ]
 }
 
+output "db_cluster_id" {
+  value = aws_rds_cluster.aurora_serverless_postgresql.id
+}
 output "beanstalk_app_name" {
   value = module.elastic_beanstalk_application.elastic_beanstalk_application_name
 }

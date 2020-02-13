@@ -1,5 +1,5 @@
-import React from "react";
-
-const Tufte = () => <link rel="stylesheet" href="tufte.css" />;
-
-export default Tufte;
+/**
+ * Include Tufte CSS library
+ * @name Tufte
+ */
+export default () => <link rel="stylesheet" href="tufte.css" />;

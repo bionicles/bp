@@ -1,5 +1,6 @@
 module.exports = {
   plugins: [
+    "postcss-import",
     "tailwindcss",
     process.env.NODE_ENV === "production"
       ? [
@@ -7,14 +8,17 @@ module.exports = {
           {
             content: [
               "./pages/**/*.{js,jsx,ts,tsx}",
-              "./components/**/*.{js,jsx,ts,tsx}"
+              "./components/**/*.{js,jsx,ts,tsx}",
+              "./public/index.html"
             ],
+            css: ["./css/tailwind.css"],
             // eslint-disable-next-line security/detect-unsafe-regex
             defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
           }
         ]
       : undefined,
     "autoprefixer",
+    "postcss-preset-env",
     "cssnano"
   ]
 };

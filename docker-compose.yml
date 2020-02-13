@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  www:
+    build:
+      dockerfile: Dockerfile.dev
+    ports:
+      - "127.0.0.1:3000:3000"
+    healthcheck:
+      test: curl -s -o /dev/null -w "%{http_code}" localhost:3000 | grep -q 2
+  postgres:
+    image: postgres:10.7
+    ports: 5432:5432

@@ -1,4 +1,3 @@
-import isEmail from "validator/es/lib/isEmail";
 const { Pool } = require("pg");
 
 // GET

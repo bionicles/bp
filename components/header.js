@@ -1,11 +1,16 @@
 import Link from "next/link";
 
+/**
+ * @name Header
+ * @prop {Object} user - logged in user
+ * @prop {Boolean} loading - if the site is loading
+ */
 export const Header = ({ user, loading }) => (
   <header>
     <nav>
       <ul>
         <li>
-          <input type="text" placeholder="To search, press ?" />
+          <input type="text" placeholder="Search" />
         </li>
         <li>
           <a href="https://github.com/bionicles/bp/issues/new">Feedback</a>

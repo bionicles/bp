@@ -32,8 +32,9 @@ create table app.users (
     phone text unique not null,
     pw text not null,
     cart jsonb,
-    address_ids uuid[] foreign key on delete cascade,
-    order_ids uuid[] foreign key on delete cascade,
+    address_ids uuid[]
+    order_ids uuid[]
+    is_test boolean
 );
 
 alter table app.users enable row level security;

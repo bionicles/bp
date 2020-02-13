@@ -1,11 +1,17 @@
-import Head from "next/head";
 import { Header } from "./header";
+import Head from "next/head";
 
-export function Layout({ user, loading = false, children }) {
+/**
+ * @name Layout
+ * @prop {Object} user
+ * @prop {Boolean} loading
+ * @prop {Components} children
+ */
+export default Layout = ({ user, loading = false, children }) => {
   return (
     <>
       <Head>
-        <title>Life is a Gift</title>
+        <title>Bit Pharma</title>
       </Head>
 
       <Header user={user} loading={loading} />
@@ -30,4 +36,4 @@ export function Layout({ user, loading = false, children }) {
       `}</style>
     </>
   );
-}
+};

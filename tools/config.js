@@ -1,3 +1,7 @@
+/**
+ * @name Config
+ * @returns client or server env vars
+ */
 if (typeof window === "undefined") {
   /**
    * Settings exposed to the server.

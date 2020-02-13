@@ -1,5 +1,19 @@
-function Blog() {
-  return <div>Welcome to the Bit Pharma Blog!</div>;
-}
+import Link from "next/link";
 
-export default Blog;
+/**
+ * @name Blog Page
+ */
+export default () => {
+  return (
+    <>
+      <div>Welcome to the Bit Pharma Blog!</div>
+      <ul>
+        <li>
+          <Link href="/blog/database">
+            <a>Why did Bit Pharma choose PostgreSQL?</a>
+          </Link>
+        </li>
+      </ul>
+    </>
+  );
+};

@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next",
-    "build": "next build",
+    "build": "yarn prep && next build",
     "prep": "yarn && yarn lint && yarn audit && yarn test && yarn test:coverage -u && yarn upload:coverage",
     "start": "next start",
+    "start-local": "docker-compose up",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage -u",
@@ -35,6 +36,8 @@
     "jsonwebtoken": "^8.5.1",
     "next": "9.2.1",
     "pg": "^7.18.1",
+    "postcss-import": "^12.0.1",
+    "postcss-preset-env": "^6.7.0",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "swr": "^0.1.16"

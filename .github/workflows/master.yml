@@ -7,12 +7,12 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v1
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+      # - name: Configure AWS Credentials
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: us-east-1
       # - name: Identify file changes
       #   id: file_changes
       #   uses: trilom/file-changes-action@v1
@@ -23,55 +23,55 @@ jobs:
       # - name: Did Terraform change?
       #   id: terraform
       #   run: echo "##[set-output name=changed;]$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | grep -q '_cloud/_terraform')"
-      - name: Terraform Format
-        # if: steps.terraform.output.changed
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_working_dir: "_cloud/_terraform"
-          tf_actions_subcommand: "fmt"
-          tf_actions_version: 0.12.20
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Terraform Init
-        # if: steps.terraform.output.changed
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_working_dir: "_cloud/_terraform"
-          tf_actions_subcommand: "init"
-          tf_actions_version: 0.12.20
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Terraform Validate
-        # if: steps.terraform.output.changed
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_working_dir: "_cloud/_terraform"
-          tf_actions_subcommand: "validate"
-          tf_actions_version: 0.12.20
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Terraform Destroy
-      #   if: steps.terraform.output.changed
-      #   run: cd _cloud/_terraform && terraform destroy --auto-approve
+      # - name: Terraform Format
+      #   # if: steps.terraform.output.changed
+      #   uses: hashicorp/terraform-github-actions@master
+      #   with:
+      #     tf_actions_working_dir: "_cloud/_terraform"
+      #     tf_actions_subcommand: "fmt"
+      #     tf_actions_version: 0.12.20
       #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Terraform Init
+      #   # if: steps.terraform.output.changed
+      #   uses: hashicorp/terraform-github-actions@master
+      #   with:
+      #     tf_actions_working_dir: "_cloud/_terraform"
+      #     tf_actions_subcommand: "init"
+      #     tf_actions_version: 0.12.20
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Terraform Validate
+      #   # if: steps.terraform.output.changed
+      #   uses: hashicorp/terraform-github-actions@master
+      #   with:
+      #     tf_actions_working_dir: "_cloud/_terraform"
+      #     tf_actions_subcommand: "validate"
+      #     tf_actions_version: 0.12.20
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # # - name: Terraform Destroy
+      # #   if: steps.terraform.output.changed
+      # #   run: cd _cloud/_terraform && terraform destroy --auto-approve
+      # #   env:
+      # #     TF_VAR_db_master_pass: ${{ secrets.TF_VAR_db_master_pass }}
+      # - name: Terraform Apply
+      #   # if: steps.terraform.output.changed
+      #   uses: hashicorp/terraform-github-actions@master
+      #   with:
+      #     tf_actions_working_dir: "_cloud/_terraform"
+      #     tf_actions_subcommand: "apply"
+      #     tf_actions_version: 0.12.20
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #     TF_VAR_db_master_pass: ${{ secrets.TF_VAR_db_master_pass }}
-      - name: Terraform Apply
-        # if: steps.terraform.output.changed
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_working_dir: "_cloud/_terraform"
-          tf_actions_subcommand: "apply"
-          tf_actions_version: 0.12.20
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TF_VAR_db_master_pass: ${{ secrets.TF_VAR_db_master_pass }}
-          TF_VAR_dns_zone_id: ${{ secrets.TF_VAR_dns_zone_id }}
-      - name: Save TF Outputs as Environment Variables
-        if: success()
-        run: |
-          echo "::set-env name=BEANSTALK_APP_NAME::$(cd _cloud/_terraform && terraform output beanstalk_app_name)"
-          echo "::set-env name=BEANSTALK_ENV_NAME::$(cd _cloud/_terraform && terraform output beanstalk_env_name)"
-          echo "::set-env name=AWS_REGION::$(cd _cloud/_terraform && terraform output aws_region)"
+      #     TF_VAR_dns_zone_id: ${{ secrets.TF_VAR_dns_zone_id }}
+      # - name: Save TF Outputs as Environment Variables
+      #   if: success()
+      #   run: |
+      #     echo "::set-env name=BEANSTALK_APP_NAME::$(cd _cloud/_terraform && terraform output beanstalk_app_name)"
+      #     echo "::set-env name=BEANSTALK_ENV_NAME::$(cd _cloud/_terraform && terraform output beanstalk_env_name)"
+      #     echo "::set-env name=AWS_REGION::$(cd _cloud/_terraform && terraform output aws_region)"
       - name: Generate build number
         if: success()
         uses: einaregilsson/build-number@v2
@@ -94,11 +94,6 @@ jobs:
       #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       #     restore-keys: |
       #       ${{ runner.os }}-yarn-
-      - name: Prebuild
-        if: success()
-        run: yarn prep
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       # - name: Sync API docs in readme from JSDoc
       #   if: success()
       #   run: yarn document-api
@@ -145,10 +140,15 @@ jobs:
         id: lh
         uses: treosh/lighthouse-ci-action@v2
         with:
-          configPath: ".lighthouseci/lighthouserc.js"
+          configPath: "./lighthouserc.js"
           urls: |
             $TEST_URL
             $TEST_URL/blog
+      - name: Save results
+        uses: actions/upload-artifact@v1
+        with:
+          name: lighthouse-results
+          path: ".lighthouseci"
       - name: Save $LAST_SUCCESSFUL_BUILD_NUMBER
         if: success()
         run: echo "::set-env name=LAST_SUCCESSFUL_BUILD_NUMBER::$BUILD_NUMBER"
