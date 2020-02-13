@@ -1,7 +1,7 @@
 {
-  "name": "www",
+  "name": "bp",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "next",
     "build": "yarn prep && next build",
@@ -27,12 +27,15 @@
   "dependencies": {
     "@mdx-js/loader": "^1.5.5",
     "@next/mdx": "^9.2.1",
+    "@sendgrid/mail": "^6.5.2",
     "ajv": "^6.11.0",
     "bcrypt": "^3.0.8",
     "captains-log": "^2.0.3",
     "cookie": "^0.4.0",
     "dayjs": "^1.8.20",
+    "dotenv": "^8.2.0",
     "isomorphic-unfetch": "^3.0.0",
+    "jsdoc-http-plugin": "^0.3.2",
     "jsonwebtoken": "^8.5.1",
     "next": "9.2.1",
     "pg": "^7.18.1",
@@ -53,6 +56,7 @@
     "babel-plugin-module-resolver": "^4.0.0",
     "better-docs": "^1.4.7",
     "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "chai-json-schema-ajv": "^5.0.0",
     "codeceptjs": "^2.4.3",
     "codecov": "^3.6.5",
@@ -89,6 +93,21 @@
       "@semantic-release/release-notes-generator",
       "@semantic-release/github",
       "@semantic-release/git"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "next/babel"
+    ],
+    "plugins": [
+      [
+        "module-resolver",
+        {
+          "root": [
+            "."
+          ]
+        }
+      ]
     ]
   },
   "jest": {
@@ -166,10 +185,26 @@
         "version": "detect"
       },
       "jsdoc": {
+        "plugins": [
+          "plugins/markdown",
+          "jsdoc-http-plugin"
+        ],
+        "definedTags": [
+          "path",
+          "header",
+          "params",
+          "auth",
+          "query",
+          "body",
+          "response",
+          "code"
+        ],
         "tagNamePreference": {
           "todo": {
             "message": "We expect immediate perfection, so don't leave to-dos in your code."
-          }
+          },
+          "property": "prop",
+          "param": "arg"
         }
       }
     },

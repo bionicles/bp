@@ -3,11 +3,11 @@ import Head from "next/head";
 
 /**
  * @name Layout
- * @prop {Object} user
- * @prop {Boolean} loading
- * @prop {Components} children
+ * @arg {object} user
+ * @arg {boolean} loading
+ * @arg {Components} children
  */
-export default Layout = ({ user, loading = false, children }) => {
+const Layout = ({ user, loading = false, children }) => {
   return (
     <>
       <Head>
@@ -37,3 +37,5 @@ export default Layout = ({ user, loading = false, children }) => {
     </>
   );
 };
+
+export default Layout;

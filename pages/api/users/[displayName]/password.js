@@ -1,65 +1,31 @@
-import isEmail from "validator/es/lib/isEmail";
 import bcrypt from "bcrypt";
-import { Pool } from "pg";
 
-const query = "UPDATE users SET password = $1 WHERE email = $2";
-const pool = new Pool();
-
-export default async (req, res) => {
-  const { email, newPassword } = req.body;
-  if (!isEmail(email)) {
-    return res.status(403).send("Invalid email.");
-  }
-  if (!newPassword) {
-    return res.status(403).send("No password provided.");
-  }
-  const client = await pool.connect();
-  if (!client) {
-    return res.status(503).end("Failed to connect to database.");
-  }
-  try {
+/**
+ * Users change their passwords (if logged in)
+ * @path {POST} /users/[displayName]/password
+ * ```js
+ * const changeResponse = await fetch(`${url}/api/users/bender/password`, {
+ *  method: "POST",
+ *  body: { password: "kiss my shiny metal axe", newPassword: "remember me" }
+ * });
+ * // changeResponse.status === 200;
+ * ```
+ * @arg {String} req.body.newPassword
+ * @code {400} unauthorized or invalid password
+ * @code {200} password changed
+ * @code {500} server error
+ */
+export default queryPg({
+  parse: async ({ query: { displayName }, body: { newPassword } }) => {
+    if (!newPassword || newPassword.length < 8) {
+      throw Error("Invalid password");
+    }
     const hash = await bcrypt.hash(newPassword, 10);
-    if (!hash) {
-      return res.status(500).send("Failed to hash password.");
-    }
-    const queryResult = await client.query(query, [hash, email]);
-    if (!queryResult) {
-      return res.status(500).send("Failed to change password.");
-    }
-    return res.status(200).send("Password successfully changed.");
-  } catch (err) {
-    return res.status(500).send(`Error executing query: ${err}`);
-  } finally {
-    await pool.end();
+    return [hash, displayName];
+  },
+  query: "update users set pw = $1 where display_name = $2",
+  respond: async ({ rows }, res) => {
+    if (rows.length === 0) throw Error("Failed to change password.");
+    return res.status(200).send("Password changed.");
   }
-};
-
-// blank
-// export default function changePassword(email, newPassword, callback) {
-//   // This script should change the password stored for the current user in your
-//   // database. It is executed when the user clicks on the confirmation link
-//   // after a reset password request.
-//   // The content and behavior of password confirmation emails can be customized
-//   // here: https://manage.auth0.com/#/emails
-//   // The `newPassword` parameter of this function is in plain text. It must be
-//   // hashed/salted to match whatever is stored in your database.
-//   //
-//   // There are three ways that this script can finish:
-//   // 1. The user's password was updated successfully:
-//   //     callback(null, true);
-//   // 2. The user's password was not updated:
-//   //     callback(null, false);
-//   // 3. Something went wrong while trying to reach your database:
-//   //     callback(new Error("my error message"));
-//   //
-//   // If an error is returned, it will be passed to the query string of the page
-//   // where the user is being redirected to after clicking the confirmation link.
-//   // For example, returning `callback(new Error("error"))` and redirecting to
-//   // https://example.com would redirect to the following URL:
-//   //     https://example.com?email=alice%40example.com&message=error&success=false
-
-//   const msg =
-//     "Please implement the Change Password script for this database " +
-//     "connection at https://manage.auth0.com/#/connections/database";
-//   return callback(new Error(msg));
-// }
+});

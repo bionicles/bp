@@ -5,21 +5,21 @@ import { Pool } from "pg";
 const pool = new Pool(pgConfig);
 
 /**
- * @name Query PostgreSQL w/ user's data in local variables
- * @param {Function} parseIn - function(req) parses req object and returns db query params
- * @param {String} query - SQL command string to execute with $1, $2 etc for inputs
- * @param {Function} parseOut - function(result, res) parses result and responds to client
- * @returns {Response} response from parseOut on result of query w/ inputs from parseIn on req
- * @returns {Response} status 500 with error if anything fails
+ * @name Query PostgreSQL w/ requester_id in local variables for row level security
+ * @arg {function} parse - validate the request and return inputs to the database
+ * @arg {string} query - SQL string to execute with $1, $2 etc as inputs
+ * @arg {function} respond - function({ req, result, res}) to send db output to client (or not!)
+ * @code {200} response from parseOut on result of query w/ inputs from parseIn on req
+ * @code {500} failure
  */
-export const queryPg = (parseIn, query, parseOut) => async (req, res) => {
+export const queryPg = ({ parse, query, respond }) => async (req, res) => {
   try {
     const { id, displayName } = getSession(req);
     const client = await pool.connect();
     if (!client) {
       throw Error("Failed to connect to database.");
     }
-    const parsedInputs = parseIn(req);
+    const parsedInputs = parse(req);
     const wrappedQuery = `
 begin;
 set local requester_display_name = ${displayName};
@@ -27,7 +27,7 @@ set local requester_id = ${id};
 ${query};
 commit;`;
     const result = await client.query(wrappedQuery, parsedInputs);
-    return parseOut(result, res);
+    return respond({ req, result, res });
   } catch (error) {
     return res.status(500).json({ error });
   } finally {

@@ -20,38 +20,45 @@ Dev:
 <https://www.gitpharma.com>
 
 ```js
-const url = https://www.gitpharma.com;
+const url = https://www.gitpharma.com/api;
+```
+
+### Say Hello
+
+```js
+const { status, body } = await fetch(`${url}/hello`);
+console.log(status, body); // => 200, "Hello World!"
 ```
 
 ### Sign Up and Verify your Email
 
 ```js
-const signUpResponse = await fetch(`${url}/api/users`, {
+const signUpResponse = await fetch(`${url}/users`, {
   method: "POST",
   body: {
     displayName: "Bender", // <--- displayName is public
     email: "bender@planetexpress.com", // <--- email is private
-    password: "kiss my shiny metal axe"
+    password: "good news everyone"
   }
 });
 // signUpResponse.status === 200;
 
 // get the code from bender@planetexpess.com inbox
-const verifyResponse = await fetch(`${url}/api/users/bender/verify`, {
+const verifyResponse = await fetch(`${url}/users/verify`, {
   method: "POST",
   body: { code: 123456 }
 });
 // verifyResponse.status === 200;
 ```
 
-### Sign In
+### Log In
 
 ```js
-const signInResponse = await fetch(`${url}/api/users/bender/signin`, {
+const loginResponse = await fetch(`${url}/api/login`, {
   method: "POST",
-  body: { password: "kiss my shiny metal axe" }
+  body: { password: "good news everyone" }
 });
-// signInResponse.status === 200;
+// loginResponse.status === 200;
 ```
 
 ### Read / Retrieve User
@@ -73,7 +80,7 @@ const readResponse = await fetch(`${url}/api/users/bender`);
 ```js
 const changeResponse = await fetch(`${url}/api/users/bender/password`, {
   method: "POST",
-  body: { password: "kiss my shiny metal axe", newPassword: "remember me" }
+  body: { password: "good news everyone", newPassword: "remember me" }
 });
 // changeResponse.status === 200;
 ```

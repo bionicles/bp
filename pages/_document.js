@@ -1,4 +1,3 @@
-// ./pages/_document.js
 import Document, { Head, Main, NextScript } from "next/document";
 
 /**
@@ -6,6 +5,7 @@ import Document, { Head, Main, NextScript } from "next/document";
  * @link https://nextjs.org/docs/advanced-features/custom-document
  */
 export default class MyDocument extends Document {
+  /** Make the Document */
   render() {
     return (
       <html lang="en">

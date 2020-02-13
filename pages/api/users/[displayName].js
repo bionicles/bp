@@ -1,50 +1,56 @@
-const { Pool } = require("pg");
-
-// GET
-const query =
-  "SELECT id, display_name, email FROM users WHERE display_name = $1";
-const pool = new Pool();
-
-export default async (req, res) => {
-  const { display_name } = req.body;
-  const client = await pool.connect();
-  if (!client) {
-    return res.status(503).send("Failed to connect to database.");
-  }
-  try {
-    const queryResult = client.query(query, [email]);
-    if (queryResult.rows.length === 0) {
-      return res.status(404).send("User not found.");
+import { parseDisplayName } from "tools/parse-display-name";
+import { queryPg } from "tools/db/query";
+/**
+ * @module /users/{displayName}
+ */
+const usersDisplayNameRoute = async (req, res) => {
+  switch (req.method) {
+    /**
+     * Most data is shown to this user only.
+     * @path {GET} /users/{displayName}
+     * @example
+     * ```js
+     * const { status, body } = await fetch(`${url}/users/bender`);
+     * console.log(status, body) => 200, { displayName: "bender" };
+     * ```
+     * @auth session cookie (most user data is private)
+     * @response {User} data available to the requester
+     */
+    case "GET": {
+      return await queryPg({
+        parse: parseDisplayName,
+        query:
+          "SELECT id, display_name, email FROM users WHERE display_name = $1",
+        respond: ({ rows }, res) => res.status(200).json(rows[0])
+      })(req, res);
     }
-    res.setHeader("Content-Type", "application/json");
-    return res.status(200).send(queryResult.rows[0]);
-  } catch (err) {
-    return res.status(403).send(`Failed to execute database query: ${err}`);
-  } finally {
-    await pool.end();
+    /**
+     * Users can only delete their own accounts.
+     * @path {DELETE} /users/{displayName}
+     * @query {String} displayName - the user to delete
+     * @example
+     * ```js
+     * const { status } = await fetch(`${url}/users/bender`, { method: "DELETE" });
+     * console.log(status, body) => 200, "bender deleted"; (only if logged in as bender)
+     * ```
+     * @code {200} user deleted
+     * @code {400} unauthorized
+     * @code {500} server error
+     * @auth session cookie
+     */
+    case "DELETE": {
+      return await queryPg({
+        parse: parseDisplayName,
+        query: "DELETE FROM users WHERE displayName = $1",
+        respond: ({ res }) => res.status(200).send("User deleted.")
+      });
+    }
+    default: {
+      res
+        .status(400)
+        .send(`Method: ${req.method} unsupported on /users/[displayName]`);
+    }
   }
 };
 
-// DELETE
-import { getUserId } from "tools";
-import { Pool } from "pg";
-
-const query = "DELETE FROM users WHERE id = $1";
-const pool = new Pool();
-
-export default async (req, res) => {
-  const id = getUserId(req);
-  if (!id) {
-    return res.status(403).send("Invalid id. Are you signed in?");
-  }
-  const client = await pool.connect();
-  if (!client) {
-    return res.status(503).send("Failed to connect to database.");
-  }
-  try {
-    await client.query(query, [id]);
-    return res.status(200).send(`Deleted user ${id}`);
-  } catch (err) {
-    return res.status(500).send("Failed to execute database query.");
-  }
-};
+export default usersDisplayNameRoute;

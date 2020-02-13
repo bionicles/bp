@@ -1,5 +1,10 @@
 /**
- * Include Tufte CSS library
+ * Tufte CSS
+ *
  * @name Tufte
+ * @link https://edwardtufte.github.io/tufte-css/
+ * @example ```jsx <Tufte />
  */
-export default () => <link rel="stylesheet" href="tufte.css" />;
+const Tufte = () => <link rel="stylesheet" href="tufte.css" />;
+
+export default Tufte;

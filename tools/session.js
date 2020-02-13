@@ -4,18 +4,17 @@ import jwt from "jsonwebtoken";
 
 /**
  * Set a Secure / HTTP Only session token
- * @name Set Session
- * @param {Response} res response object
- * @param {Object} value what shall be saved in the session
- * @param {String} value.id primary key for user
- * @param {String} value.displayName visible label for user
- * @param {*} options
+ * @name Set Session User Cookie
+ * @arg {object} res - response object
+ * @arg {object} user
+ * @arg {object} [options={ httpOnly: true, secure: true }]
  */
 export const setSession = async (
   res,
-  value,
+  user,
   options = { httpOnly: true, secure: true }
 ) => {
+  const value = { id: user.id };
   const session = await jwt.sign(value, process.env.SESSION_COOKIE_SECRET, {
     algorithm: "RS256",
     expiresIn: "2 days"
