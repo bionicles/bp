@@ -21,9 +21,6 @@ variable "name" {
 variable "db_master_user" {
   default = "postgres"
 }
-variable "bastion_ami_id" {
-  default = "ami-062f7200baf2fa504"
-}
 variable "db_master_pass" {} # $TF_VAR_db_master_pass -> aws-sdk/client/ssm.getParameter 
 variable "stage" {
   default = "dev"
