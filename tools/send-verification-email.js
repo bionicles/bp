@@ -7,32 +7,12 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 /**
  * @name sendVerificationEmail
- * @example 
+ * @example
  * ```js sendVerificationEmail(email, code)
- * @arg {string} email
- * @arg {string} code
+ * @arg {string} email - address to verify
+ * @arg {string} code - code to send
  * @link https://github.com/sendgrid/sendgrid-nodejs
  * @returns {*} sgResponse - from sendgrid
- * @arg email
- * @arg code
- * @arg email
- * @arg code
- * @arg email
- * @arg code
- * @arg email
- * @arg code
- * @arg email
- * @arg code
- * @arg email
- * @arg code
- * @arg email
- * @arg code
- * @arg email
- * @arg code
- * @arg email
- * @arg code
- * @arg email
- * @arg code
  */
 const sendVerificationEmail = async (email, code) => {
   const sgResponse = await sgMail.send({

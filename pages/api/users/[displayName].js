@@ -8,6 +8,7 @@ const usersDisplayNameRoute = async (req, res) => {
   switch (req.method) {
     /**
      * Most data is shown to this user only.
+     *
      * @path {GET} /users/{displayName}
      * @example
      * ```js
@@ -27,6 +28,7 @@ const usersDisplayNameRoute = async (req, res) => {
     }
     /**
      * Users can only delete their own accounts.
+     *
      * @path {DELETE} /users/{displayName}
      * @query {String} displayName - the user to delete
      * @example

@@ -2,7 +2,6 @@ import { Header } from "./header";
 import Head from "next/head";
 
 /**
- * @name Layout
  * @example ```jsx
  * const props = {user, loading, children};
  * return (
@@ -12,9 +11,9 @@ import Head from "next/head";
  *  </Layout>
  * )
  * ```
- * @arg {object} user
- * @arg {boolean} loading
- * @arg {Components} children
+ * @prop {object} user - data for logged in user
+ * @prop {boolean} loading - if the user is loading
+ * @prop {*} children - react components for the body of the page
  */
 const Layout = ({ user, loading = false, children }) => {
   return (

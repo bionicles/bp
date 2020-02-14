@@ -23,8 +23,9 @@ const pool = new Pool(pgConfig);
  * @arg {Function} parse - validate the request and throw error or return a list of query params
  * @arg {string} query - SQL string to execute with $1, $2 etc query params from parse function
  * @arg {Function} respond - function({ req, result, res}) to send db output to client (or not!)
- * @errors {Error} parse and respond can throw errors to send em back to the client
+ * @throws {Error} parse and respond can throw errors to send em back to the client
  * @code {200} success - result of "respond" function
+ * @returns {Response} res - the response for a query
  */
 export const queryPg = ({ parse, query, respond }) => async (req, res) => {
   try {

@@ -20,6 +20,7 @@ export default (req, res) => {
   switch (req.method) {
     /**
      * List users
+     *
      * @path {GET} /users
      * @response {array} Users
      */
@@ -34,7 +35,8 @@ export default (req, res) => {
       });
     }
     /**
-     * @name SignUp
+     * Sign up
+     *
      * @path {POST} /users
      * @example
      * ```js

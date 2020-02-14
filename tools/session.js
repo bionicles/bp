@@ -10,36 +10,6 @@ import jwt from "jsonwebtoken";
  * @arg {object} res - response object
  * @arg {object} user - data for this requester (id, displayName)
  * @arg {object} [options={ httpOnly: true, secure: true }]
- * @arg res
- * @arg user
- * @arg options
- * @arg res
- * @arg user
- * @arg options
- * @arg res
- * @arg user
- * @arg options
- * @arg res
- * @arg user
- * @arg options
- * @arg res
- * @arg user
- * @arg options
- * @arg res
- * @arg user
- * @arg options
- * @arg res
- * @arg user
- * @arg options
- * @arg res
- * @arg user
- * @arg options
- * @arg res
- * @arg user
- * @arg options
- * @arg res
- * @arg user
- * @arg options
  */
 export const setSession = async (
   res,
@@ -62,16 +32,6 @@ export const setSession = async (
  * @example ```js const resWithUser = await getSession(req);
  * @arg {object} req - request object
  * @returns {object} req w/ req.user object set (might be anon)
- * @arg req
- * @arg req
- * @arg req
- * @arg req
- * @arg req
- * @arg req
- * @arg req
- * @arg req
- * @arg req
- * @arg req
  */
 export const getSession = async req => {
   let user = { id: "anon", displayName: "Anon" };

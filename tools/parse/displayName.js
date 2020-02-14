@@ -23,7 +23,8 @@ export const isValidDisplayName = rTest(
  * const inputs = parseDisplayName(req);
  * // inputs = ["bender"]
  * ```
- * @arg {string} req.params.displayName
+ * @arg {string} req - request object
+ * @prop {string} req.query.displayName - displayName
  * @throws {Error} if no displayName
  * @returns {string} displayName
  */

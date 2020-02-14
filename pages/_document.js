@@ -9,7 +9,7 @@ import Document, { Head, Main, NextScript } from "next/document";
 export default class CustomDocument extends Document {
   /**
    * @example ```jsx <CustomDocument />```
-   * @returns CustomDocument component
+   * @returns {*} CustomDocument component
    */
   render() {
     return (

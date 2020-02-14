@@ -8,16 +8,6 @@ var validateEmail = ajv.compile({ properties: { email: { type: "email" } } });
  * @arg {String} req - a request object
  * @throws "Invalid email." - if email invalid
  * @returns inputs - an array with 1 email
- * @arg req
- * @arg req
- * @arg req
- * @arg req
- * @arg req
- * @arg req
- * @arg req
- * @arg req
- * @arg req
- * @arg req
  */
 export const parseEmail = async req => {
   const valid = await validateEmail(req.body);

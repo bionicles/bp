@@ -2,8 +2,8 @@ import Link from "next/link";
 
 /**
  * @name Header
- * @arg {object} user - logged in user
- * @arg {boolean} loading - if the site is loading
+ * @prop {object} user - logged in user
+ * @prop {boolean} loading - if the site is loading
  * @example
  * ```jsx
  * const props = { user, loading };

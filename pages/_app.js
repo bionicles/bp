@@ -3,8 +3,13 @@ import App from "next/app";
 import "../css/index.css";
 
 /**
- * @example ```jsx <CustomApp />```
- * @link https://nextjs.org/docs/advanced-features/custom-app
+ * Custom App class to enable custom css.
+ *
+ * @example
+ * ```jsx
+ * <CustomApp />
+ * ```
+ * @see {@link https://nextjs.org/docs/advanced-features/custom-app}
  */
 class CustomApp extends App {
   /** Render the custom app
