@@ -5,12 +5,26 @@ import { Pool } from "pg";
 const pool = new Pool(pgConfig);
 
 /**
- * @name Query PostgreSQL w/ requester_id in local variables for row level security
- * @arg {function} parse - validate the request and return inputs to the database
- * @arg {string} query - SQL string to execute with $1, $2 etc as inputs
- * @arg {function} respond - function({ req, result, res}) to send db output to client (or not!)
- * @code {200} response from parseOut on result of query w/ inputs from parseIn on req
- * @code {500} failure
+ * Meta-program a PostgreSQL Route w/ requester_id set in local variables for row level security
+ *
+ * @name queryPg
+ * @example
+ * ```js
+ * const routeHandler = queryPg({
+ *  parse: req => {
+ *    const valid = ajv.validate(schema, req.body);
+ *    if (!valid) throw Error(ajv.errors);
+ *    return [req.body.prop1, req.body.prop2]
+ *  },
+ *  query: "insert into stuff (prop1, prop2) values ($1, $2) returning *",
+ *  respond: ({ req, result, res}) => result.rows[0] ? res.status(200).json(result.rows[0]) : throw Error("insert failed", req, result)
+ * })
+ * ```
+ * @arg {Function} parse - validate the request and throw error or return a list of query params
+ * @arg {string} query - SQL string to execute with $1, $2 etc query params from parse function
+ * @arg {Function} respond - function({ req, result, res}) to send db output to client (or not!)
+ * @errors {Error} parse and respond can throw errors to send em back to the client
+ * @code {200} success - result of "respond" function
  */
 export const queryPg = ({ parse, query, respond }) => async (req, res) => {
   try {

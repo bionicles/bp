@@ -1,14 +1,9 @@
-const Ajv = require("ajv");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const Ajv = require("ajv");
 const ajv = new Ajv();
 
-const schema = {
-  properties: {
-    email: { type: "number" },
-    password: { type: "string", minLength: 8 }
-  }
-};
+import { setSession } from "tools/session";
+import { queryPg } from "tools/db/query";
 
 /**
  * @path {POST} /login
@@ -22,7 +17,15 @@ const schema = {
 const login = queryPg({
   parse: async req => {
     if (req.method !== "POST") throw Error("Use POST /login");
-    const valid = ajv.validate(schema, req.body);
+    const valid = ajv.validate(
+      {
+        properties: {
+          email: { type: "email" },
+          password: { type: "string", minLength: 8 }
+        }
+      },
+      req.body
+    );
     if (!valid) throw Error(ajv.errors);
     return [req.body.email, req.body.password];
   },

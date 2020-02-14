@@ -3,6 +3,15 @@ import Head from "next/head";
 
 /**
  * @name Layout
+ * @example ```jsx
+ * const props = {user, loading, children};
+ * return (
+ *  <Layout {...props}>
+ *    <Child1 />
+ *    <Child2 />
+ *  </Layout>
+ * )
+ * ```
  * @arg {object} user
  * @arg {boolean} loading
  * @arg {Components} children

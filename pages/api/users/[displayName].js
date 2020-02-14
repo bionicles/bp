@@ -2,6 +2,7 @@ import { parseDisplayName } from "tools/parse-display-name";
 import { queryPg } from "tools/db/query";
 /**
  * @module /users/{displayName}
+ * @example ```js const user = await fetch(`/users/${displayName}`);```
  */
 const usersDisplayNameRoute = async (req, res) => {
   switch (req.method) {

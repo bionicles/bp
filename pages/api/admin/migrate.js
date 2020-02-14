@@ -8,9 +8,9 @@ const { PGDATABASE, ADMIN_PASSWORD } = process.env;
  * @example
  * ```js
  * const migrationResponse = await fetch(
- *    `${url}/api/admin/migrate/`, {
- *        method: 'POST',
- *        body: { adminPassword: process.env.ADMIN_PASSWORD }
+ * `${url}/api/admin/migrate/`, {
+ * method: 'POST',
+ * body: { adminPassword: process.env.ADMIN_PASSWORD }
  * });
  * console.log(migrationResponse.status) => 200
  * ```
@@ -18,8 +18,10 @@ const { PGDATABASE, ADMIN_PASSWORD } = process.env;
  * @code {400} Wrong Password
  * @code {200} Success
  * @code {500} Failure
- **/
-const migrate = async (req, res) => {
+ * @arg {object} req - request
+ * @arg {object} res - response
+ */
+const migrationHandler = async (req, res) => {
   if (req.body.password === ADMIN_PASSWORD) {
     try {
       await createDb(PGDATABASE, pgConfig);
@@ -32,4 +34,4 @@ const migrate = async (req, res) => {
   return res.status(400).send("Wrong password.");
 };
 
-export default migrate;
+export default migrationHandler;

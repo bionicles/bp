@@ -3,15 +3,17 @@ import App from "next/app";
 import "../css/index.css";
 
 /**
- * @name App
+ * @example ```jsx <CustomApp />```
  * @link https://nextjs.org/docs/advanced-features/custom-app
  */
-class MyApp extends App {
-  /** Make the app */
+class CustomApp extends App {
+  /** Render the custom app
+   * @example ```jsx <CustomApp />```
+   */
   render() {
     const { Component, pageProps } = this.props;
     return <Component {...pageProps} />;
   }
 }
 
-export default MyApp;
+export default CustomApp;

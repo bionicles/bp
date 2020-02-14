@@ -1,11 +1,16 @@
 import Document, { Head, Main, NextScript } from "next/document";
 
 /**
- * @name Document
- * @link https://nextjs.org/docs/advanced-features/custom-document
+ * Define custom HTML document (useful for SEO)
+ *
+ * @example ```jsx <CustomDocument />```
+ * @see {@link https://nextjs.org/docs/advanced-features/custom-document|Next.js Docs}
  */
-export default class MyDocument extends Document {
-  /** Make the Document */
+export default class CustomDocument extends Document {
+  /**
+   * @example ```jsx <CustomDocument />```
+   * @returns CustomDocument component
+   */
   render() {
     return (
       <html lang="en">

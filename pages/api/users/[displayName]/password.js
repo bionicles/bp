@@ -1,7 +1,10 @@
 import bcrypt from "bcrypt";
 
+import { queryPg } from "tools/db/query";
+
 /**
  * Users change their passwords (if logged in)
+ *
  * @path {POST} /users/[displayName]/password
  * ```js
  * const changeResponse = await fetch(`${url}/api/users/bender/password`, {
@@ -10,7 +13,7 @@ import bcrypt from "bcrypt";
  * });
  * // changeResponse.status === 200;
  * ```
- * @arg {String} req.body.newPassword
+ * @arg {string} req.body.newPassword
  * @code {400} unauthorized or invalid password
  * @code {200} password changed
  * @code {500} server error

@@ -161,6 +161,21 @@
             "FunctionExpression": true
           }
         }
+      ],
+      "jsdoc/check-tag-names": [
+        "warn",
+        {
+          "definedTags": [
+            "path",
+            "header",
+            "params",
+            "auth",
+            "query",
+            "body",
+            "response",
+            "code"
+          ]
+        }
       ]
     },
     "extends": [
@@ -188,16 +203,6 @@
         "plugins": [
           "plugins/markdown",
           "jsdoc-http-plugin"
-        ],
-        "definedTags": [
-          "path",
-          "header",
-          "params",
-          "auth",
-          "query",
-          "body",
-          "response",
-          "code"
         ],
         "tagNamePreference": {
           "todo": {

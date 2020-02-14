@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useApi } from "~/tools";
 
+/**
+ * @example ```jsx <Change />
+ * @returns Change - change password form react component
+ */
 const Change = () => {
   const {
     data: { displayName },
@@ -8,7 +12,11 @@ const Change = () => {
   } = useApi("/auth/me");
   const { newPassword, setNewPassword } = useState("");
 
-  const handleSubmit = async () =>
+  /**
+   * @example ```jsx <form onSubmit={submitChange} />
+   * @returns {object} res - /users/{displayName}/password route response
+   */
+  const submitChange = async () =>
     await fetch(`/users/${displayName}/password`, {
       method: "POST",
       body: { newPassword }
@@ -16,7 +24,7 @@ const Change = () => {
   if (error) return <div>You must sign in to change your password.</div>;
   if (!displayName) return <div>Loading...</div>;
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitChange}>
       <label htmlFor="newPassword">New Password:</label>
       <input
         type="password"

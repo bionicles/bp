@@ -3,7 +3,10 @@ import React from "react";
 import { useFetchUser } from "tools/user";
 import { Layout } from "components/layout";
 
-function Home() {
+/**
+ * @example ```jsx <Home />
+ **/
+const Home = () => {
   const { user, loading } = useFetchUser();
 
   return (
@@ -34,6 +37,6 @@ function Home() {
       )}
     </Layout>
   );
-}
+};
 
 export default Home;

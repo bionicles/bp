@@ -7,5 +7,7 @@
  * ```
  * @response {string} body - "Hello World!"
  * @code {200} - success
+ * @arg {object} req - request object not needed
+ * @arg {object} res - response object not needed
  */
-export default (_, res) => res.status(200).send("Hello World!");
+export default (req, res) => res.status(200).send("Hello World!");

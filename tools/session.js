@@ -3,11 +3,43 @@ import { serialize } from "cookie";
 import jwt from "jsonwebtoken";
 
 /**
- * Set a Secure / HTTP Only session token
- * @name Set Session User Cookie
+ * Sign and set the user session cookie
+ *
+ * @name setSession
+ * @example ``` const resWithSession = setSession(res, user);
  * @arg {object} res - response object
- * @arg {object} user
+ * @arg {object} user - data for this requester (id, displayName)
  * @arg {object} [options={ httpOnly: true, secure: true }]
+ * @arg res
+ * @arg user
+ * @arg options
+ * @arg res
+ * @arg user
+ * @arg options
+ * @arg res
+ * @arg user
+ * @arg options
+ * @arg res
+ * @arg user
+ * @arg options
+ * @arg res
+ * @arg user
+ * @arg options
+ * @arg res
+ * @arg user
+ * @arg options
+ * @arg res
+ * @arg user
+ * @arg options
+ * @arg res
+ * @arg user
+ * @arg options
+ * @arg res
+ * @arg user
+ * @arg options
+ * @arg res
+ * @arg user
+ * @arg options
  */
 export const setSession = async (
   res,
@@ -24,10 +56,22 @@ export const setSession = async (
 };
 
 /**
- * Verify session user JWT and get its' data
- * @name Get session user data
- * @param {Request} req
- * @returns {Request} req w/ user.id String + user.displayName string
+ * Verify and retrieve user session data
+ *
+ * @name getSession
+ * @example ```js const resWithUser = await getSession(req);
+ * @arg {object} req - request object
+ * @returns {object} req w/ req.user object set (might be anon)
+ * @arg req
+ * @arg req
+ * @arg req
+ * @arg req
+ * @arg req
+ * @arg req
+ * @arg req
+ * @arg req
+ * @arg req
+ * @arg req
  */
 export const getSession = async req => {
   let user = { id: "anon", displayName: "Anon" };
@@ -39,5 +83,5 @@ export const getSession = async req => {
     user = { id, displayName };
   }
   req.user = user;
-  return req.user;
+  return req;
 };

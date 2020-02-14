@@ -7,21 +7,41 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 /**
  * @name sendVerificationEmail
- * @example
+ * @example 
  * ```js sendVerificationEmail(email, code)
  * @arg {string} email
  * @arg {string} code
  * @link https://github.com/sendgrid/sendgrid-nodejs
  * @returns {*} sgResponse - from sendgrid
+ * @arg email
+ * @arg code
+ * @arg email
+ * @arg code
+ * @arg email
+ * @arg code
+ * @arg email
+ * @arg code
+ * @arg email
+ * @arg code
+ * @arg email
+ * @arg code
+ * @arg email
+ * @arg code
+ * @arg email
+ * @arg code
+ * @arg email
+ * @arg code
+ * @arg email
+ * @arg code
  */
-const sendVerificationEmail = (email, code) => {
+const sendVerificationEmail = async (email, code) => {
   const sgResponse = await sgMail.send({
     to: email,
     from: "noreply@bitpharma.com",
     templateId: "d-010f070801ff414db1bb2a44ba973a1f",
     dynamic_template_data: { code }
   });
-  return sgResponse
+  return sgResponse;
 };
 
 export default sendVerificationEmail;
