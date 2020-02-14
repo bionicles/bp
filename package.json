@@ -22,7 +22,7 @@
     "dump-schema": "pg_dump -s postgres -h $POSTGRES_HOST -p 5432 -U postgres -n public -f ./schema.sql",
     "tf-up": "cd _cloud/_terraform && terraform apply --auto-approve",
     "tf-down": "cd _cloud/_terraform && terraform destroy --auto-approve",
-    "document-api": "jsdoc2md --partial ./partials/link.hbs --template ./partials/README.hbs --files ./pages/api/**.js —param-list-format list >> README.md"
+    "document-api": "jsdoc2md ./pages/api/**/*.js --template README.hbs --files > README.md"
   },
   "dependencies": {
     "@mdx-js/loader": "^1.5.5",
@@ -75,6 +75,7 @@
     "eslint-plugin-security": "^1.4.0",
     "jest": "^25.1.0",
     "jsdoc": "^3.6.3",
+    "jsdoc-to-markdown": "^5.0.3",
     "mailslurp-client": "^6.7.4",
     "prettier": "^1.19.1",
     "puppeteer": "^2.1.1",
