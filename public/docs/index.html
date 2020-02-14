@@ -16,6 +16,136 @@
   <body>
     <a name="top" id="top">&nbsp;</a>
 <div id="main"><h3> </h3>
+<section id="globalobj-undefined-undefined">
+  <a href="#top" class="back-to-top">back to top &#8679;</a>
+
+<header id="">
+<h2>
+</h2>
+</header>
+
+<article>
+    <div class="container-overview">
+</div>
+<div class="subsection">
+          <h3 class="subsection-title">Members (1)</h3>
+<div class="members">
+  <h4 class="name" id="login"><span class="type-signature">(route, constant) </span>login<span class="type-signature"></span></h4>
+<div class="description">
+      <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">POST</td>
+                            <td class="name last">/login</td>
+                            </tr>
+                            </table>
+<h5>Body Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+<th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">email</td>
+            <td class="type">string</td>
+<td class="description last"></td>
+          </tr><tr>
+            <td class="name">password</td>
+            <td class="type">string</td>
+<td class="description last">8+ characters</td>
+          </tr>
+          </table>
+                            <h5>Response:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+<th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">displayName</td>
+            <td class="type">string</td>
+<td class="description last"></td>
+          </tr>
+          </table>
+                            <h5>Response Code:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+<th>Type</th>
+<th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+<td class="type">400</td>
+<td class="description last">invalid request</td>
+          </tr><tr>
+<td class="type">500</td>
+<td class="description last">server error</td>
+          </tr><tr>
+<td class="type">200</td>
+<td class="description last">success</td>
+          </tr>
+          </table>
+  </div>
+</div>
+</div>
+<div class="subsection">
+          <h3 class="subsection-title">Methods (1)</h3>
+<h4 class="name" id="hello"><span class="type-signature">(route) </span>hello<span class="signature">()</span><span class="type-signature"></span></h4>
+<div class="description">
+    <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">ANY</td>
+                            <td class="name last">/hello</td>
+                            </tr>
+                            </table>
+<h5>Response:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+<th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">body</td>
+            <td class="type">string</td>
+<td class="description last">"Hello World!"</td>
+          </tr>
+          </table>
+                            <h5>Response Code:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+<th>Type</th>
+<th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+<td class="type">200</td>
+<td class="description last">- success</td>
+          </tr>
+          </table>
+</div>
+<h5>Example</h5>
+<pre class="prettyprint"><code>```js
+const { status, body } = await fetch(`${url}/api/hello`)
+console.log(status, body) => 200, "Hello World!"
+```</code></pre>
+</div>
+</article>
+
+</section>
 <section id="namespace-global-Admin">
   <a href="#top" class="back-to-top">back to top &#8679;</a>
 
@@ -402,7 +532,7 @@ verifyResponse.status === 200;
 </article>
 
 </section></div>
-<nav><h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="#Admin">Admin</a></li><li><a href="#Users">Users</a></li></ul></nav>
+<nav><h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="#Admin">Admin</a></li><li><a href="#Users">Users</a></li></ul><h3>Global</h3><ul><li><a href="#hello">hello</a></li><li><a href="#login">login</a></li></ul></nav>
 <br class="clear">
 
 <footer>

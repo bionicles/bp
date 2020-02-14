@@ -18,7 +18,9 @@ export const Header = ({ user, loading }) => (
           <input type="text" placeholder="Search" />
         </li>
         <li>
-          <a href="https://github.com/bionicles/bp/issues/new">Feedback</a>
+          <a href="https://github.com/bionicles/bp/issues/new" target="_blank">
+            Feedback
+          </a>
         </li>
         <li>
           <a href="/docs/index.html" target="_blank">

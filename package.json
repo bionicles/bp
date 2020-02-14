@@ -22,7 +22,7 @@
     "dump-schema": "pg_dump -s postgres -h $POSTGRES_HOST -p 5432 -U postgres -n public -f ./schema.sql",
     "tf-up": "cd _cloud/_terraform && terraform apply --auto-approve",
     "tf-down": "cd _cloud/_terraform && terraform destroy --auto-approve",
-    "document-api": "node_modules/.bin/jsdoc -c jsdoc.conf.json -t node_modules/jsdoc-one-page pages/api/**/*.js -d public/docs"
+    "document-api": "node_modules/.bin/jsdoc -c jsdoc.conf.json -t node_modules/jsdoc-one-page pages/api/*.js pages/api/**/*.js -d public/docs"
   },
   "dependencies": {
     "@mdx-js/loader": "^1.5.5",
