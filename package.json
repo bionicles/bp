@@ -22,7 +22,7 @@
     "dump-schema": "pg_dump -s postgres -h $POSTGRES_HOST -p 5432 -U postgres -n public -f ./schema.sql",
     "tf-up": "cd _cloud/_terraform && terraform apply --auto-approve",
     "tf-down": "cd _cloud/_terraform && terraform destroy --auto-approve",
-    "document-api": "jsdoc2md ./pages/api/**/*.js >> README.md"
+    "document-api": "node_modules/.bin/jsdoc -c jsdoc.conf.json -t node_modules/jsdoc-one-page pages/api/**/*.js -d public/docs"
   },
   "dependencies": {
     "@mdx-js/loader": "^1.5.5",
@@ -75,6 +75,7 @@
     "eslint-plugin-security": "^1.4.0",
     "jest": "^25.1.0",
     "jsdoc": "^3.6.3",
+    "jsdoc-one-page": "^0.0.5",
     "jsdoc-to-markdown": "^5.0.3",
     "mailslurp-client": "^6.7.4",
     "prettier": "^1.19.1",
@@ -128,7 +129,8 @@
       "tests/__snapshots__/*",
       "tests/coverage/*",
       "node_modules",
-      "tests/e2e"
+      "tests/e2e",
+      "out/*"
     ],
     "plugins": [
       "react",
@@ -203,19 +205,6 @@
     "settings": {
       "react": {
         "version": "detect"
-      },
-      "jsdoc": {
-        "plugins": [
-          "plugins/markdown",
-          "jsdoc-http-plugin"
-        ],
-        "tagNamePreference": {
-          "todo": {
-            "message": "We expect immediate perfection, so don't leave to-dos in your code."
-          },
-          "property": "prop",
-          "param": "arg"
-        }
       }
     },
     "globals": {

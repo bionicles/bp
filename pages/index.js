@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useFetchUser } from "tools/user";
-import { Layout } from "components/layout";
+import Layout from "components/layout";
 
 /**
  * @example ```jsx <Home />

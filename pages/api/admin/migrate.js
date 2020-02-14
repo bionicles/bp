@@ -2,8 +2,11 @@ import { createDb, migrate } from "postgres-migrations";
 import { pgConfig } from "tools/db/config";
 const { PGDATABASE, ADMIN_PASSWORD } = process.env;
 
+/** @namespace */
+var Admin = {};
+
 /**
- * @name Migrate
+ * @memberof Admin
  * @path {POST} /api/admin/migrate
  * @example
  * ```js
@@ -21,7 +24,7 @@ const { PGDATABASE, ADMIN_PASSWORD } = process.env;
  * @arg {object} req - request
  * @arg {object} res - response
  */
-const migrationHandler = async (req, res) => {
+const handleMigrate = async (req, res) => {
   if (req.body.password === ADMIN_PASSWORD) {
     try {
       await createDb(PGDATABASE, pgConfig);
@@ -34,4 +37,4 @@ const migrationHandler = async (req, res) => {
   return res.status(400).send("Wrong password.");
 };
 
-export default migrationHandler;
+export default handleMigrate;

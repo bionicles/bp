@@ -21,18 +21,23 @@ export const Header = ({ user, loading }) => (
           <a href="https://github.com/bionicles/bp/issues/new">Feedback</a>
         </li>
         <li>
+          <a href="/docs/index.html" target="_blank">
+            Docs
+          </a>
+        </li>
+        <li>
           <a href="mailto:bion@bitpharma.com">Contact</a>
         </li>
         {!loading &&
           (user ? (
             <li>
               <Link href="/me">
-                <a>Me</a>
+                <a>{user.displayName}</a>
               </Link>
             </li>
           ) : (
             <li>
-              <a href="/auth">Auth</a>
+              <a href="/auth">Log In</a>
             </li>
           ))}
       </ul>

@@ -1,0 +1,13 @@
+{
+  "plugins": ["plugins/markdown", "node_modules/jsdoc-http-plugin"],
+  "tagNamePreference": {
+    "todo": {
+      "message": "We expect immediate perfection, so don't leave to-dos in your code."
+    },
+    "property": "prop",
+    "param": "arg"
+  },
+  "opts": {
+    "sort": false
+  }
+}

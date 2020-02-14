@@ -6,6 +6,7 @@ import { queryPg } from "tools/db/query";
  * Users change their passwords (if logged in)
  *
  * @path {POST} /users/[displayName]/password
+ * @example
  * ```js
  * const changeResponse = await fetch(`${url}/api/users/bender/password`, {
  *  method: "POST",

@@ -10,4 +10,6 @@
  * @arg {object} req - request object not needed
  * @arg {object} res - response object not needed
  */
-export default (req, res) => res.status(200).send("Hello World!");
+const hello = (req, res) => res.status(200).send("Hello World!");
+
+export default hello;

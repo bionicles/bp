@@ -1,0 +1,387 @@
+<h3> </h3>
+<section id="namespace-global-Admin">
+  <a href="#top" class="back-to-top">back to top &#8679;</a>
+
+<header id="Admin">
+<h2>
+        Admin
+        </h2>
+</header>
+
+<article>
+    <div class="container-overview">
+</div>
+<div class="subsection">
+          <h3 class="subsection-title">Methods (1)</h3>
+<h4 class="name" id="Admin-handleMigrate"><span class="type-signature">(async, route) </span>handleMigrate<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+<div class="description">
+    <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">POST</td>
+                            <td class="name last">/api/admin/migrate</td>
+                            </tr>
+                            </table>
+<h5>Body Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+<th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">req.body.password</td>
+            <td class="type">string</td>
+<td class="description last">db admin password</td>
+          </tr>
+          </table>
+                            <h5>Route Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+<th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">req</td>
+            <td class="type">[object Object]</td>
+<td class="description last"><p>request</p></td>
+          </tr><tr>
+            <td class="name">res</td>
+            <td class="type">[object Object]</td>
+<td class="description last"><p>response</p></td>
+          </tr>
+          </table>
+                            <h5>Response Code:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+<th>Type</th>
+<th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+<td class="type">400</td>
+<td class="description last">Wrong Password</td>
+          </tr><tr>
+<td class="type">200</td>
+<td class="description last">Success</td>
+          </tr><tr>
+<td class="type">500</td>
+<td class="description last">Failure</td>
+          </tr>
+          </table>
+</div>
+<h5>Parameters:</h5>
+<table class="params">
+    <thead>
+    <tr>
+<th>Name</th>
+<th>Type</th>
+<th class="last">Description</th>
+    </tr>
+    </thead>
+<tbody>
+<tr>
+<td class="name"><code>req</code></td>
+<td class="type">
+<span class="param-type">object</span>
+</td>
+<td class="description last"><p>request</p></td>
+        </tr>
+<tr>
+<td class="name"><code>res</code></td>
+<td class="type">
+<span class="param-type">object</span>
+</td>
+<td class="description last"><p>response</p></td>
+        </tr>
+</tbody>
+</table>
+<h5>Example</h5>
+<pre class="prettyprint"><code>```js
+const migrationResponse = await fetch(
+`${url}/api/admin/migrate/`, {
+method: 'POST',
+body: { adminPassword: process.env.ADMIN_PASSWORD }
+});
+console.log(migrationResponse.status) => 200
+```</code></pre>
+</div>
+</article>
+
+</section>
+<section id="namespace-global-Users">
+  <a href="#top" class="back-to-top">back to top &#8679;</a>
+
+<header id="Users">
+<h2>
+        Users
+        </h2>
+</header>
+
+<article>
+    <div class="container-overview">
+</div>
+<div class="subsection">
+          <h3 class="subsection-title">Members (5)</h3>
+<div class="members">
+  <h4 class="name" id="Users-deleteUser"><span class="type-signature">(route, constant) </span>deleteUser<span class="type-signature"></span></h4>
+<div class="description">
+      <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">DELETE</td>
+                            <td class="name last">/users/{displayName}</td>
+                            </tr>
+                            </table>
+                            <p>Users can only delete their own accounts.
+<h5>Authentication</h5>
+<p>session cookie</p></p>
+                            <h5>Query Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+<th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">displayName</td>
+            <td class="type">String</td>
+<td class="description last">the user to delete</td>
+          </tr>
+          </table>
+                            <h5>Response Code:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+<th>Type</th>
+<th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+<td class="type">200</td>
+<td class="description last">user deleted</td>
+          </tr><tr>
+<td class="type">400</td>
+<td class="description last">unauthorized</td>
+          </tr><tr>
+<td class="type">500</td>
+<td class="description last">server error</td>
+          </tr>
+          </table>
+  </div>
+<h5>Example</h5>
+<pre class="prettyprint"><code>```js
+const { status } = await fetch(`${url}/users/bender`, { method: "DELETE" });
+console.log(status, body) => 200, "bender deleted"; (only if logged in as bender)
+```</code></pre>
+</div>
+<div class="members">
+  <h4 class="name" id="Users-getUser"><span class="type-signature">(route, constant) </span>getUser<span class="type-signature"></span></h4>
+<div class="description">
+      <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">GET</td>
+                            <td class="name last">/users/{displayName}</td>
+                            </tr>
+                            </table>
+                            <p>Most data is shown to this user only.
+<h5>Authentication</h5>
+<p>session cookie (most user data is private)</p></p>
+                            <h5>Response:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+<th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">data</td>
+            <td class="type">User</td>
+<td class="description last">available to the requester</td>
+          </tr>
+          </table>
+  </div>
+<h5>Example</h5>
+<pre class="prettyprint"><code>```js
+const { status, body } = await fetch(`${url}/users/bender`);
+console.log(status, body) => 200, { displayName: "bender" };
+```</code></pre>
+</div>
+<div class="members">
+  <h4 class="name" id="Users-listUsers"><span class="type-signature">(route, constant) </span>listUsers<span class="type-signature"></span></h4>
+<div class="description">
+      <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">GET</td>
+                            <td class="name last">/users</td>
+                            </tr>
+                            </table>
+                            <p>List users</p>
+                            <h5>Response:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+<th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">Users</td>
+            <td class="type">array</td>
+<td class="description last"></td>
+          </tr>
+          </table>
+  </div>
+<h5>Example</h5>
+<pre class="prettyprint"><code>```js
+const users = await fetch(`${url}/users);
+```</code></pre>
+</div>
+<div class="members">
+  <h4 class="name" id="Users-signUp"><span class="type-signature">(route, constant) </span>signUp<span class="type-signature"></span></h4>
+<div class="description">
+      <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">POST</td>
+                            <td class="name last">/users</td>
+                            </tr>
+                            </table>
+                            <p>Sign up</p>
+                            <h5>Body Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+<th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">displayName</td>
+            <td class="type">string</td>
+<td class="description last">a public name</td>
+          </tr><tr>
+            <td class="name">password</td>
+            <td class="type">string</td>
+<td class="description last">at least 8 characters</td>
+          </tr><tr>
+            <td class="name">email</td>
+            <td class="type">string</td>
+<td class="description last">kept private</td>
+          </tr>
+          </table>
+                            <h5>Response Code:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+<th>Type</th>
+<th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+<td class="type">200</td>
+<td class="description last">Success</td>
+          </tr><tr>
+<td class="type">400</td>
+<td class="description last">Invalid request</td>
+          </tr><tr>
+<td class="type">500</td>
+<td class="description last">Server Error</td>
+          </tr>
+          </table>
+  </div>
+<h5>Example</h5>
+<pre class="prettyprint"><code>```js
+const signUpResponse = await fetch(`${url}/users`, {
+ method: "POST",
+ body: {
+   displayName: "Bender", // &lt;--- displayName is public
+   email: "bender@planetexpress.com", // &lt;--- email is private
+   password: "good news everyone"
+ }
+});
+// signUpResponse.status === 200;
+```</code></pre>
+</div>
+<div class="members">
+  <h4 class="name" id="Users-verify"><span class="type-signature">(route, constant) </span>verify<span class="type-signature"></span></h4>
+<div class="description">
+      <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">POST</td>
+                            <td class="name last">/users/verify</td>
+                            </tr>
+                            </table>
+<h5>Body Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+<th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">email</td>
+            <td class="type">string</td>
+<td class="description last"></td>
+          </tr><tr>
+            <td class="name">code</td>
+            <td class="type">string</td>
+<td class="description last"></td>
+          </tr>
+          </table>
+                            <h5>Response Code:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+<th>Type</th>
+<th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+<td class="type">400</td>
+<td class="description last">Invalid request</td>
+          </tr><tr>
+<td class="type">500</td>
+<td class="description last">Server error</td>
+          </tr><tr>
+<td class="type">200</td>
+<td class="description last">Success</td>
+          </tr>
+          </table>
+  </div>
+<h5>Example</h5>
+<pre class="prettyprint"><code>```js
+const verifyResponse = await fetch(`${url}/users/verify`, {
+  method: "POST",
+  body: { email: "bender@planetexpress.com", code: 123456 }
+});
+verifyResponse.status === 200;
+```</code></pre>
+</div>
+</div>
+</article>
+
+</section>

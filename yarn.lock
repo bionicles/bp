@@ -7939,6 +7939,11 @@ jsdoc-http-plugin@^0.3.2:
   dependencies:
     jsdoc "^3.4.3"
 
+jsdoc-one-page@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/jsdoc-one-page/-/jsdoc-one-page-0.0.5.tgz#8701e022159844dbd9cb64d9504974059604f58a"
+  integrity sha512-EFLNLh0Xy6XKL9KJmfHORQSrP8q0f7tN+bnKLlWIDtH8ymJQHP7osPDQsKLJjM4h/AbgD27TILcZnoIPBjlwNA==
+
 jsdoc-parse@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/jsdoc-parse/-/jsdoc-parse-4.0.1.tgz#07949b13b1659c2bbc5217560d77b46a060cb86d"
