@@ -1,7 +1,7 @@
 import { sendVerificationEmail } from "tools/send-verification-email";
 import { isValidDisplayName } from "tools/parse/display-name";
 import { getCodeAndExpiry } from "tools/get-code-and-expiry";
-import { queryPg } from "tools/db/query";
+import db from "tools/db";
 const bcrypt = require("bcrypt");
 const Ajv = require("ajv");
 var ajv = new Ajv();
@@ -24,9 +24,8 @@ var Users = {};
  * const users = await fetch(`${url}/users);
  * ```
  */
-const listUsers = queryPg({
-  parse: () => [],
-  query: "select * from users limit 10;",
+const listUsers = db.query({
+  parse: () => ["select * from users limit 10;", []],
   respond: ({ rows }, res) =>
     rows.length > 0
       ? res.status(200).json(rows)
@@ -58,7 +57,7 @@ const listUsers = queryPg({
  * @code {500} Server Error
  * @returns session cookie
  */
-const signUp = queryPg({
+const signUp = db.query({
   parse: async ({ body }) => {
     const valid = await ajv.validate(
       {
@@ -75,10 +74,11 @@ const signUp = queryPg({
     const hash = await bcrypt.hash(password, 10);
     if (!hash) throw Error("Failed to hash password.");
     const { code, expiry } = getCodeAndExpiry();
-    return [displayName, email, hash, code, expiry];
+    const query =
+      "insert into users(display_name, email, pw, code, expiry) values ($1, $2, $3, $4, $5) returning (id, display_name, email, code) on conflict (display_name, email) do nothing";
+    const values = [displayName, email, hash, code, expiry];
+    return [query, values];
   },
-  query:
-    "insert into users(display_name, email, pw, code, expiry) values ($1, $2, $3, $4, $5) returning (id, display_name, email, code) on conflict (display_name, email) do nothing",
   respond: ({ result: { rows }, res }) => {
     if (rows.length === 0) throw Error("User not created.");
     const {

@@ -1,6 +1,7 @@
-import { parseDisplayName } from "tools/parse-display-name";
 import { queryPg } from "tools/db";
 
+const readUserQuery =
+  "select display_name, abstract, tags from users where display_name = $1";
 /**
  * Most data is shown to this user only.
  *
@@ -15,10 +16,7 @@ import { queryPg } from "tools/db";
  * @response {User} data available to the requester
  */
 const readUser = queryPg({
-  parse: req => [
-    "select id, display_name, email from users where display_name = $1",
-    parseDisplayName(req)
-  ],
+  parse: req => [readUserQuery, [req.query.displayName]],
   respond: ({ rows }, res) => res.status(200).json(rows[0])
 });
 
@@ -37,19 +35,20 @@ const readUser = queryPg({
  * @query {string} displayName
  * @body {*} values - to be updated
  * @auth session cookie - users can only update themselves
+ * @response {User} updated user object
  */
 const updateUser = queryPg({
   parse: ({ body, query }) => {
-    var values = [req.query.displayName];
+    var values = [query.displayName];
     var columns = [];
     var dollars = [];
     forEachObjIndexed((k, v, i) => {
       if (k in whitelistedKeys && isValid(v)) {
         columns.push(columnNames[k]);
-        dollars.push(`$${index + 2}`);
+        dollars.push(`$${i + 2}`);
         values.push(v);
       }
-    }, req.body);
+    }, body);
     const query = `update users set (${columns}) values (${dollars}) where displayName = $1 returning *`;
     return [query, values];
   }
@@ -79,17 +78,16 @@ const deleteUser = await queryPg({
 
 const usersDisplayNameRoute = async (req, res) => {
   switch (req.method) {
-    case "GET": {
+    case "GET":
       return readUser(req, res);
-    }
-    case "DELETE": {
+    case "PATCH":
+      return updateUser(req, res);
+    case "DELETE":
       return deleteUser(req, res);
-    }
-    default: {
-      res
+    default:
+      return res
         .status(400)
-        .send(`Method: ${req.method} unsupported on /users/[displayName]`);
-    }
+        .send(`${req.method} unsupported on /users/[displayName]`);
   }
 };
 

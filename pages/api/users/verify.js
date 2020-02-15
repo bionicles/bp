@@ -1,5 +1,6 @@
 import { setSession } from "tools/session";
-import { queryPg } from "tools/db/query";
+import db from "tools/db/query";
+
 /**
  * @path {POST} /users/verify
  * @memberof Users
@@ -18,10 +19,11 @@ import { queryPg } from "tools/db/query";
  * @code {200} Success
  * @returns Secure HTTP-Only JWT Session Cookie
  */
-const verify = queryPg({
-  parse: ({ body: { email, code } }) => [email, code],
-  query:
+const verify = db.query({
+  parse: ({ body: { email, code } }) => [
     "update app.users set email_verified = true where email = $1 and code = $2 returning *",
+    [email, code]
+  ],
   respond: async ({ result: { rows }, res }) => {
     if (rows.length === 0) throw Error("Verification failed.");
     const resWithSession = await setSession(res, rows[0]);

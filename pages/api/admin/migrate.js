@@ -1,6 +1,5 @@
 import { createDb, migrate } from "postgres-migrations";
 import { pgConfig } from "tools/db/config";
-const { PGDATABASE, ADMIN_PASSWORD } = process.env;
 
 /** @namespace */
 var Admin = {};
@@ -25,9 +24,9 @@ var Admin = {};
  * @arg {object} res - response
  */
 const handleMigrate = async (req, res) => {
-  if (req.body.password === ADMIN_PASSWORD) {
+  if (req.body.password === process.env.ADMIN_PASSWORD) {
     try {
-      await createDb(PGDATABASE, pgConfig);
+      await createDb(process.env.PGDATABASE, pgConfig);
       await migrate(pgConfig, "tools/db/migrations");
       return res.status(200).send("Success.");
     } catch (e) {
