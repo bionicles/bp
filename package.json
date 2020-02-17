@@ -44,7 +44,7 @@
     "postcss-preset-env": "^6.7.0",
     "react": "16.12.0",
     "react-dom": "16.12.0",
-    "swr": "^0.1.16"
+    "swr": "^0.1.17"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
@@ -83,7 +83,7 @@
     "puppeteer": "^2.1.1",
     "purgecss": "^2.0.6",
     "react-test-renderer": "^16.12.0",
-    "semantic-release": "^17.0.2",
+    "semantic-release": "^17.0.3",
     "source-map-explorer": "^2.2.2",
     "tailwindcss": "^1.2.0"
   },
