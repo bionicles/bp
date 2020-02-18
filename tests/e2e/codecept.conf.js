@@ -14,7 +14,7 @@ exports.config = {
   output: "./output",
   helpers: {
     Puppeteer: {
-      show: true,
+      show: false,
       chrome: {
         keepCookies: true,
         args: ["--no-sandbox", "--disable-setuid-sandbox"]

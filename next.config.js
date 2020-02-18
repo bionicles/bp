@@ -1,3 +1,4 @@
+require("dotenv").config();
 // const withCustomBabelConfigFile = require("next-plugin-custom-babel-config");
 // const withTranspileModules = require("next-plugin-transpile-modules");
 const withMDX = require("@next/mdx")();

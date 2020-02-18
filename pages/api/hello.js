@@ -8,6 +8,6 @@
  * @response {string} body - "Hello World!"
  * @code {200} - success
  */
-const hello = (req, res) => res.status(200).send("Hello World!");
+const hello = (_, res) => res.status(200).send("Hello World!");
 
 export default hello;

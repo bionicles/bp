@@ -1,4 +1,4 @@
-const rTest = require("ramda/test");
+import rTest from "ramda/src/test";
 // const Ajv = require("ajv");
 // var ajv = new Ajv();
 
@@ -6,7 +6,7 @@ const rTest = require("ramda/test");
  * Check if a displayName is valid
  *
  * @name isValidDisplayName
- * @example ```js const valid = isValidDisplayName(displayName);
+ * @example ```js const valid = isValidDisplayName(displayName);```
  * @arg {string} displayName - a candidate display name
  * @returns {boolean} whether the display name is valid
  */

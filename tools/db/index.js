@@ -1,5 +1,6 @@
 import { getSession } from "tools/session";
 import { pgConfig } from "tools/db/config";
+import getNow from "tools/get-now";
 import { Pool } from "pg";
 
 const pool = new Pool(pgConfig);
@@ -25,15 +26,25 @@ const pool = new Pool(pgConfig);
  * @code {200} success - result of "respond" function
  * @returns {Response} res - the response for a query
  */
-const transact = ({ parse, respond }) => async (req, res) => {
+const transact = ({ parse, respond }) => async (reqNoUser, res) => {
+  const req = await getSession(reqNoUser);
+  const client = await pool.connect();
+  const now = getNow();
   try {
-    const { id } = getSession(req);
-    const client = await pool.connect();
-    if (!client) throw Error("Failed to connect to db.");
     const [query, values] = await parse(req);
     await client.query("begin;");
-    await client.query(`set local requester_id = ${id};`);
-    await client.query(query, values);
+    await client.query(`set local.requester_id = ${req.user.id};`);
+    console.log(
+      "user:",
+      req.user.id,
+      "query:",
+      query,
+      "values:",
+      values,
+      "at:",
+      now
+    );
+    const result = await client.query(query, values);
     await client.query("commit;");
     return respond({ req, result, res });
   } catch (error) {
@@ -45,5 +56,6 @@ const transact = ({ parse, respond }) => async (req, res) => {
 };
 
 export default {
-  query: transact
+  query: transact,
+  simple: async (text, params) => await pool.query(text, params)
 };

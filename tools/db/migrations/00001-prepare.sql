@@ -43,11 +43,11 @@ create policy app.users.public_display_names_and_abstract on app.users
     grant select(display_name, abstract, tags) using (true)
 
 create policy app.users.anon_signup on app.users
-    grant insert on table app.users using (requester_id = anon_user_id)
+    grant insert on table app.users using (local.requester_id = anon_user_id)
 
 create policy app.users.self_service on app.users 
     grant select, update(display_name, abstract, cart, email, phone, pw, email_verified, phone_verified), delete
-    using (requester_id = id);
+    using (local.requester_id = id);
 
 create index app.users.display_name_index on app.users (lower(display_name))
 create index app.users.address_ids_index on app.users (lower(address_ids))
@@ -81,15 +81,15 @@ create policy app.teams.public_display_names_and_abstract on app.teams
     grant select(display_name, abstract, tags, item_ids) using (public);
 
 create policy app.teams.users_create_teams on app.teams
-    grant insert on table app.teams using (requester_id != anon_user_id);
+    grant insert on table app.teams using (local.requester_id != anon_user_id);
 
 create policy app.teams.superadmins_manage_teams on app.teams 
     grant select, update(display_name, abstract, superadmin_ids, admin_ids, item_ids, public), delete
-    using (requester_id = any(superadmin_ids));
+    using (local.requester_id = any(superadmin_ids));
 
 create policy app.teams.admins_manage_teams on app.teams 
     grant select, update(abstract, item_ids)
-    using (requester_id = any(admin_ids));
+    using (local.requester_id = any(admin_ids));
 
 create index app.teams.superadmin_index on app.teams using gin(superadmin_ids)
 create index app.teams.admin_index on app.teams using gin(admin_ids)

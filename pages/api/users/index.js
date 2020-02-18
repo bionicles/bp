@@ -1,6 +1,7 @@
 import { sendVerificationEmail } from "tools/send-verification-email";
-import { isValidDisplayName } from "tools/parse/display-name";
+import { isValidDisplayName } from "tools/display-name";
 import { getCodeAndExpiry } from "tools/get-code-and-expiry";
+
 import db from "tools/db";
 const bcrypt = require("bcrypt");
 const Ajv = require("ajv");

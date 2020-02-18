@@ -1,5 +1,5 @@
 import { setSession } from "tools/session";
-import db from "tools/db/query";
+import db from "tools/db";
 
 const verifyQuery =
   "update app.users set email_verified = true where email = $1 and code = $2 returning *";

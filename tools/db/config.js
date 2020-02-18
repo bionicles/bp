@@ -23,12 +23,20 @@ rqXRfboQnoZsG4q5WTP468SQvvG5
 -----END CERTIFICATE-----
 `;
 
-export const dbConfig = {
-  database: PGDATABASE,
-  password: PGPASSWORD,
-  host: PGHOST,
-  ssl: {
-    rejectUnauthorized: false,
-    ca: [awsCert, "ascii"]
-  }
-};
+export const pgConfig =
+  process.env.NODE_ENV === "development"
+    ? {
+        user: "bionhoward",
+        host: "127.0.0.1",
+        database: "postgres",
+        port: 5432
+      }
+    : {
+        database: PGDATABASE,
+        password: PGPASSWORD,
+        host: PGHOST,
+        ssl: {
+          rejectUnauthorized: false,
+          ca: [awsCert, "ascii"]
+        }
+      };

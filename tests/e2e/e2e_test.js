@@ -1,28 +1,44 @@
 /*global Feature */
 /*global Scenario */
-// const { MailSlurp } = require("../../node_modules/mailslurp-client");
-// console.log(process.env.TEST_URL);
-// console.log(process.env.MAILSLURP_KEY);
-// const mailslurp = new MailSlurp({ apiKey: process.env.MAILSLURP_KEY });
-
+const { MailSlurp } = require("../../node_modules/mailslurp-client");
+const mailslurp = new MailSlurp({ apiKey: process.env.MAILSLURP_KEY });
 const chai = require("chai");
 chai.use(require("chai-json-schema-ajv"));
 const expect = chai.expect;
 
-const MAX_LAG = 20;
+const API_LOG = 1;
+const MAX_LAG = 1000;
 const url = process.env.TEST_URL;
 console.log("e2e_test.js url: ", url);
 
 const timeSince = start => process.hrtime(start)[1] / 1000000;
 
 Feature("API");
-Scenario("1. /hello", async I => {
-  const helloStart = process.hrtime();
-  const helloResponse = await I.sendGetRequest("/hello");
-  expect(timeSince(helloStart)).to.be.lessThan(MAX_LAG);
-  expect(helloResponse.status).to.equal(200);
-  expect(helloResponse.data).to.equal("Hello World!");
+// Scenario("0. /hello", async I => {
+//   const helloStart = process.hrtime();
+//   const helloResponse = await I.sendGetRequest("/hello");
+//   expect(timeSince(helloStart)).to.be.lessThan(MAX_LAG);
+//   expect(helloResponse.status).to.equal(200);
+//   expect(helloResponse.data).to.equal("Hello World!");
+// });
+
+Scenario("1. /admin/pingdb", async I => {
+  // const pingDbStart = process.hrtime();
+  const pingDbResponse = await I.sendPostRequest("/admin/pingdb");
+  console.log(">>>>> RES", pingDbResponse.status, pingDbResponse.data);
+  // expect(timeSince(pingDbStart)).to.be.lessThan(MAX_LAG);
+  expect(pingDbResponse.status).to.equal(200);
 });
+
+// Scenario("2. /admin/migrate", async I => {
+//   // const migrateStart = process.hrtime();
+//   const migrationResponse = await I.sendPostRequest("/admin/migrate", {
+//     password: process.env.ADMIN_PASSWORD
+//   });
+//   console.log(migrationResponse.status, migrationResponse.data);
+//   // expect(timeSince(migrateStart)).to.be.lessThan(MAX_LAG);
+//   expect(migrationResponse.status).to.equal(200);
+// });
 
 // Scenario("2. /users", async I => {
 //   // ALLOW SIGN UP WITH VALID EMAILS
@@ -35,8 +51,9 @@ Scenario("1. /hello", async I => {
 //     display_name,
 //     password
 //   });
+//   if (API_LOG) console.log(signUpResponse);
 //   expect(timeSince(signUpStart)).to.be.lessThan(MAX_LAG);
-//   expect(signUpResponse.statusCode).to.equal(200);
+//   expect(signUpResponse.status).to.equal(200);
 
 //   // GET EMAIL WITH CODE
 //   const verifyEmail = await mailslurp.waitForLatestEmail(id);

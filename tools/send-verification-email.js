@@ -14,7 +14,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
  * @link https://github.com/sendgrid/sendgrid-nodejs
  * @returns {*} sgResponse - from sendgrid
  */
-const sendVerificationEmail = async (email, code) => {
+export const sendVerificationEmail = async (email, code) => {
   const sgResponse = await sgMail.send({
     to: email,
     from: "noreply@bitpharma.com",
@@ -23,5 +23,3 @@ const sendVerificationEmail = async (email, code) => {
   });
   return sgResponse;
 };
-
-export default sendVerificationEmail;

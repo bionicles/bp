@@ -3,7 +3,7 @@ const Ajv = require("ajv");
 const ajv = new Ajv();
 
 import { setSession } from "tools/session";
-import { queryPg } from "tools/db/query";
+import db from "tools/db";
 
 /**
  * @path {POST} /login
@@ -14,7 +14,7 @@ import { queryPg } from "tools/db/query";
  * @code {200} success
  * @response {string} displayName
  */
-const login = queryPg({
+const login = db.query({
   parse: async req => {
     if (req.method !== "POST") throw Error("Use POST /login");
     const valid = ajv.validate(
@@ -27,10 +27,11 @@ const login = queryPg({
       req.body
     );
     if (!valid) throw Error(ajv.errors);
-    return [req.body.email, req.body.password];
+    return [
+      "select id, display_name, abstract, email, password from users where email = $1",
+      [req.body.email, req.body.password]
+    ];
   },
-  query:
-    "SELECT id, display_name, abstract, email, password FROM users WHERE email = $1",
   respond: async ({ req, result, res }) => {
     const user = result.rows[0];
     const match = await bcrypt.compare(req.body.password, user.password);
