@@ -28,7 +28,7 @@
   "dependencies": {
     "@mdx-js/loader": "^1.5.5",
     "@next/mdx": "^9.2.2",
-    "@sendgrid/mail": "^6.5.2",
+    "@sendgrid/mail": "^6.5.3",
     "ajv": "^6.11.0",
     "bcrypt": "^3.0.8",
     "captains-log": "^2.0.3",
