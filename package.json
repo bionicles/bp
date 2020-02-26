@@ -51,7 +51,7 @@
     "@babel/core": "^7.8.4",
     "@babel/node": "^7.8.4",
     "@babel/preset-env": "^7.8.4",
-    "@fullhuman/postcss-purgecss": "^2.0.6",
+    "@fullhuman/postcss-purgecss": "^2.1.0",
     "@semantic-release/git": "^9.0.0",
     "autoprefixer": "^9.7.4",
     "babel-loader": "^8.0.6",
