@@ -1,5 +1,6 @@
 /*global Feature */
 /*global Scenario */
+require("dotenv").config();
 const { MailSlurp } = require("../../node_modules/mailslurp-client");
 const mailslurp = new MailSlurp({ apiKey: process.env.MAILSLURP_KEY });
 const chai = require("chai");
@@ -22,22 +23,26 @@ Feature("API");
 //   expect(helloResponse.data).to.equal("Hello World!");
 // });
 
-Scenario("1. /admin/pingdb", async I => {
-  // const pingDbStart = process.hrtime();
-  const pingDbResponse = await I.sendPostRequest("/admin/pingdb");
-  console.log(">>>>> RES", pingDbResponse.status, pingDbResponse.data);
-  // expect(timeSince(pingDbStart)).to.be.lessThan(MAX_LAG);
-  expect(pingDbResponse.status).to.equal(200);
+Scenario("1. /admin/migrate", async I => {
+  // const migrateStart = process.hrtime();
+  const migrationResponse = await I.sendPostRequest("/admin/migrate", {
+    password: process.env.ADMIN_PASSWORD
+  });
+  console.log(
+    "migrationResponse",
+    migrationResponse.status,
+    migrationResponse.data
+  );
+  // expect(timeSince(migrateStart)).to.be.lessThan(MAX_LAG);
+  expect(migrationResponse.status).to.equal(200);
 });
 
-// Scenario("2. /admin/migrate", async I => {
-//   // const migrateStart = process.hrtime();
-//   const migrationResponse = await I.sendPostRequest("/admin/migrate", {
-//     password: process.env.ADMIN_PASSWORD
-//   });
-//   console.log(migrationResponse.status, migrationResponse.data);
-//   // expect(timeSince(migrateStart)).to.be.lessThan(MAX_LAG);
-//   expect(migrationResponse.status).to.equal(200);
+// Scenario("2. /admin/pingdb", async I => {
+//   // const pingDbStart = process.hrtime();
+//   const pingDbResponse = await I.sendPostRequest("/admin/pingdb");
+//   console.log(">>>>> RES", pingDbResponse.status, pingDbResponse.data);
+//   // expect(timeSince(pingDbStart)).to.be.lessThan(MAX_LAG);
+//   expect(pingDbResponse.status).to.equal(200);
 // });
 
 // Scenario("2. /users", async I => {

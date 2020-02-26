@@ -1,12 +1,11 @@
 import { getSession } from "tools/session";
 import { pgConfig } from "tools/db/config";
-import getNow from "tools/get-now";
 import { Pool } from "pg";
 
 const pool = new Pool(pgConfig);
 
 /**
- * Meta-program a PostgreSQL Route w/ requester_id set in local variables for row level security
+ * Meta-program a PostgreSQL Route w/ req.id set in local variables for row level security
  *
  * @example
  * ```js
@@ -29,21 +28,15 @@ const pool = new Pool(pgConfig);
 const transact = ({ parse, respond }) => async (reqNoUser, res) => {
   const req = await getSession(reqNoUser);
   const client = await pool.connect();
-  const now = getNow();
   try {
+    if (!req.user) throw Error("req.user not found");
     const [query, values] = await parse(req);
     await client.query("begin;");
-    await client.query(`set local.requester_id = ${req.user.id};`);
-    console.log(
-      "user:",
-      req.user.id,
-      "query:",
-      query,
-      "values:",
-      values,
-      "at:",
-      now
-    );
+    await client.query(`select set_config('req.id', ${req.user.id}, 't');`);
+    await client.query(`set local role ${req.user.role};`);
+    if (req.user.id !== "anon") {
+      await client.query("set role appuser;");
+    }
     const result = await client.query(query, values);
     await client.query("commit;");
     return respond({ req, result, res });

@@ -1,6 +1,20 @@
-const { PGDATABASE, PGPASSWORD, PGHOST } = process.env;
-
-const awsCert = `
+export const pgConfig =
+  process.env.NODE_ENV === "development"
+    ? {
+        user: "bionhoward",
+        host: "127.0.0.1",
+        database: "bp",
+        password: "devpassword",
+        port: 5432
+      }
+    : {
+        database: process.env.PGDATABASE,
+        password: process.env.PGPASSWORD,
+        host: process.env.PGHOST,
+        ssl: {
+          rejectUnauthorized: false,
+          ca: [
+            `
 -----BEGIN CERTIFICATE-----
 MIIDQTCCAimgAwIBAgITBmyfz5m/jAo54vB4ikPmljZbyjANBgkqhkiG9w0BAQsF
 ADA5MQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQW1hem9uMRkwFwYDVQQDExBBbWF6
@@ -21,22 +35,8 @@ o/ufQJVtMVT8QtPHRh8jrdkPSHCa2XV4cdFyQzR1bldZwgJcJmApzyMZFo6IQ6XU
 5MsI+yMRQ+hDKXJioaldXgjUkK642M4UwtBV8ob2xJNDd2ZhwLnoQdeXeGADbkpy
 rqXRfboQnoZsG4q5WTP468SQvvG5
 -----END CERTIFICATE-----
-`;
-
-export const pgConfig =
-  process.env.NODE_ENV === "development"
-    ? {
-        user: "bionhoward",
-        host: "127.0.0.1",
-        database: "postgres",
-        port: 5432
-      }
-    : {
-        database: PGDATABASE,
-        password: PGPASSWORD,
-        host: PGHOST,
-        ssl: {
-          rejectUnauthorized: false,
-          ca: [awsCert, "ascii"]
+`,
+            "ascii"
+          ]
         }
       };

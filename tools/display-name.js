@@ -10,9 +10,7 @@ import rTest from "ramda/src/test";
  * @arg {string} displayName - a candidate display name
  * @returns {boolean} whether the display name is valid
  */
-export const isValidDisplayName = rTest(
-  /^[a-zA-Z0-9]+([-]?[a-zA-Z0-9]){2,39}$/
-);
+export const isValidDisplayName = rTest(/^[a-zA-Z0-9]{2,39}$/);
 
 /**
  * Parse displayName from a Query

@@ -34,14 +34,16 @@ export const setSession = async (
  * @returns {object} req w/ req.user object set (might be anon)
  */
 export const getSession = async req => {
-  let user = { id: "anon", displayName: "Anon" };
+  let user = { id: "anon", displayName: "Anon", role: "anon" };
   if (req.cookies.session) {
     const { id, displayName } = await jwt.verify(
       req.cookies.session,
       process.env.SESSION_COOKIE_SECRET
     );
-    user = { id, displayName };
+    const role = id !== "anon" ? "appuser" : "anon";
+    user = { id, displayName, role };
   }
+  console.log("getSession user", user);
   req.user = user;
   return req;
 };
