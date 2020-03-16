@@ -7493,6 +7493,14 @@ isobject@^4.0.0:
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-4.0.0.tgz#3f1c9155e73b192022a80819bacd0343711697b0"
   integrity sha512-S/2fF5wH8SJA/kmwr6HYhK/RI/OkhD84k8ntalo0iJjZikgq1XFvR5M8NPT1x5F7fBwCG3qHfnzeP/Vh/ZxCUA==
 
+isomorphic-fetch@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz#611ae1acf14f5e81f729507472819fe9733558a9"
+  integrity sha1-YRrhrPFPXoH3KVB0coGf6XM1WKk=
+  dependencies:
+    node-fetch "^1.0.1"
+    whatwg-fetch ">=0.10.0"
+
 isomorphic-unfetch@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/isomorphic-unfetch/-/isomorphic-unfetch-3.0.0.tgz#de6d80abde487b17de2c400a7ef9e5ecc2efb362"
@@ -8831,22 +8839,21 @@ macos-release@^2.2.0:
   resolved "https://registry.yarnpkg.com/macos-release/-/macos-release-2.3.0.tgz#eb1930b036c0800adebccd5f17bc4c12de8bb71f"
   integrity sha512-OHhSbtcviqMPt7yfw5ef5aghS2jzFVKEFyCJndQt2YpSQ9qRVSEv2axSJI1paVThEu+FFGs584h/1YhxjVqajA==
 
-mailslurp-client@^6.7.4:
-  version "6.7.4"
-  resolved "https://registry.yarnpkg.com/mailslurp-client/-/mailslurp-client-6.7.4.tgz#39e48dd42fcf5f787f31cf001c3ba461753fc879"
-  integrity sha512-L8UuM1rH10OlElkpEISaWcLBLaOLWr6pB4iRfcUH8Ylituo5odf7G1PON04D+pkUR1EXuwlhTQX+6AXh2O3CQg==
+mailslurp-client@^7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/mailslurp-client/-/mailslurp-client-7.1.1.tgz#f272f7e8b10d3b0610312d96f3ae71fc7f607a0b"
+  integrity sha512-C5g1O3EcltTSeds7G6HrmTd6R1tAiqrsvm+qi67tKzQAO6ulXkuUh0dPid1wgSMp+YhlCzF78KK1CALiFDCt1A==
   dependencies:
     debug "^4.1.1"
-    mailslurp-swagger-sdk-ts "6.1.0"
+    isomorphic-fetch "^2.2.1"
+    mailslurp-swagger-sdk-ts "7.0.7"
     typedoc-plugin-external-module-map "^1.0.0"
     typedoc-plugin-markdown "^2.2.14"
 
-mailslurp-swagger-sdk-ts@6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/mailslurp-swagger-sdk-ts/-/mailslurp-swagger-sdk-ts-6.1.0.tgz#e1865dd755149736178d2d47113a87098dd40472"
-  integrity sha512-sWoOlWcwwg2gUa/z7RMY7uAN6x/1Jgc1y9+kWNuBw9nXNE/4LDA17F647oWm20fv2lPqOo4GZaf4XrjZjuOayw==
-  dependencies:
-    portable-fetch "^3.0.0"
+mailslurp-swagger-sdk-ts@7.0.7:
+  version "7.0.7"
+  resolved "https://registry.yarnpkg.com/mailslurp-swagger-sdk-ts/-/mailslurp-swagger-sdk-ts-7.0.7.tgz#e2ce88fed789f6f102eba0a30c965c3aec40c188"
+  integrity sha512-B2Ux71dhhnoyc9uC9Ju8Kk/+4WKEcPuMHTuhn3tuwwnXqAUKmwpPZdz+kTfQoD9ZmR7YpjPV5bklmxpHTI7Utg==
 
 make-dir@^1.0.0:
   version "1.3.0"
@@ -10747,14 +10754,6 @@ pnp-webpack-plugin@1.5.0:
   integrity sha512-jd9olUr9D7do+RN8Wspzhpxhgp1n6Vd0NtQ4SFkmIACZoEL1nkyAdW9Ygrinjec0vgDcWjscFQQ1gDW8rsfKTg==
   dependencies:
     ts-pnp "^1.1.2"
-
-portable-fetch@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/portable-fetch/-/portable-fetch-3.0.0.tgz#3cbf4aa6dbc5a5734b41c0419c9273313bfd9ad8"
-  integrity sha1-PL9KptvFpXNLQcBBnJJzMTv9mtg=
-  dependencies:
-    node-fetch "^1.0.1"
-    whatwg-fetch ">=0.10.0"
 
 posix-character-classes@^0.1.0:
   version "0.1.1"
