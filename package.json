@@ -88,7 +88,7 @@
     "purgecss": "^2.0.6",
     "react-test-renderer": "^16.13.0",
     "semantic-release": "^17.0.4",
-    "source-map-explorer": "^2.3.1",
+    "source-map-explorer": "^2.4.1",
     "tailwindcss": "^1.2.0"
   },
   "release": {
