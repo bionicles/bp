@@ -82,7 +82,7 @@
     "jsdoc": "^3.6.3",
     "jsdoc-one-page": "^0.0.5",
     "jsdoc-to-markdown": "^5.0.3",
-    "mailslurp-client": "^6.7.4",
+    "mailslurp-client": "^10.5.0",
     "prettier": "^1.19.1",
     "puppeteer": "^2.1.1",
     "purgecss": "^2.0.6",
